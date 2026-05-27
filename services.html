@@ -35,7 +35,6 @@
     transition: transform 0.35s;
   }
   .service-full-card:hover::after { transform: scaleX(1); }
-  .service-full-card.wide { grid-column: span 2; }
   .sfc-header {
     display: flex;
     align-items: flex-start;
@@ -61,10 +60,10 @@
   }
   .sfc-name {
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: 1.8rem;
     letter-spacing: 0.04em;
     color: var(--white);
-    line-height: 1;
+    line-height: 1.05;
   }
   .sfc-desc {
     font-size: 0.88rem;
@@ -72,13 +71,19 @@
     line-height: 1.7;
     margin-bottom: 1.75rem;
   }
+  .sfc-deliverables { margin-bottom: 1.25rem; }
   .sfc-deliverables h4 {
     font-family: var(--font-mono);
     font-size: 0.62rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.6rem;
+  }
+  .sfc-deliverables p {
+    font-size: 0.82rem;
+    color: rgba(245,242,238,0.65);
+    line-height: 1.65;
   }
   .sfc-deliverables ul { list-style: none; }
   .sfc-deliverables li {
@@ -95,9 +100,7 @@
     font-size: 0.7rem;
     flex-shrink: 0;
   }
-  .sfc-cta {
-    margin-top: 2rem;
-  }
+  .sfc-cta { margin-top: 2rem; }
   .sfc-cta a {
     font-family: var(--font-mono);
     font-size: 0.72rem;
@@ -245,23 +248,35 @@
   <div class="ticker-inner">
     <span class="ticker-item">Website Design</span>
     <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Web Applications</span>
+    <span class="ticker-item">Business Portals</span>
     <span class="ticker-item ticker-dot">✦</span>
     <span class="ticker-item">Mobile Apps</span>
     <span class="ticker-item ticker-dot">✦</span>
     <span class="ticker-item">E-Commerce</span>
     <span class="ticker-item ticker-dot">✦</span>
     <span class="ticker-item">Startup MVPs</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">AI Integration</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Maintenance</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Branding Setup</span>
     <span class="ticker-item ticker-dot">✦</span>
     <span class="ticker-item">Website Design</span>
     <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Web Applications</span>
+    <span class="ticker-item">Business Portals</span>
     <span class="ticker-item ticker-dot">✦</span>
     <span class="ticker-item">Mobile Apps</span>
     <span class="ticker-item ticker-dot">✦</span>
     <span class="ticker-item">E-Commerce</span>
     <span class="ticker-item ticker-dot">✦</span>
     <span class="ticker-item">Startup MVPs</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">AI Integration</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Maintenance</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Branding Setup</span>
     <span class="ticker-item ticker-dot">✦</span>
   </div>
 </div>
@@ -272,81 +287,103 @@
   <h2 class="section-title">EVERYTHING<br>WE BUILD</h2>
   <div class="services-full-grid">
 
-    <!-- Website Design -->
+    <!-- 01 Website Design & Redesign -->
     <div class="service-full-card">
       <div class="sfc-header">
         <div class="sfc-icon-wrap">🌐</div>
         <div class="sfc-meta">
           <p class="sfc-num">01</p>
-          <h3 class="sfc-name">Website Design & Dev</h3>
+          <h3 class="sfc-name">Website Design & Redesign</h3>
         </div>
       </div>
-      <p class="sfc-desc">Custom websites that load fast, look sharp, and convert visitors into customers. No templates — every site is designed from scratch around your brand and goals.</p>
+      <p class="sfc-desc">Modern websites and redesigns that help businesses look professional, trustworthy, and mobile-friendly.</p>
       <div class="sfc-deliverables">
-        <h4>What's included</h4>
+        <h4>What it means</h4>
+        <p>We build new websites or improve existing websites so they look modern, professional, mobile-friendly, and trustworthy.</p>
+      </div>
+      <div class="sfc-deliverables">
+        <h4>Good for</h4>
+        <p>Small businesses, nonprofits, personal brands, service providers, restaurants, salons, contractors, and organizations with outdated websites.</p>
+      </div>
+      <div class="sfc-deliverables">
+        <h4>Deliverables</h4>
         <ul>
-          <li>Custom design tailored to your brand</li>
-          <li>Fully responsive for all screen sizes</li>
-          <li>Performance-optimized (Core Web Vitals)</li>
-          <li>Contact forms & CTA integrations</li>
-          <li>SEO fundamentals & meta setup</li>
-          <li>Google Analytics integration</li>
-          <li>Hosting setup & deployment</li>
+          <li>Custom website design</li>
+          <li>Mobile-responsive pages</li>
+          <li>Homepage and service pages</li>
+          <li>Contact form setup</li>
+          <li>Basic SEO structure</li>
+          <li>Launch support</li>
         </ul>
       </div>
-      <div class="sfc-cta"><a href="contact.html">Start a website project →</a></div>
+      <div class="sfc-cta"><a href="contact.html">Start this project →</a></div>
     </div>
 
-    <!-- Web Applications -->
+    <!-- 02 Business Portals & Dashboard Systems -->
     <div class="service-full-card">
       <div class="sfc-header">
         <div class="sfc-icon-wrap">⚙️</div>
         <div class="sfc-meta">
           <p class="sfc-num">02</p>
-          <h3 class="sfc-name">Web Applications</h3>
+          <h3 class="sfc-name">Business Portals & Dashboard Systems</h3>
         </div>
       </div>
-      <p class="sfc-desc">Complex, interactive web apps built to solve real business problems. Custom dashboards, admin panels, booking systems, portals — if it has logic, we can build it.</p>
+      <p class="sfc-desc">Private systems for clients, staff, admins, or members to manage information in one place.</p>
       <div class="sfc-deliverables">
-        <h4>What's included</h4>
+        <h4>What it means</h4>
+        <p>We build private login-based systems where clients, staff, admins, or members can manage information in one place.</p>
+      </div>
+      <div class="sfc-deliverables">
+        <h4>Good for</h4>
+        <p>Businesses, nonprofits, service providers, legal support teams, appointment-based teams, and organizations that need tracking systems.</p>
+      </div>
+      <div class="sfc-deliverables">
+        <h4>Deliverables</h4>
         <ul>
-          <li>Full-stack React + Node.js / Express.js / Python architecture</li>
-          <li>Custom database design & API development (MySQL, PostgreSQL, MongoDB)</li>
-          <li>User authentication & role management</li>
-          <li>Admin dashboards & reporting</li>
-          <li>Third-party API integrations</li>
-          <li>Cloud deployment (AWS / Vercel)</li>
-          <li>Testing & QA before launch</li>
+          <li>Client portal</li>
+          <li>Admin dashboard</li>
+          <li>Staff dashboard</li>
+          <li>Case or status tracking</li>
+          <li>Forms and data storage</li>
+          <li>Role-based user views</li>
         </ul>
       </div>
-      <div class="sfc-cta"><a href="contact.html">Discuss your app idea →</a></div>
+      <div class="sfc-cta"><a href="contact.html">Start this project →</a></div>
     </div>
 
-    <!-- Mobile Apps -->
+    <!-- 03 Mobile App Development -->
     <div class="service-full-card">
       <div class="sfc-header">
         <div class="sfc-icon-wrap">📱</div>
         <div class="sfc-meta">
           <p class="sfc-num">03</p>
-          <h3 class="sfc-name">Mobile Apps</h3>
+          <h3 class="sfc-name">Mobile App Development</h3>
         </div>
       </div>
-      <p class="sfc-desc">Native iOS in Swift, cross-platform in Flutter or React Native — designed for the App Store and Google Play. Smooth, polished, built for real-world use.</p>
+      <p class="sfc-desc">Mobile app MVPs and companion apps that improve the customer or member experience.</p>
       <div class="sfc-deliverables">
-        <h4>What's included</h4>
+        <h4>What it means</h4>
+        <p>We build mobile app MVPs and companion apps that help businesses create a better customer or member experience.</p>
+      </div>
+      <div class="sfc-deliverables">
+        <h4>Good for</h4>
+        <p>Startups, service businesses, nonprofits, membership programs, booking services, and customer support systems.</p>
+      </div>
+      <div class="sfc-deliverables">
+        <h4>Deliverables</h4>
         <ul>
-          <li>iOS (Swift / SwiftUI), Flutter, or React Native</li>
-          <li>UI/UX design & prototyping in Figma</li>
-          <li>Backend API development if needed</li>
-          <li>Push notifications & deep linking</li>
-          <li>App Store submission & setup</li>
-          <li>Post-launch bug support</li>
+          <li>iOS/Android app MVP</li>
+          <li>Mobile UI design</li>
+          <li>User login flow</li>
+          <li>Booking or request features</li>
+          <li>Dashboard connection</li>
+          <li>App launch guidance</li>
         </ul>
       </div>
-      <div class="sfc-cta"><a href="contact.html">Build a mobile app →</a></div>
+      <div class="sfc-cta"><a href="contact.html">Start this project →</a></div>
     </div>
 
-    <!-- E-Commerce -->
+    <!-- 04 E-Commerce Stores -->
     <div class="service-full-card">
       <div class="sfc-header">
         <div class="sfc-icon-wrap">🛒</div>
@@ -355,52 +392,156 @@
           <h3 class="sfc-name">E-Commerce Stores</h3>
         </div>
       </div>
-      <p class="sfc-desc">Online stores built to sell. Whether you're launching a brand or migrating from a clunky platform, we build e-commerce that converts — fast checkout, mobile-first.</p>
+      <p class="sfc-desc">Online stores with clean product pages, payments, checkout, and selling tools.</p>
       <div class="sfc-deliverables">
-        <h4>What's included</h4>
+        <h4>What it means</h4>
+        <p>We build online stores that make it easier for businesses to sell products or services with a clean shopping and checkout experience.</p>
+      </div>
+      <div class="sfc-deliverables">
+        <h4>Good for</h4>
+        <p>Retail stores, jewelry brands, clothing brands, restaurants, digital products, service packages, and local businesses selling online.</p>
+      </div>
+      <div class="sfc-deliverables">
+        <h4>Deliverables</h4>
         <ul>
-          <li>Custom storefront design</li>
-          <li>Stripe / Shopify / WooCommerce integration</li>
-          <li>Product catalog & inventory management</li>
-          <li>Checkout & payment flow optimization</li>
-          <li>Order tracking & email notifications</li>
-          <li>Mobile-first responsive experience</li>
+          <li>Product pages</li>
+          <li>Shopping cart</li>
+          <li>Payment setup</li>
+          <li>Checkout flow</li>
+          <li>Inventory setup</li>
+          <li>Store design and launch support</li>
         </ul>
       </div>
-      <div class="sfc-cta"><a href="contact.html">Launch your store →</a></div>
+      <div class="sfc-cta"><a href="contact.html">Start this project →</a></div>
     </div>
 
-    <!-- Startup MVPs -->
-    <div class="service-full-card service-full-card wide">
+    <!-- 05 Startup MVP Development -->
+    <div class="service-full-card">
       <div class="sfc-header">
         <div class="sfc-icon-wrap">🚀</div>
         <div class="sfc-meta">
           <p class="sfc-num">05</p>
-          <h3 class="sfc-name">Startup MVPs</h3>
+          <h3 class="sfc-name">Startup MVP Development</h3>
         </div>
       </div>
-      <p class="sfc-desc">You have an idea. We help you build the leanest version of it that proves the concept, attracts users, and sets you up for a real product launch. Fast, functional, focused.</p>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:1.5rem;">
-        <div class="sfc-deliverables">
-          <h4>What's included</h4>
-          <ul>
-            <li>Product scoping & feature roadmap</li>
-            <li>UI/UX design & user flows</li>
-            <li>Full-stack web or mobile build</li>
-            <li>Core feature set, no bloat</li>
-          </ul>
-        </div>
-        <div class="sfc-deliverables">
-          <h4>Also included</h4>
-          <ul>
-            <li>User authentication & onboarding</li>
-            <li>Cloud deployment & monitoring</li>
-            <li>Analytics & feedback tooling</li>
-            <li>Post-launch iteration support</li>
-          </ul>
+      <p class="sfc-desc">Fast first versions of digital products so founders can test, launch, and improve.</p>
+      <div class="sfc-deliverables">
+        <h4>What it means</h4>
+        <p>We turn ideas into working first versions so founders can test, launch, learn from users, and improve quickly.</p>
+      </div>
+      <div class="sfc-deliverables">
+        <h4>Good for</h4>
+        <p>Startup founders, student founders, small teams, SaaS ideas, marketplaces, booking platforms, and AI tool ideas.</p>
+      </div>
+      <div class="sfc-deliverables">
+        <h4>Deliverables</h4>
+        <ul>
+          <li>MVP planning</li>
+          <li>Product wireframe</li>
+          <li>Core user flows</li>
+          <li>Web app prototype</li>
+          <li>Database setup</li>
+          <li>Launch-ready first version</li>
+        </ul>
+      </div>
+      <div class="sfc-cta"><a href="contact.html">Start this project →</a></div>
+    </div>
+
+    <!-- 06 AI Integration & Automation -->
+    <div class="service-full-card">
+      <div class="sfc-header">
+        <div class="sfc-icon-wrap">🤖</div>
+        <div class="sfc-meta">
+          <p class="sfc-num">06</p>
+          <h3 class="sfc-name">AI Integration & Automation</h3>
         </div>
       </div>
-      <div class="sfc-cta" style="margin-top:2rem;"><a href="contact.html">Build your MVP →</a></div>
+      <p class="sfc-desc">AI assistants, smart forms, and workflow automation that save time and support customers.</p>
+      <div class="sfc-deliverables">
+        <h4>What it means</h4>
+        <p>We add AI tools and automation to websites, portals, and business workflows to save time and improve customer support.</p>
+      </div>
+      <div class="sfc-deliverables">
+        <h4>Good for</h4>
+        <p>Businesses with repeated questions, nonprofits with intake forms, service providers, support teams, and websites that need smarter user help.</p>
+      </div>
+      <div class="sfc-deliverables">
+        <h4>Deliverables</h4>
+        <ul>
+          <li>AI chatbot</li>
+          <li>FAQ assistant</li>
+          <li>Intake form assistant</li>
+          <li>Document helper</li>
+          <li>Workflow automation</li>
+          <li>AI-powered search or support flow</li>
+        </ul>
+      </div>
+      <div class="sfc-cta"><a href="contact.html">Start this project →</a></div>
+    </div>
+
+    <!-- 07 Website Maintenance & Support -->
+    <div class="service-full-card">
+      <div class="sfc-header">
+        <div class="sfc-icon-wrap">🔧</div>
+        <div class="sfc-meta">
+          <p class="sfc-num">07</p>
+          <h3 class="sfc-name">Website Maintenance & Support</h3>
+        </div>
+      </div>
+      <p class="sfc-desc">Ongoing website updates, bug fixes, small improvements, and monthly support.</p>
+      <div class="sfc-deliverables">
+        <h4>What it means</h4>
+        <p>We provide ongoing support after launch so websites stay updated, clean, secure, and working properly.</p>
+      </div>
+      <div class="sfc-deliverables">
+        <h4>Good for</h4>
+        <p>Business owners who do not want to manage updates themselves, organizations with changing content, and websites that need regular care.</p>
+      </div>
+      <div class="sfc-deliverables">
+        <h4>Deliverables</h4>
+        <ul>
+          <li>Website updates</li>
+          <li>Bug fixes</li>
+          <li>Small design changes</li>
+          <li>Content updates</li>
+          <li>Performance checks</li>
+          <li>Monthly support</li>
+        </ul>
+      </div>
+      <div class="sfc-cta"><a href="contact.html">Start this project →</a></div>
+    </div>
+
+    <!-- 08 Branding & Digital Setup -->
+    <div class="service-full-card">
+      <div class="sfc-header">
+        <div class="sfc-icon-wrap">🎨</div>
+        <div class="sfc-meta">
+          <p class="sfc-num">08</p>
+          <h3 class="sfc-name">Branding & Digital Setup</h3>
+        </div>
+      </div>
+      <p class="sfc-desc">Basic digital identity setup like domain, email, Google profile, colors, copy, and social links.</p>
+      <div class="sfc-deliverables">
+        <h4>What it means</h4>
+        <p>We help new or growing businesses look professional online by setting up the basic digital identity and tools they need.</p>
+      </div>
+      <div class="sfc-deliverables">
+        <h4>Good for</h4>
+        <p>New businesses, small business owners, personal brands, nonprofits, local service providers, and anyone starting from zero.</p>
+      </div>
+      <div class="sfc-deliverables">
+        <h4>Deliverables</h4>
+        <ul>
+          <li>Logo cleanup</li>
+          <li>Color palette</li>
+          <li>Domain setup</li>
+          <li>Business email setup</li>
+          <li>Google Business Profile guidance</li>
+          <li>Website copy support</li>
+          <li>Social media link setup</li>
+        </ul>
+      </div>
+      <div class="sfc-cta"><a href="contact.html">Start this project →</a></div>
     </div>
 
   </div>
@@ -572,10 +713,13 @@
         <h4>Services</h4>
         <ul>
           <li><a href="services.html">Website Design</a></li>
-          <li><a href="services.html">Web Apps</a></li>
+          <li><a href="services.html">Business Portals</a></li>
           <li><a href="services.html">Mobile Apps</a></li>
           <li><a href="services.html">E-Commerce</a></li>
           <li><a href="services.html">Startup MVPs</a></li>
+          <li><a href="services.html">AI Integration</a></li>
+          <li><a href="services.html">Maintenance</a></li>
+          <li><a href="services.html">Branding Setup</a></li>
         </ul>
       </div>
       <div class="footer-nav-col">
