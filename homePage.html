@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tectonic — We Build Digital Products</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f2ee;
+    --accent: #e8440a;
+    --accent2: #f0a500;
+    --gray: #1a1a1a;
+    --gray2: #2a2a2a;
+    --muted: #888;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.2s, height 0.2s;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(232,68,10,0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease-out, width 0.2s, height 0.2s, border-color 0.2s;
+  }
+
+  /* Nav */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 4rem;
+    mix-blend-mode: normal;
+  }
+  nav::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.9), transparent);
+    z-index: -1;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    padding: 0.6rem 1.4rem;
+    cursor: none;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: #c73a08; }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 4rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(232,68,10,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,68,10,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridShift 20s linear infinite;
+  }
+  @keyframes gridShift {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(60px); }
+  }
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232,68,10,0.15) 0%, transparent 70%);
+    top: 10%; right: -100px;
+    animation: glowPulse 4s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+  .hero-content { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 12vw, 11rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero-title .outline {
+    -webkit-text-stroke: 1px var(--white);
+    color: transparent;
+  }
+  .hero-title .red { color: var(--accent); }
+  .hero-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 380px;
+    line-height: 1.7;
+  }
+  .hero-sub strong { color: var(--white); font-weight: 500; }
+  .hero-cta-group { display: flex; gap: 1rem; align-items: center; }
+  .btn-primary {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    padding: 1rem 2rem;
+    cursor: none;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #c73a08; transform: translateY(-2px); }
+  .btn-ghost {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(245,242,238,0.3);
+    padding: 1rem 2rem;
+    cursor: none;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--white); transform: translateY(-2px); }
+  .hero-scroll {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-scroll::before {
+    content: '';
+    display: block;
+    width: 40px; height: 1px;
+    background: var(--muted);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0%, 100% { width: 40px; opacity: 0.5; }
+    50% { width: 60px; opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Ticker */
+  .ticker {
+    background: var(--accent);
+    padding: 0.75rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-flex;
+    gap: 0;
+    animation: ticker 20s linear infinite;
+  }
+  .ticker-item {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    padding: 0 2rem;
+    color: var(--white);
+  }
+  .ticker-dot {
+    color: rgba(255,255,255,0.4);
+  }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Section base */
+  section { padding: 7rem 4rem; }
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px; height: 1px;
+    background: var(--accent);
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Services */
+  .services { background: var(--gray); }
+  .services-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+    gap: 2rem;
+  }
+  .services-desc {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 320px;
+    line-height: 1.7;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border: 1px solid var(--gray2);
+  }
+  .service-card {
+    border-right: 1px solid var(--gray2);
+    padding: 2.5rem 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    cursor: none;
+  }
+  .service-card:last-child { border-right: none; }
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+  .service-card:hover { background: var(--gray2); }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-num {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+  }
+  .service-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1.25rem;
+    display: block;
+    filter: grayscale(0);
+  }
+  .service-name {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+    color: var(--white);
+  }
+  .service-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* About */
+  .about { background: var(--black); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  .about-visual {
+    position: relative;
+    height: 480px;
+  }
+  .about-card {
+    position: absolute;
+    background: var(--gray);
+    border: 1px solid var(--gray2);
+    padding: 2rem;
+  }
+  .about-card.main {
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .about-card.main::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, var(--accent) 0%, transparent 100%);
+    opacity: 0.08;
+  }
+  .about-card.float {
+    bottom: -1.5rem;
+    right: -1.5rem;
+    width: 200px;
+    background: var(--accent);
+    border: none;
+    z-index: 2;
+  }
+  .about-card.float .float-num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--white);
+    line-height: 1;
+  }
+  .about-card.float .float-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-top: 0.25rem;
+  }
+  .about-initials {
+    font-family: var(--font-display);
+    font-size: 8rem;
+    color: rgba(232,68,10,0.12);
+    line-height: 1;
+    position: absolute;
+    top: 1rem; left: 1rem;
+  }
+  .about-name {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+    position: relative;
+    z-index: 1;
+  }
+  .about-role {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 0.25rem;
+    position: relative;
+    z-index: 1;
+  }
+  .about-text {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .about-text strong { color: var(--white); font-weight: 500; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid var(--gray2);
+    color: var(--muted);
+    padding: 0.4rem 0.8rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .tag:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Portfolio */
+  .portfolio { background: var(--gray); }
+  .portfolio-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+  }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--gray2);
+  }
+  .project-card {
+    background: var(--gray);
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    cursor: none;
+    transition: background 0.3s;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .project-card:hover { background: #222; }
+  .project-card.featured {
+    grid-column: span 2;
+    min-height: 260px;
+  }
+  .project-num {
+    position: absolute;
+    top: 2rem; right: 2rem;
+    font-family: var(--font-display);
+    font-size: 5rem;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+  }
+  .project-tags { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+  .project-tag {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--gray2);
+    color: var(--muted);
+    padding: 0.3rem 0.7rem;
+  }
+  .project-tag.live { background: rgba(232,68,10,0.15); color: var(--accent); }
+  .project-name {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+  .project-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 480px;
+  }
+  .project-arrow {
+    position: absolute;
+    bottom: 2rem; right: 2rem;
+    font-size: 1.5rem;
+    color: var(--accent);
+    opacity: 0;
+    transform: translate(-8px, 8px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .project-card:hover .project-arrow { opacity: 1; transform: translate(0, 0); }
+
+  /* Pricing */
+  .pricing { background: var(--black); }
+  .pricing-header { margin-bottom: 4rem; }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--gray2);
+  }
+  .pricing-card {
+    background: var(--gray);
+    padding: 3rem 2.5rem;
+    position: relative;
+    cursor: none;
+    transition: background 0.3s;
+  }
+  .pricing-card:hover { background: #1e1e1e; }
+  .pricing-card.featured {
+    background: var(--accent);
+  }
+  .pricing-card.featured:hover { background: #d63d08; }
+  .pricing-badge {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.15);
+    color: var(--white);
+    padding: 0.3rem 0.8rem;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+  .pricing-name {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+  .pricing-price {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+  }
+  .pricing-price span {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.05em;
+  }
+  .pricing-sub {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 2rem;
+  }
+  .pricing-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin-bottom: 2rem;
+  }
+  .pricing-features { list-style: none; margin-bottom: 2.5rem; }
+  .pricing-features li {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    padding: 0.5rem 0;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  .pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.9); }
+  .check { color: var(--accent2); font-size: 0.9rem; flex-shrink: 0; }
+  .pricing-card.featured .check { color: var(--white); }
+  .btn-pricing {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: transparent;
+    color: var(--white);
+    cursor: none;
+    transition: background 0.2s, border-color 0.2s;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+  }
+  .btn-pricing:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
+  .pricing-card.featured .btn-pricing {
+    background: rgba(0,0,0,0.2);
+    border-color: rgba(255,255,255,0.4);
+  }
+  .pricing-card.featured .btn-pricing:hover { background: rgba(0,0,0,0.35); }
+
+  /* Contact */
+  .contact { background: var(--gray); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+  }
+  .contact-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 0.95;
+    margin-bottom: 2rem;
+  }
+  .contact-title .outline {
+    -webkit-text-stroke: 1px rgba(245,242,238,0.4);
+    color: transparent;
+  }
+  .contact-info { margin-top: 3rem; }
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--gray2);
+  }
+  .contact-item-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+  .contact-item-val {
+    font-size: 0.95rem;
+    color: var(--white);
+  }
+  .form-group { margin-bottom: 1.5rem; }
+  .form-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    background: var(--black);
+    border: 1px solid var(--gray2);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 300;
+    padding: 0.85rem 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--accent);
+  }
+  .form-input::placeholder, .form-textarea::placeholder { color: var(--muted); }
+  .form-textarea { resize: vertical; min-height: 120px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-select { cursor: none; }
+  .form-select option { background: var(--black); }
+  .btn-submit {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    padding: 1.1rem 2.5rem;
+    cursor: none;
+    width: 100%;
+    transition: background 0.2s, transform 0.2s;
+    margin-top: 0.5rem;
+  }
+  .btn-submit:hover { background: #c73a08; transform: translateY(-2px); }
+
+  /* Footer */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--gray2);
+    padding: 2.5rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--accent); }
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .footer-links { display: flex; gap: 2rem; }
+  .footer-links a {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Nav -->
+<nav>
+  <a href="#" class="nav-logo">TEC<span>.</span>TONIC</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Start a project</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">// Digital products that move businesses forward</p>
+    <h1 class="hero-title">
+      WE BUILD<br>
+      <span class="outline">DIGITAL</span><br>
+      PROD<span class="red">U</span>CTS
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-sub">
+        Websites, web apps, mobile apps &amp; e-commerce — built for <strong>businesses that want to grow</strong>. Based in Los Angeles.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#work" class="btn-ghost">View our work</a>
+        <a href="#contact" class="btn-primary">Start a project →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ticker -->
+<div class="ticker">
+  <div class="ticker-inner" id="ticker">
+    <span class="ticker-item">Website Design</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Web Applications</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Mobile Apps</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">E-Commerce</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Startup MVPs</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Website Design</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Web Applications</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Mobile Apps</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">E-Commerce</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Startup MVPs</span>
+    <span class="ticker-item ticker-dot">✦</span>
+  </div>
+</div>
+
+<!-- Services -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div>
+      <p class="section-label">What we do</p>
+      <h2 class="section-title">OUR<br>SERVICES</h2>
+    </div>
+    <p class="services-desc">From concept to launch — we handle the full digital stack so you can focus on running your business.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <p class="service-num">01</p>
+      <span class="service-icon">🌐</span>
+      <h3 class="service-name">Website Design & Dev</h3>
+      <p class="service-desc">Custom, fast, and conversion-focused websites that represent your brand online.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-num">02</p>
+      <span class="service-icon">⚙️</span>
+      <h3 class="service-name">Web Applications</h3>
+      <p class="service-desc">Powerful web apps with custom dashboards, APIs, and business logic built in.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-num">03</p>
+      <span class="service-icon">📱</span>
+      <h3 class="service-name">Mobile Apps</h3>
+      <p class="service-desc">iOS and Android apps that give your customers a seamless mobile experience.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-num">04</p>
+      <span class="service-icon">🛒</span>
+      <h3 class="service-name">E-Commerce Stores</h3>
+      <p class="service-desc">Online stores built to sell — integrated payments, inventory, and optimized checkout.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-num">05</p>
+      <span class="service-icon">🚀</span>
+      <h3 class="service-name">Startup MVPs</h3>
+      <p class="service-desc">Launch your idea fast. We build lean, functional MVPs that get you to market quickly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-visual">
+      <div class="about-card main">
+        <div class="about-initials">WYM</div>
+        <p class="about-name">Wai Yan Min</p>
+        <p class="about-role">Founder & CTO · Tectonic</p>
+      </div>
+      <div class="about-card float">
+        <p class="float-num">10+</p>
+        <p class="float-label">Projects delivered</p>
+      </div>
+    </div>
+    <div class="about-content">
+      <p class="section-label">Who we are</p>
+      <h2 class="section-title">THE<br>FOUNDER</h2>
+      <p class="about-text">
+        I'm <strong>Wai Yan Min</strong> — a full-stack developer studying Computer Science at <strong>Cal Poly Pomona</strong> and currently serving as <strong>CTO at MYTTA Foundation</strong>, where I built and manage their entire digital platform.
+      </p>
+      <p class="about-text">
+        Tectonic is built on the belief that every business deserves a powerful digital presence — not just big corporations. I founded this to bring <strong>startup-level execution to businesses of all sizes</strong>.
+      </p>
+      <div class="about-tags">
+        <span class="tag">React</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">Swift</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">MongoDB</span>
+        <span class="tag">Figma</span>
+        <span class="tag">AWS</span>
+        <span class="tag">TypeScript</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio -->
+<section class="portfolio" id="work">
+  <div class="portfolio-header">
+    <div>
+      <p class="section-label">What we've built</p>
+      <h2 class="section-title">SELECTED<br>WORK</h2>
+    </div>
+  </div>
+  <div class="portfolio-grid">
+    <a href="https://www.myttafoundation.com/" target="_blank" class="project-card featured" style="text-decoration:none;">
+      <span class="project-num">01</span>
+      <div class="project-tags">
+        <span class="project-tag live">● Live</span>
+        <span class="project-tag">Website</span>
+        <span class="project-tag">Non-profit</span>
+      </div>
+      <h3 class="project-name">MYTTA Foundation</h3>
+      <p class="project-desc">Full website for an immigration legal services organization in Brooklyn, NY — covering asylum, green cards, work permits, and more. Built and maintained as CTO.</p>
+      <span class="project-arrow">↗</span>
+    </a>
+    <div class="project-card">
+      <span class="project-num">02</span>
+      <div class="project-tags">
+        <span class="project-tag">Web App</span>
+        <span class="project-tag">React</span>
+      </div>
+      <h3 class="project-name">Your Next Project</h3>
+      <p class="project-desc">Your business could be featured here. Let's build something together.</p>
+      <span class="project-arrow">↗</span>
+    </div>
+    <div class="project-card">
+      <span class="project-num">03</span>
+      <div class="project-tags">
+        <span class="project-tag">Mobile App</span>
+        <span class="project-tag">iOS</span>
+      </div>
+      <h3 class="project-name">Your Next App</h3>
+      <p class="project-desc">Got an idea for a mobile app? We can build it from concept to launch.</p>
+      <span class="project-arrow">↗</span>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing" id="pricing">
+  <div class="pricing-header">
+    <p class="section-label">Investment</p>
+    <h2 class="section-title">SIMPLE<br>PRICING</h2>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <span class="pricing-badge">Starter</span>
+      <h3 class="pricing-name">Launch</h3>
+      <p class="pricing-price">$499<span> / project</span></p>
+      <p class="pricing-sub">Perfect for small businesses getting online</p>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li><span class="check">✓</span> Custom 5-page website</li>
+        <li><span class="check">✓</span> Mobile responsive design</li>
+        <li><span class="check">✓</span> Contact form integration</li>
+        <li><span class="check">✓</span> Basic SEO setup</li>
+        <li><span class="check">✓</span> 30 days of support</li>
+      </ul>
+      <a href="#contact" class="btn-pricing">Get started →</a>
+    </div>
+    <div class="pricing-card featured">
+      <span class="pricing-badge">Most Popular</span>
+      <h3 class="pricing-name">Growth</h3>
+      <p class="pricing-price">$999<span> / project</span></p>
+      <p class="pricing-sub">For businesses ready to scale digitally</p>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li><span class="check">✓</span> Custom 10-page website or web app</li>
+        <li><span class="check">✓</span> E-commerce or booking system</li>
+        <li><span class="check">✓</span> CMS integration</li>
+        <li><span class="check">✓</span> Advanced SEO & analytics</li>
+        <li><span class="check">✓</span> 60 days of support</li>
+        <li><span class="check">✓</span> Performance optimization</li>
+      </ul>
+      <a href="#contact" class="btn-pricing">Get started →</a>
+    </div>
+    <div class="pricing-card">
+      <span class="pricing-badge">Enterprise</span>
+      <h3 class="pricing-name">Tectonic</h3>
+      <p class="pricing-price">Custom<span> pricing</span></p>
+      <p class="pricing-sub">Full-scale apps, platforms & startup MVPs</p>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li><span class="check">✓</span> Full-stack web or mobile app</li>
+        <li><span class="check">✓</span> Custom API & database design</li>
+        <li><span class="check">✓</span> User authentication & dashboards</li>
+        <li><span class="check">✓</span> Scalable cloud infrastructure</li>
+        <li><span class="check">✓</span> Ongoing maintenance available</li>
+        <li><span class="check">✓</span> Dedicated project management</li>
+      </ul>
+      <a href="#contact" class="btn-pricing">Let's talk →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="contact-grid">
+    <div>
+      <p class="section-label">Get in touch</p>
+      <h2 class="contact-title">LET'S BUILD<br><span class="outline">SOMETHING</span><br>TECTONIC</h2>
+      <div class="contact-info">
+        <div class="contact-item">
+          <span class="contact-item-label">Email</span>
+          <span class="contact-item-val">waiyanmin.lane@gmail.com</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Phone</span>
+          <span class="contact-item-val">+1 (669) 213-7967</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Based in</span>
+          <span class="contact-item-val">Los Angeles, California</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Response time</span>
+          <span class="contact-item-val">Within 24 hours</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <form id="contact-form" action="https://formspree.io/f/xojyezqb" method="POST">
+      <div class="form-group form-row">
+        <div>
+          <label class="form-label">Your name</label>
+          <input type="text" name="name" class="form-input" placeholder="John Smith" required>
+        </div>
+        <div>
+          <label class="form-label">Your email</label>
+          <input type="email" name="email" class="form-input" placeholder="john@company.com" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Service needed</label>
+        <select name="service" class="form-select">
+          <option value="">Select a service...</option>
+          <option>Website Design & Development</option>
+          <option>Web Application</option>
+          <option>Mobile App</option>
+          <option>E-Commerce Store</option>
+          <option>Startup MVP</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Budget range</label>
+        <select name="budget" class="form-select">
+          <option value="">Select a budget...</option>
+          <option>Under $1,000</option>
+          <option>$1,000 – $3,000</option>
+          <option>$3,000 – $10,000</option>
+          <option>$10,000+</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tell us about your project</label>
+        <textarea name="message" class="form-textarea" placeholder="Describe your idea, goals, or what you need..." required></textarea>
+      </div>
+      <button type="submit" class="btn-submit" id="submit-btn">Send message →</button>
+      <div id="form-success" style="display:none; margin-top:1rem; font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:#1D9E75;">
+        ✓ Message sent! I'll get back to you within 24 hours.
+      </div>
+      <div id="form-error" style="display:none; margin-top:1rem; font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent);">
+        ✕ Something went wrong. Please email me directly.
+      </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <span class="footer-logo">TEC<span>.</span>TONIC</span>
+  <span class="footer-copy">© 2025 Tectonic. All rights reserved.</span>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  document.querySelectorAll('a, button, .service-card, .project-card, .pricing-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '20px';
+      cursor.style.height = '20px';
+      ring.style.width = '52px';
+      ring.style.height = '52px';
+      ring.style.borderColor = 'rgba(232,68,10,0.8)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '12px';
+      cursor.style.height = '12px';
+      ring.style.width = '36px';
+      ring.style.height = '36px';
+      ring.style.borderColor = 'rgba(232,68,10,0.5)';
+    });
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      const success = document.getElementById('form-success');
+      const error = document.getElementById('form-error');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          success.style.display = 'block';
+          error.style.display = 'none';
+          contactForm.reset();
+          btn.textContent = 'Sent ✓';
+        } else {
+          throw new Error();
+        }
+      } catch {
+        error.style.display = 'block';
+        success.style.display = 'none';
+        btn.textContent = 'Send message →';
+        btn.disabled = false;
+      }
+    });
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .project-card, .pricing-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, background 0.3s';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

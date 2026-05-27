@@ -1,0 +1,495 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Tectonic</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ─── Availability strip ─── */
+  .availability-strip {
+    background: var(--gray);
+    border-bottom: 1px solid var(--gray2);
+    padding: 1.1rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .availability-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .avail-dot {
+    width: 8px; height: 8px;
+    background: #1D9E75;
+    border-radius: 50%;
+    animation: dotPulse 2s ease-in-out infinite;
+  }
+  @keyframes dotPulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(29,158,117,0.4); }
+    50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(29,158,117,0); }
+  }
+  .avail-text {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #1D9E75;
+  }
+  .avail-meta {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ─── Contact page section ─── */
+  .contact-page { background: var(--gray); }
+
+  /* ─── FAQ ─── */
+  .faq { background: var(--black); }
+  .faq-list { margin-top: 3rem; border-top: 1px solid var(--gray2); }
+  .faq-item { border-bottom: 1px solid var(--gray2); cursor: none; }
+  .faq-question {
+    padding: 1.75rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .faq-question h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    transition: color 0.2s;
+  }
+  .faq-question:hover h3 { color: var(--accent); }
+  .faq-toggle {
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    color: var(--accent);
+    flex-shrink: 0;
+    transition: transform 0.3s;
+    background: none;
+    border: none;
+    cursor: none;
+  }
+  .faq-item.open .faq-toggle { transform: rotate(45deg); }
+  .faq-answer {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.8;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s;
+    padding-bottom: 0;
+  }
+  .faq-item.open .faq-answer { max-height: 300px; padding-bottom: 1.75rem; }
+
+  /* ─── Ways to connect ─── */
+  .connect-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--gray2);
+    margin-top: 4rem;
+  }
+  .connect-card {
+    background: var(--gray);
+    padding: 3rem 2.5rem;
+    cursor: none;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .connect-card:hover { background: #222; }
+  .connect-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+  .connect-card:hover::before { transform: scaleX(1); }
+  .connect-icon { font-size: 2rem; margin-bottom: 1.25rem; display: block; }
+  .connect-type {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .connect-val {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .connect-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+  .connect-link {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .connect-link:hover { color: var(--white); }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Nav -->
+<nav>
+  <a href="index.html" class="nav-logo">TEC<span>.</span>TONIC</a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="portfolio.html">Work</a></li>
+    <li><a href="services.html#pricing">Pricing</a></li>
+  </ul>
+  <div style="display:flex; align-items:center; gap:1.25rem;">
+    <a href="https://github.com/waiyanmin99" target="_blank" class="nav-gh">GitHub</a>
+    <a href="contact.html" class="nav-cta" style="background:#c73a08;">Start a project</a>
+  </div>
+</nav>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow" style="left:-50px; right:auto; top:20%;"></div>
+    <div class="hero-glow" style="right:-50px; top:auto; bottom:0; width:400px; height:400px;"></div>
+  </div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">// Get in touch</p>
+    <h1 class="page-hero-title">
+      LET'S<br>
+      <span class="outline">BUILD</span><br>
+      SOMETHING
+    </h1>
+    <p class="page-hero-sub">Have a project in mind? Tell us about it. We'll get back to you within 24 hours with a plan.</p>
+  </div>
+</section>
+
+<!-- Availability Strip -->
+<div class="availability-strip">
+  <div class="availability-indicator">
+    <div class="avail-dot"></div>
+    <span class="avail-text">Currently accepting new projects</span>
+  </div>
+  <span class="avail-meta">Response time: within 24 hours · Los Angeles, CA (PST)</span>
+</div>
+
+<!-- Contact Section -->
+<section class="contact-page">
+  <div class="contact-grid">
+    <div>
+      <p class="section-label">Start a conversation</p>
+      <h2 class="contact-title">LET'S BUILD<br><span class="outline">SOMETHING</span><br>TECTONIC</h2>
+      <p style="font-size:0.9rem; color:var(--muted); line-height:1.7; margin-bottom:0.5rem;">
+        Whether you have a fully scoped project or just a rough idea, reach out. The best projects start with a conversation — not a brief.
+      </p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <span class="contact-item-label">Email</span>
+          <span class="contact-item-val">waiyanmin.lane@gmail.com</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Phone</span>
+          <span class="contact-item-val">+1 (669) 213-7967</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Based in</span>
+          <span class="contact-item-val">Los Angeles, California</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Response time</span>
+          <span class="contact-item-val">Within 24 hours</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Working hours</span>
+          <span class="contact-item-val">Mon – Sat, 9am – 9pm PST</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Social</span>
+          <div style="display:flex; gap:0.75rem; margin-top:0.35rem; flex-wrap:wrap;">
+            <a href="https://www.linkedin.com/in/waiyanmin999" target="_blank" style="font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; border:1px solid var(--gray2); padding:0.3rem 0.75rem; transition:color 0.2s, border-color 0.2s;" onmouseenter="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--gray2)'">LinkedIn</a>
+            <a href="#" style="font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; border:1px solid var(--gray2); padding:0.3rem 0.75rem; transition:color 0.2s, border-color 0.2s;" onmouseenter="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--gray2)'">Facebook</a>
+            <a href="#" style="font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; border:1px solid var(--gray2); padding:0.3rem 0.75rem; transition:color 0.2s, border-color 0.2s;" onmouseenter="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--gray2)'">Instagram</a>
+            <a href="https://github.com/waiyanmin99" target="_blank" style="font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; border:1px solid var(--gray2); padding:0.3rem 0.75rem; transition:color 0.2s, border-color 0.2s;" onmouseenter="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--gray2)'">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <form id="contact-form" action="https://formspree.io/f/xojyezqb" method="POST">
+        <div class="form-group form-row">
+          <div>
+            <label class="form-label">Your name</label>
+            <input type="text" name="name" class="form-input" placeholder="John Smith" required>
+          </div>
+          <div>
+            <label class="form-label">Your email</label>
+            <input type="email" name="email" class="form-input" placeholder="john@company.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Company / Business (optional)</label>
+          <input type="text" name="company" class="form-input" placeholder="Acme Inc.">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Service needed</label>
+          <select name="service" class="form-select">
+            <option value="">Select a service...</option>
+            <option>Website Design & Development</option>
+            <option>Web Application</option>
+            <option>Mobile App</option>
+            <option>E-Commerce Store</option>
+            <option>Startup MVP</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Budget range</label>
+          <select name="budget" class="form-select">
+            <option value="">Select a budget...</option>
+            <option>Under $1,000</option>
+            <option>$1,000 – $3,000</option>
+            <option>$3,000 – $10,000</option>
+            <option>$10,000+</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tell us about your project</label>
+          <textarea name="message" class="form-textarea" style="min-height:150px;" placeholder="Describe your idea, goals, timeline, or anything else that helps us understand what you need..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit" id="submit-btn">Send message →</button>
+        <div id="form-success" style="display:none; margin-top:1rem; font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:#1D9E75;">
+          ✓ Message sent! I'll get back to you within 24 hours.
+        </div>
+        <div id="form-error" style="display:none; margin-top:1rem; font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent);">
+          ✕ Something went wrong. Please email me directly.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Ways to Connect -->
+<section style="background:var(--black); padding:7rem 4rem;">
+  <p class="section-label">Other ways to reach us</p>
+  <h2 class="section-title">GET IN<br>TOUCH</h2>
+  <div class="connect-cards">
+    <div class="connect-card">
+      <span class="connect-icon">✉️</span>
+      <p class="connect-type">Email</p>
+      <p class="connect-val">Direct Line</p>
+      <p class="connect-desc">Prefer email? Reach me directly for project inquiries, questions, or just to say hello.</p>
+      <a href="mailto:waiyanmin.lane@gmail.com" class="connect-link">waiyanmin.lane@gmail.com →</a>
+    </div>
+    <div class="connect-card">
+      <span class="connect-icon">📞</span>
+      <p class="connect-type">Phone</p>
+      <p class="connect-val">Call or Text</p>
+      <p class="connect-desc">For urgent matters or if you'd rather talk through your project — give me a call or text.</p>
+      <a href="tel:+16692137967" class="connect-link">+1 (669) 213-7967 →</a>
+    </div>
+    <div class="connect-card">
+      <span class="connect-icon">📍</span>
+      <p class="connect-type">Location</p>
+      <p class="connect-val">Los Angeles</p>
+      <p class="connect-desc">Based in Los Angeles, CA. Available for in-person meetings with local clients.</p>
+      <span class="connect-link" style="cursor:default;">Los Angeles, California (PST)</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <p class="section-label">Before you reach out</p>
+  <h2 class="section-title">COMMON<br>QUESTIONS</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>How quickly can you start my project?</h3>
+        <button class="faq-toggle">+</button>
+      </div>
+      <p class="faq-answer">Usually within 1–2 weeks of signing. We take on a limited number of projects at a time to ensure quality and focus. Get in touch now to reserve your spot.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>What do you need from me to get started?</h3>
+        <button class="faq-toggle">+</button>
+      </div>
+      <p class="faq-answer">Just a brief description of what you want to build, your timeline, and a rough budget range. We'll take it from there — we've helped clients who came with nothing more than a napkin sketch.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>How does payment work?</h3>
+        <button class="faq-toggle">+</button>
+      </div>
+      <p class="faq-answer">We typically work on a 50% deposit to begin, 50% on delivery structure for smaller projects. Larger projects may be split across milestones. We accept bank transfer or PayPal.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>Do you work with international clients?</h3>
+        <button class="faq-toggle">+</button>
+      </div>
+      <p class="faq-answer">Absolutely. We've worked with clients across the US and remotely. All project communication happens async via email, Slack, or your preferred tool — timezone differences are no problem.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>What if I'm not sure what I need?</h3>
+        <button class="faq-toggle">+</button>
+      </div>
+      <p class="faq-answer">That's what the discovery call is for. We'll talk through your business goals, and I'll recommend the right approach. No pressure, no commitment — just a conversation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo">TEC<span>.</span>TONIC</a>
+      <p class="footer-tagline">Burmese-American developer bridging cultures through technology.</p>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/waiyanmin999" target="_blank" aria-label="LinkedIn">LinkedIn</a>
+        <a href="#" aria-label="Facebook">Facebook</a>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="https://github.com/waiyanmin99" target="_blank" aria-label="GitHub">GitHub</a>
+      </div>
+    </div>
+    <div class="footer-nav-group">
+      <div class="footer-nav-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="portfolio.html">Work</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Website Design</a></li>
+          <li><a href="services.html">Web Apps</a></li>
+          <li><a href="services.html">Mobile Apps</a></li>
+          <li><a href="services.html">E-Commerce</a></li>
+          <li><a href="services.html">Startup MVPs</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:waiyanmin.lane@gmail.com">Email us</a></li>
+          <li><a href="tel:+16692137967">Call us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Tectonic. All rights reserved.</span>
+    <div class="footer-legal">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+  });
+  function animRing() {
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+  document.querySelectorAll('a, button, .connect-card, .faq-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '20px'; cursor.style.height = '20px';
+      ring.style.width = '52px'; ring.style.height = '52px';
+      ring.style.borderColor = 'rgba(232,68,10,0.8)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '12px'; cursor.style.height = '12px';
+      ring.style.width = '36px'; ring.style.height = '36px';
+      ring.style.borderColor = 'rgba(232,68,10,0.5)';
+    });
+  });
+
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      const success = document.getElementById('form-success');
+      const error = document.getElementById('form-error');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          success.style.display = 'block'; error.style.display = 'none';
+          contactForm.reset(); btn.textContent = 'Sent ✓';
+        } else { throw new Error(); }
+      } catch {
+        error.style.display = 'block'; success.style.display = 'none';
+        btn.textContent = 'Send message →'; btn.disabled = false;
+      }
+    });
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.connect-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, background 0.3s';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

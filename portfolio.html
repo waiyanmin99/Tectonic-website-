@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — Tectonic</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ─── Stats strip ─── */
+  .stats-strip {
+    background: var(--gray);
+    border-bottom: 1px solid var(--gray2);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background-color: var(--gray2);
+  }
+  .stats-strip-item {
+    background: var(--gray);
+    padding: 3rem 3.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .stats-strip-num {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+  .stats-strip-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ─── Portfolio Full ─── */
+  .portfolio-full { background: var(--black); }
+  .portfolio-full-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--gray2);
+    margin-top: 4rem;
+  }
+
+  /* ─── Featured project detail ─── */
+  .project-detail {
+    background: var(--gray);
+    padding: 5rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .project-detail-visual {
+    background: var(--gray2);
+    border: 1px solid var(--gray2);
+    height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-detail-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(232,68,10,0.08) 0%, transparent 60%);
+  }
+  .project-detail-visual-text {
+    font-family: var(--font-display);
+    font-size: 4rem;
+    color: rgba(255,255,255,0.06);
+    letter-spacing: 0.1em;
+    position: relative;
+    z-index: 1;
+  }
+  .project-detail-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .project-detail-eyebrow::before {
+    content: '';
+    display: block;
+    width: 20px; height: 1px;
+    background: var(--accent);
+  }
+  .project-detail-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    letter-spacing: 0.03em;
+    line-height: 0.95;
+    margin-bottom: 1.25rem;
+  }
+  .project-detail-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+  .project-detail-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .project-meta-item {}
+  .project-meta-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+  }
+  .project-meta-val {
+    font-size: 0.82rem;
+    color: var(--white);
+  }
+
+  /* Placeholder card style */
+  .project-card.placeholder {
+    background: var(--gray);
+    min-height: 300px;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card.placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(255,255,255,0.01) 20px,
+      rgba(255,255,255,0.01) 21px
+    );
+  }
+
+  /* ─── Coming soon ─── */
+  .coming-soon { background: var(--gray); }
+  .coming-soon-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--gray2);
+    margin-top: 4rem;
+  }
+  .coming-card {
+    background: var(--gray);
+    padding: 3rem 2.5rem;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-top: 3px solid var(--gray2);
+    transition: border-color 0.3s, background 0.3s;
+    cursor: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .coming-card:hover { background: #222; border-color: var(--accent); }
+  .coming-card-label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .coming-card-title {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.25);
+  }
+  .coming-card-cta {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .coming-card:hover .coming-card-cta { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Nav -->
+<nav>
+  <a href="index.html" class="nav-logo">TEC<span>.</span>TONIC</a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="portfolio.html" class="active">Work</a></li>
+    <li><a href="services.html#pricing">Pricing</a></li>
+  </ul>
+  <div style="display:flex; align-items:center; gap:1.25rem;">
+    <a href="https://github.com/waiyanmin99" target="_blank" class="nav-gh">GitHub</a>
+    <a href="contact.html" class="nav-cta">Start a project</a>
+  </div>
+</nav>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+  </div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">// Selected work</p>
+    <h1 class="page-hero-title">
+      WORK<br>
+      THAT <span class="outline">SPEAKS</span><br>
+      <span class="red">FOR ITSELF</span>
+    </h1>
+    <p class="page-hero-sub">Real projects. Real clients. Real outcomes. Every project in our portfolio is something we're proud to have built.</p>
+  </div>
+</section>
+
+<!-- Stats Strip -->
+<div class="stats-strip">
+  <div class="stats-strip-item">
+    <p class="stats-strip-num">10+</p>
+    <p class="stats-strip-label">Projects Shipped</p>
+  </div>
+  <div class="stats-strip-item">
+    <p class="stats-strip-num">100%</p>
+    <p class="stats-strip-label">On-Time Delivery</p>
+  </div>
+  <div class="stats-strip-item">
+    <p class="stats-strip-num">5+</p>
+    <p class="stats-strip-label">Happy Clients</p>
+  </div>
+  <div class="stats-strip-item">
+    <p class="stats-strip-num">24h</p>
+    <p class="stats-strip-label">Response Time</p>
+  </div>
+</div>
+
+<!-- Featured Project -->
+<div class="project-detail">
+  <div class="project-detail-visual">
+    <p class="project-detail-visual-text">MYTTA</p>
+  </div>
+  <div>
+    <p class="project-detail-eyebrow">Featured project · Live</p>
+    <h2 class="project-detail-title">MYTTA FOUNDATION</h2>
+    <p class="project-detail-desc">
+      Full website for an immigration legal services organization in Brooklyn, NY. The site serves as the primary digital presence for clients seeking asylum, green cards, work permits, DACA renewals, and more. Built from the ground up and maintained as CTO.
+    </p>
+    <div class="project-detail-meta">
+      <div class="project-meta-item">
+        <p class="project-meta-label">Type</p>
+        <p class="project-meta-val">Website & Web Platform</p>
+      </div>
+      <div class="project-meta-item">
+        <p class="project-meta-label">Industry</p>
+        <p class="project-meta-val">Non-profit / Legal</p>
+      </div>
+      <div class="project-meta-item">
+        <p class="project-meta-label">Stack</p>
+        <p class="project-meta-val">React, Node.js, PostgreSQL</p>
+      </div>
+      <div class="project-meta-item">
+        <p class="project-meta-label">Status</p>
+        <p class="project-meta-val" style="color:var(--accent);">● Live & Active</p>
+      </div>
+    </div>
+    <a href="https://www.myttafoundation.com/" target="_blank" class="btn-primary">View live site ↗</a>
+  </div>
+</div>
+
+<!-- Portfolio Grid -->
+<section class="portfolio-full">
+  <p class="section-label">All projects</p>
+  <h2 class="section-title">THE<br>FULL GRID</h2>
+  <div class="portfolio-full-grid">
+
+    <a href="https://www.myttafoundation.com/" target="_blank" class="project-card featured">
+      <span class="project-num">01</span>
+      <div class="project-tags">
+        <span class="project-tag live">● Live</span>
+        <span class="project-tag">Website</span>
+        <span class="project-tag">Non-profit</span>
+        <span class="project-tag">React</span>
+      </div>
+      <h3 class="project-name">MYTTA Foundation</h3>
+      <p class="project-desc">Full website for an immigration legal services organization in Brooklyn, NY. Built and maintained as CTO — React, Node.js, PostgreSQL.</p>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <div class="project-card">
+      <span class="project-num">02</span>
+      <div class="project-tags">
+        <span class="project-tag live">● Live</span>
+        <span class="project-tag">E-Commerce</span>
+        <span class="project-tag">Jewelry</span>
+      </div>
+      <h3 class="project-name">Jewelry Shop</h3>
+      <p class="project-desc">Custom e-commerce storefront for an online jewelry retailer — clean product displays, seamless checkout, and mobile-first design.</p>
+      <span class="project-arrow">↗</span>
+    </div>
+
+    <div class="project-card placeholder">
+      <span class="project-num">03</span>
+      <div class="project-tags">
+        <span class="project-tag">Mobile App</span>
+        <span class="project-tag">iOS</span>
+        <span class="project-tag">Swift</span>
+      </div>
+      <h3 class="project-name">Your iOS App</h3>
+      <p class="project-desc">Got an idea for a mobile app? Native iOS development from concept to App Store.</p>
+      <span class="project-arrow">↗</span>
+    </div>
+
+    <div class="project-card placeholder">
+      <span class="project-num">04</span>
+      <div class="project-tags">
+        <span class="project-tag">E-Commerce</span>
+        <span class="project-tag">Stripe</span>
+      </div>
+      <h3 class="project-name">Your Online Store</h3>
+      <p class="project-desc">Custom-designed e-commerce store built to convert — not another off-the-shelf template.</p>
+      <span class="project-arrow">↗</span>
+    </div>
+
+    <div class="project-card placeholder">
+      <span class="project-num">05</span>
+      <div class="project-tags">
+        <span class="project-tag">Startup MVP</span>
+        <span class="project-tag">Full-Stack</span>
+      </div>
+      <h3 class="project-name">Your MVP</h3>
+      <p class="project-desc">Turn your startup idea into a real product. Fast, lean, and built to validate your concept.</p>
+      <span class="project-arrow">↗</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- Coming Soon / Open Slots -->
+<section class="coming-soon">
+  <p class="section-label">Open for work</p>
+  <h2 class="section-title">THESE<br>SLOTS ARE YOURS</h2>
+  <div class="coming-soon-grid">
+    <div class="coming-card">
+      <p class="coming-card-label">Slot available</p>
+      <p class="coming-card-title">Website Redesign</p>
+      <a href="contact.html" class="coming-card-cta">Claim this slot →</a>
+    </div>
+    <div class="coming-card">
+      <p class="coming-card-label">Slot available</p>
+      <p class="coming-card-title">Web Application</p>
+      <a href="contact.html" class="coming-card-cta">Claim this slot →</a>
+    </div>
+    <div class="coming-card">
+      <p class="coming-card-label">Slot available</p>
+      <p class="coming-card-title">Mobile App</p>
+      <a href="contact.html" class="coming-card-cta">Claim this slot →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div>
+    <h2 class="cta-title">YOUR PROJECT<br>BELONGS HERE.</h2>
+    <p class="cta-sub">Let's build something worth showcasing. Start with a conversation.</p>
+  </div>
+  <a href="contact.html" class="btn-white">Start a project →</a>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo">TEC<span>.</span>TONIC</a>
+      <p class="footer-tagline">Burmese-American developer bridging cultures through technology.</p>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/waiyanmin999" target="_blank" aria-label="LinkedIn">LinkedIn</a>
+        <a href="#" aria-label="Facebook">Facebook</a>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="https://github.com/waiyanmin99" target="_blank" aria-label="GitHub">GitHub</a>
+      </div>
+    </div>
+    <div class="footer-nav-group">
+      <div class="footer-nav-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="portfolio.html">Work</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Website Design</a></li>
+          <li><a href="services.html">Web Apps</a></li>
+          <li><a href="services.html">Mobile Apps</a></li>
+          <li><a href="services.html">E-Commerce</a></li>
+          <li><a href="services.html">Startup MVPs</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:waiyanmin.lane@gmail.com">Email us</a></li>
+          <li><a href="tel:+16692137967">Call us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Tectonic. All rights reserved.</span>
+    <div class="footer-legal">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+  });
+  function animRing() {
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+  document.querySelectorAll('a, button, .project-card, .coming-card, .stats-strip-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '20px'; cursor.style.height = '20px';
+      ring.style.width = '52px'; ring.style.height = '52px';
+      ring.style.borderColor = 'rgba(232,68,10,0.8)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '12px'; cursor.style.height = '12px';
+      ring.style.width = '36px'; ring.style.height = '36px';
+      ring.style.borderColor = 'rgba(232,68,10,0.5)';
+    });
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.project-card, .coming-card, .stats-strip-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, background 0.3s';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

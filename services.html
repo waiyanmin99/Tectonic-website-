@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Tectonic</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ─── Services expanded ─── */
+  .services-full { background: var(--gray); }
+  .services-full-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--gray2);
+    margin-top: 4rem;
+  }
+  .service-full-card {
+    background: var(--gray);
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    cursor: none;
+    transition: background 0.3s;
+  }
+  .service-full-card:hover { background: #222; }
+  .service-full-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.35s;
+  }
+  .service-full-card:hover::after { transform: scaleX(1); }
+  .service-full-card.wide { grid-column: span 2; }
+  .sfc-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .sfc-icon-wrap {
+    width: 56px; height: 56px;
+    background: rgba(232,68,10,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+  .sfc-meta { flex: 1; }
+  .sfc-num {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    margin-bottom: 0.4rem;
+  }
+  .sfc-name {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    line-height: 1;
+  }
+  .sfc-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1.75rem;
+  }
+  .sfc-deliverables h4 {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.85rem;
+  }
+  .sfc-deliverables ul { list-style: none; }
+  .sfc-deliverables li {
+    font-size: 0.82rem;
+    color: rgba(245,242,238,0.65);
+    padding: 0.3rem 0;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+  }
+  .sfc-deliverables li::before {
+    content: '—';
+    color: var(--accent);
+    font-size: 0.7rem;
+    flex-shrink: 0;
+  }
+  .sfc-cta {
+    margin-top: 2rem;
+  }
+  .sfc-cta a {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .sfc-cta a:hover { color: var(--white); }
+
+  /* ─── Process ─── */
+  .process { background: var(--black); }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--gray2);
+    margin-top: 4rem;
+  }
+  .process-step {
+    background: var(--black);
+    padding: 3rem 2rem;
+    position: relative;
+    cursor: none;
+    transition: background 0.3s;
+  }
+  .process-step:hover { background: var(--gray); }
+  .process-step-num {
+    font-family: var(--font-display);
+    font-size: 5rem;
+    color: rgba(232,68,10,0.1);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+  .process-step-name {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .process-step-desc {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .process-step-arrow {
+    position: absolute;
+    top: 3rem; right: 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--gray2);
+    letter-spacing: 0.1em;
+  }
+  .process-step:last-child .process-step-arrow { display: none; }
+
+  /* ─── FAQ ─── */
+  .faq { background: var(--gray); }
+  .faq-list { margin-top: 3rem; border-top: 1px solid var(--gray2); }
+  .faq-item {
+    border-bottom: 1px solid var(--gray2);
+    cursor: none;
+  }
+  .faq-question {
+    padding: 1.75rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .faq-question h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    transition: color 0.2s;
+  }
+  .faq-question:hover h3 { color: var(--accent); }
+  .faq-toggle {
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    color: var(--accent);
+    flex-shrink: 0;
+    transition: transform 0.3s;
+    background: none;
+    border: none;
+    cursor: none;
+  }
+  .faq-item.open .faq-toggle { transform: rotate(45deg); }
+  .faq-answer {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.8;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s;
+    padding-bottom: 0;
+  }
+  .faq-item.open .faq-answer {
+    max-height: 300px;
+    padding-bottom: 1.75rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Nav -->
+<nav>
+  <a href="index.html" class="nav-logo">TEC<span>.</span>TONIC</a>
+  <ul class="nav-links">
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="portfolio.html">Work</a></li>
+    <li><a href="services.html#pricing">Pricing</a></li>
+  </ul>
+  <div style="display:flex; align-items:center; gap:1.25rem;">
+    <a href="https://github.com/waiyanmin99" target="_blank" class="nav-gh">GitHub</a>
+    <a href="contact.html" class="nav-cta">Start a project</a>
+  </div>
+</nav>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow" style="left:-100px; right:auto;"></div>
+  </div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">// What we do</p>
+    <h1 class="page-hero-title">
+      WE BUILD<br>
+      <span class="outline">DIGITAL</span><br>
+      <span class="red">PRODUCTS</span>
+    </h1>
+    <p class="page-hero-sub">From a simple marketing site to a full-stack platform — we scope it, design it, build it, and ship it.</p>
+  </div>
+</section>
+
+<!-- Ticker -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Website Design</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Web Applications</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Mobile Apps</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">E-Commerce</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Startup MVPs</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Website Design</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Web Applications</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Mobile Apps</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">E-Commerce</span>
+    <span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Startup MVPs</span>
+    <span class="ticker-item ticker-dot">✦</span>
+  </div>
+</div>
+
+<!-- Services Full -->
+<section class="services-full">
+  <p class="section-label">Our offerings</p>
+  <h2 class="section-title">EVERYTHING<br>WE BUILD</h2>
+  <div class="services-full-grid">
+
+    <!-- Website Design -->
+    <div class="service-full-card">
+      <div class="sfc-header">
+        <div class="sfc-icon-wrap">🌐</div>
+        <div class="sfc-meta">
+          <p class="sfc-num">01</p>
+          <h3 class="sfc-name">Website Design & Dev</h3>
+        </div>
+      </div>
+      <p class="sfc-desc">Custom websites that load fast, look sharp, and convert visitors into customers. No templates — every site is designed from scratch around your brand and goals.</p>
+      <div class="sfc-deliverables">
+        <h4>What's included</h4>
+        <ul>
+          <li>Custom design tailored to your brand</li>
+          <li>Fully responsive for all screen sizes</li>
+          <li>Performance-optimized (Core Web Vitals)</li>
+          <li>Contact forms & CTA integrations</li>
+          <li>SEO fundamentals & meta setup</li>
+          <li>Google Analytics integration</li>
+          <li>Hosting setup & deployment</li>
+        </ul>
+      </div>
+      <div class="sfc-cta"><a href="contact.html">Start a website project →</a></div>
+    </div>
+
+    <!-- Web Applications -->
+    <div class="service-full-card">
+      <div class="sfc-header">
+        <div class="sfc-icon-wrap">⚙️</div>
+        <div class="sfc-meta">
+          <p class="sfc-num">02</p>
+          <h3 class="sfc-name">Web Applications</h3>
+        </div>
+      </div>
+      <p class="sfc-desc">Complex, interactive web apps built to solve real business problems. Custom dashboards, admin panels, booking systems, portals — if it has logic, we can build it.</p>
+      <div class="sfc-deliverables">
+        <h4>What's included</h4>
+        <ul>
+          <li>Full-stack React + Node.js / Express.js / Python architecture</li>
+          <li>Custom database design & API development (MySQL, PostgreSQL, MongoDB)</li>
+          <li>User authentication & role management</li>
+          <li>Admin dashboards & reporting</li>
+          <li>Third-party API integrations</li>
+          <li>Cloud deployment (AWS / Vercel)</li>
+          <li>Testing & QA before launch</li>
+        </ul>
+      </div>
+      <div class="sfc-cta"><a href="contact.html">Discuss your app idea →</a></div>
+    </div>
+
+    <!-- Mobile Apps -->
+    <div class="service-full-card">
+      <div class="sfc-header">
+        <div class="sfc-icon-wrap">📱</div>
+        <div class="sfc-meta">
+          <p class="sfc-num">03</p>
+          <h3 class="sfc-name">Mobile Apps</h3>
+        </div>
+      </div>
+      <p class="sfc-desc">Native iOS in Swift, cross-platform in Flutter or React Native — designed for the App Store and Google Play. Smooth, polished, built for real-world use.</p>
+      <div class="sfc-deliverables">
+        <h4>What's included</h4>
+        <ul>
+          <li>iOS (Swift / SwiftUI), Flutter, or React Native</li>
+          <li>UI/UX design & prototyping in Figma</li>
+          <li>Backend API development if needed</li>
+          <li>Push notifications & deep linking</li>
+          <li>App Store submission & setup</li>
+          <li>Post-launch bug support</li>
+        </ul>
+      </div>
+      <div class="sfc-cta"><a href="contact.html">Build a mobile app →</a></div>
+    </div>
+
+    <!-- E-Commerce -->
+    <div class="service-full-card">
+      <div class="sfc-header">
+        <div class="sfc-icon-wrap">🛒</div>
+        <div class="sfc-meta">
+          <p class="sfc-num">04</p>
+          <h3 class="sfc-name">E-Commerce Stores</h3>
+        </div>
+      </div>
+      <p class="sfc-desc">Online stores built to sell. Whether you're launching a brand or migrating from a clunky platform, we build e-commerce that converts — fast checkout, mobile-first.</p>
+      <div class="sfc-deliverables">
+        <h4>What's included</h4>
+        <ul>
+          <li>Custom storefront design</li>
+          <li>Stripe / Shopify / WooCommerce integration</li>
+          <li>Product catalog & inventory management</li>
+          <li>Checkout & payment flow optimization</li>
+          <li>Order tracking & email notifications</li>
+          <li>Mobile-first responsive experience</li>
+        </ul>
+      </div>
+      <div class="sfc-cta"><a href="contact.html">Launch your store →</a></div>
+    </div>
+
+    <!-- Startup MVPs -->
+    <div class="service-full-card service-full-card wide">
+      <div class="sfc-header">
+        <div class="sfc-icon-wrap">🚀</div>
+        <div class="sfc-meta">
+          <p class="sfc-num">05</p>
+          <h3 class="sfc-name">Startup MVPs</h3>
+        </div>
+      </div>
+      <p class="sfc-desc">You have an idea. We help you build the leanest version of it that proves the concept, attracts users, and sets you up for a real product launch. Fast, functional, focused.</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:1.5rem;">
+        <div class="sfc-deliverables">
+          <h4>What's included</h4>
+          <ul>
+            <li>Product scoping & feature roadmap</li>
+            <li>UI/UX design & user flows</li>
+            <li>Full-stack web or mobile build</li>
+            <li>Core feature set, no bloat</li>
+          </ul>
+        </div>
+        <div class="sfc-deliverables">
+          <h4>Also included</h4>
+          <ul>
+            <li>User authentication & onboarding</li>
+            <li>Cloud deployment & monitoring</li>
+            <li>Analytics & feedback tooling</li>
+            <li>Post-launch iteration support</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sfc-cta" style="margin-top:2rem;"><a href="contact.html">Build your MVP →</a></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Process -->
+<section class="process">
+  <p class="section-label">How we work</p>
+  <h2 class="section-title">THE<br>PROCESS</h2>
+  <div class="process-steps">
+    <div class="process-step">
+      <p class="process-step-num">01</p>
+      <span class="process-step-arrow">→</span>
+      <h3 class="process-step-name">Discover</h3>
+      <p class="process-step-desc">We start with a call to understand your business, your goals, your users, and your timeline. No cookie-cutter proposals — we listen first.</p>
+    </div>
+    <div class="process-step">
+      <p class="process-step-num">02</p>
+      <span class="process-step-arrow">→</span>
+      <h3 class="process-step-name">Design</h3>
+      <p class="process-step-desc">We create wireframes and high-fidelity visual designs for your approval. You see exactly what you're getting before a single line of code is written.</p>
+    </div>
+    <div class="process-step">
+      <p class="process-step-num">03</p>
+      <span class="process-step-arrow">→</span>
+      <h3 class="process-step-name">Develop</h3>
+      <p class="process-step-desc">Clean, tested code built to your approved designs. You get progress updates throughout, and we don't disappear for weeks at a time.</p>
+    </div>
+    <div class="process-step">
+      <p class="process-step-num">04</p>
+      <h3 class="process-step-name">Deploy</h3>
+      <p class="process-step-desc">We launch, run final tests, set up monitoring, and hand over your fully live product. Support doesn't stop at delivery.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing" id="pricing">
+  <div class="pricing-header">
+    <p class="section-label">Investment</p>
+    <h2 class="section-title">SIMPLE<br>PRICING</h2>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <span class="pricing-badge">Starter</span>
+      <h3 class="pricing-name">Launch</h3>
+      <p class="pricing-price">$499<span> / project</span></p>
+      <p class="pricing-sub">Perfect for small businesses getting online</p>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li><span class="check">✓</span> Custom 5-page website</li>
+        <li><span class="check">✓</span> Mobile responsive design</li>
+        <li><span class="check">✓</span> Contact form integration</li>
+        <li><span class="check">✓</span> Basic SEO setup</li>
+        <li><span class="check">✓</span> 30 days of support</li>
+      </ul>
+      <a href="contact.html" class="btn-pricing">Get started →</a>
+    </div>
+    <div class="pricing-card featured">
+      <span class="pricing-badge">Most Popular</span>
+      <h3 class="pricing-name">Growth</h3>
+      <p class="pricing-price">$999<span> / project</span></p>
+      <p class="pricing-sub">For businesses ready to scale digitally</p>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li><span class="check">✓</span> Custom 10-page website or web app</li>
+        <li><span class="check">✓</span> E-commerce or booking system</li>
+        <li><span class="check">✓</span> CMS integration</li>
+        <li><span class="check">✓</span> Advanced SEO & analytics</li>
+        <li><span class="check">✓</span> 60 days of support</li>
+        <li><span class="check">✓</span> Performance optimization</li>
+      </ul>
+      <a href="contact.html" class="btn-pricing">Get started →</a>
+    </div>
+    <div class="pricing-card">
+      <span class="pricing-badge">Enterprise</span>
+      <h3 class="pricing-name">Tectonic</h3>
+      <p class="pricing-price">Custom<span> pricing</span></p>
+      <p class="pricing-sub">Full-scale apps, platforms & startup MVPs</p>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li><span class="check">✓</span> Full-stack web or mobile app</li>
+        <li><span class="check">✓</span> Custom API & database design</li>
+        <li><span class="check">✓</span> User authentication & dashboards</li>
+        <li><span class="check">✓</span> Scalable cloud infrastructure</li>
+        <li><span class="check">✓</span> Ongoing maintenance available</li>
+        <li><span class="check">✓</span> Dedicated project management</li>
+      </ul>
+      <a href="contact.html" class="btn-pricing">Let's talk →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <p class="section-label">Common questions</p>
+  <h2 class="section-title">FAQ</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>How long does a typical project take?</h3>
+        <button class="faq-toggle">+</button>
+      </div>
+      <p class="faq-answer">Most website projects take 1–2 weeks from kickoff to launch. Web apps and mobile apps typically take 3–8 weeks depending on complexity. We'll give you a specific timeline after our discovery call.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>What's the process for getting started?</h3>
+        <button class="faq-toggle">+</button>
+      </div>
+      <p class="faq-answer">Simple — fill out the contact form or email me directly. We'll schedule a short discovery call, I'll send over a proposal and timeline, and once you approve we get to work.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>Do you offer ongoing maintenance and support?</h3>
+        <button class="faq-toggle">+</button>
+      </div>
+      <p class="faq-answer">Yes. All projects include post-launch support (30 or 60 days depending on the plan). Beyond that, we offer monthly maintenance retainers for content updates, security patches, and new features.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>Can I make changes during the project?</h3>
+        <button class="faq-toggle">+</button>
+      </div>
+      <p class="faq-answer">Minor adjustments are part of the process and expected. Major scope changes may affect timeline and budget — we'll always communicate clearly before any changes take effect.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>Do I own everything after the project is done?</h3>
+        <button class="faq-toggle">+</button>
+      </div>
+      <p class="faq-answer">100%. Once the project is paid in full, you own all code, designs, and assets outright. No licensing fees, no lock-in.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div>
+    <h2 class="cta-title">NOT SURE WHAT<br>YOU NEED?</h2>
+    <p class="cta-sub">Let's hop on a call. No pressure, no pitch — just a conversation about your project.</p>
+  </div>
+  <a href="contact.html" class="btn-white">Get in touch →</a>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo">TEC<span>.</span>TONIC</a>
+      <p class="footer-tagline">Burmese-American developer bridging cultures through technology.</p>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/waiyanmin999" target="_blank" aria-label="LinkedIn">LinkedIn</a>
+        <a href="#" aria-label="Facebook">Facebook</a>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="https://github.com/waiyanmin99" target="_blank" aria-label="GitHub">GitHub</a>
+      </div>
+    </div>
+    <div class="footer-nav-group">
+      <div class="footer-nav-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="portfolio.html">Work</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Website Design</a></li>
+          <li><a href="services.html">Web Apps</a></li>
+          <li><a href="services.html">Mobile Apps</a></li>
+          <li><a href="services.html">E-Commerce</a></li>
+          <li><a href="services.html">Startup MVPs</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:waiyanmin.lane@gmail.com">Email us</a></li>
+          <li><a href="tel:+16692137967">Call us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Tectonic. All rights reserved.</span>
+    <div class="footer-legal">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+  });
+  function animRing() {
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+  document.querySelectorAll('a, button, .service-full-card, .pricing-card, .process-step, .faq-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '20px'; cursor.style.height = '20px';
+      ring.style.width = '52px'; ring.style.height = '52px';
+      ring.style.borderColor = 'rgba(232,68,10,0.8)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '12px'; cursor.style.height = '12px';
+      ring.style.width = '36px'; ring.style.height = '36px';
+      ring.style.borderColor = 'rgba(232,68,10,0.5)';
+    });
+  });
+
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.service-full-card, .pricing-card, .process-step').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, background 0.3s';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
