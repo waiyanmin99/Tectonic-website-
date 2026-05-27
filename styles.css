@@ -373,7 +373,7 @@ section { padding: 7rem 4rem; }
 }
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 0;
   border: 1px solid var(--gray2);
 }
