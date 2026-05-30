@@ -386,6 +386,8 @@ section { padding: 7rem 4rem; }
   cursor: none;
 }
 .service-card:last-child { border-right: none; }
+.service-card:nth-child(4n) { border-right: none; }
+.service-card:nth-child(n+5) { border-top: 1px solid var(--gray2); }
 .service-card::after {
   content: '';
   position: absolute;
