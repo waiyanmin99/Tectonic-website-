@@ -171,6 +171,23 @@
     text-transform: uppercase;
     color: rgba(255,255,255,0.6);
   }
+  @media (max-width: 1024px) {
+    .values-grid { grid-template-columns: repeat(2, 1fr); }
+    .tech-groups { grid-template-columns: repeat(2, 1fr); }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .certs-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+  @media (max-width: 768px) {
+    .values-grid { grid-template-columns: 1fr; }
+    .tech-groups { grid-template-columns: 1fr; }
+    .credentials-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .certs-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+  @media (max-width: 480px) {
+    .stats-row { grid-template-columns: 1fr; }
+    .certs-grid { grid-template-columns: 1fr !important; }
+  }
 </style>
 </head>
 <body>
@@ -461,7 +478,7 @@
 <section style="background:var(--black); padding:7rem 4rem;">
   <p class="section-label">Credentials</p>
   <h2 class="section-title">CERTIFI-<br>CATIONS</h2>
-  <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--gray2); margin-top:4rem;">
+  <div class="certs-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--gray2); margin-top:4rem;">
     <div class="cred-card" style="position:static; flex-direction:column; gap:0;">
       <p class="cred-year" style="margin-bottom:1rem;">2024</p>
       <div>
@@ -501,7 +518,7 @@
 <section style="background:var(--black); padding:7rem 4rem;">
   <p class="section-label">What sets us apart</p>
   <h2 class="section-title">WHY<br>TECTONIC</h2>
-  <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--gray2); margin-top:4rem;">
+  <div class="why-grid" style="display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--gray2); margin-top:4rem;">
     <div class="service-card">
       <p class="service-num">01</p>
       <span class="service-icon">💰</span>
