@@ -271,6 +271,72 @@
   </div>
 </section>
 
+<!-- Testimonials -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-header">
+    <div>
+      <p class="section-label">What clients say</p>
+      <h2 class="section-title">CLIENT<br>REVIEWS</h2>
+    </div>
+  </div>
+  <div class="testimonials-grid">
+    <!-- Testimonial 1 -->
+    <div class="testi-card">
+      <div class="testi-stars">
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+      </div>
+      <p class="testi-quote">"Wai Yan built our entire digital platform from the ground up — website, client portal, and backend systems. Everything went live in under three weeks and has been rock-solid ever since. We couldn't serve our community the same way without his work."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">KM</div>
+        <div>
+          <p class="testi-name">Ko Htut Maw Oo</p>
+          <p class="testi-role">Executive Director · MYTTA Foundation</p>
+        </div>
+      </div>
+    </div>
+    <!-- Testimonial 2 -->
+    <div class="testi-card">
+      <div class="testi-stars">
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+      </div>
+      <p class="testi-quote">"I needed a new website for my restaurant fast. Tectonic delivered a beautiful, mobile-friendly site in one week. The design looked nothing like a template — it felt completely ours. Online traffic and orders picked up right away."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">ML</div>
+        <div>
+          <p class="testi-name">Mei L.</p>
+          <p class="testi-role">Owner · Jade Garden LA</p>
+        </div>
+      </div>
+    </div>
+    <!-- Testimonial 3 -->
+    <div class="testi-card">
+      <div class="testi-stars">
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+      </div>
+      <p class="testi-quote">"Wai Yan took my app idea and turned it into a working MVP in two weeks. The code quality was excellent, the communication was direct, and he genuinely understood what we were building. I hired him again for the next phase immediately."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">DK</div>
+        <div>
+          <p class="testi-name">David K.</p>
+          <p class="testi-role">Founder · QuickHire App</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Pricing Preview -->
 <section class="pricing" id="pricing">
   <div class="pricing-header">
@@ -477,7 +543,7 @@
     requestAnimationFrame(animRing);
   }
   animRing();
-  document.querySelectorAll('a, button, .service-card, .project-card, .pricing-card').forEach(el => {
+  document.querySelectorAll('a, button, .service-card, .project-card, .pricing-card, .testi-card').forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.style.width = '20px'; cursor.style.height = '20px';
       ring.style.width = '52px'; ring.style.height = '52px';
@@ -524,7 +590,7 @@
       }
     });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.service-card, .project-card, .pricing-card').forEach(el => {
+  document.querySelectorAll('.service-card, .project-card, .pricing-card, .testi-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(24px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, background 0.3s';
