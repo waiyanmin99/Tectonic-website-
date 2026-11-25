@@ -5,7 +5,7 @@
   document.documentElement.classList.remove("no-js");
 
   var CONTACT = {
-    email: "waiyanmin.lane@gmail.com",
+    email: "contact@buildtectonic.com",
     phone: "+1 (669) 213-7967",
     phoneHref: "tel:+16692137967",
     city: "Los Angeles, California",
