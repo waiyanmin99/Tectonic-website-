@@ -6,8 +6,8 @@
 
   var CONTACT = {
     email: "contact@buildtectonic.com",
-    phone: "+1 (669) 213-7967",
-    phoneHref: "tel:+16692137967",
+    phone: "+1 (323) 577-5706",
+    phoneHref: "tel:+13235775706",
     city: "Los Angeles, California",
     linkedin: "https://www.linkedin.com/in/waiyanmin999",
     github: "https://github.com/waiyanmin99",
