@@ -96,11 +96,11 @@
     return parts.join("; ") +
       ". Estimated total: " + money(t.once) + " one-time" + (t.monthly ? " + " + money(t.monthly) + "/mo" : "") + ".";
   }
-  window.TectonicEstimate = { describe: describe };
-
   /* ---------- Builder UI (build.html) ---------- */
+  function initBuilder() {
   var root = document.getElementById("builderSteps");
-  if (!root) return;
+  if (!root || root.dataset.ready) return;
+  root.dataset.ready = "1";
 
   root.innerHTML = STEPS.map(function (s) {
     return '<section class="builder-step" aria-labelledby="h-' + s.id + '">' +
@@ -145,4 +145,8 @@
   }
   root.addEventListener("change", update);
   update();
+  }
+
+  window.TectonicEstimate = { describe: describe, initBuilder: initBuilder };
+  initBuilder();
 })();

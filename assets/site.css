@@ -811,13 +811,17 @@ td .muted { font-size: 13px; }
    Motion: page transitions, entrance, scroll reveals
    ========================================================= */
 
-/* 1. Page change: the browser keeps the old page on screen until the new one
-   is ready, then blends them quickly (no white flash). A thin orange line
-   sweeps across the top as the "page changed" signal. */
-@view-transition { navigation: auto; }
-.site-header { view-transition-name: site-header; }
-::view-transition-group(site-header) { animation: none; }
-::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.2s; animation-timing-function: ease-out; }
+/* 1. Page change (same as the MYTTA site): pages swap without a reload,
+   the new content fades in and rises 14px, and a thin orange line sweeps
+   across the top. The page background behind dark sections is dark, so the
+   fade goes dark-to-dark instead of flashing white. */
+:root { --ease-ios: cubic-bezier(0.32, 0.72, 0, 1); }
+@keyframes page-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+#main.page-enter { animation: page-in 0.6s var(--ease-ios) both; }
+body[data-header="dark"] { background: var(--dark); }
+body:not([data-header="dark"]) { background: #f6f6f7; }
+#main { background: var(--white); }
+#main.notfound { background: var(--dark); }
 @keyframes page-rule {
   0% { transform: scaleX(0); opacity: 1; }
   70% { transform: scaleX(1); opacity: 1; }
@@ -841,7 +845,9 @@ td .muted { font-size: 13px; }
 .l-card:hover .l-art .art svg { transform: scale(1.08) rotate(-3deg); }
 
 @media (prefers-reduced-motion: reduce) {
-  @view-transition { navigation: none; }
   .reveal { opacity: 1; transform: none; }
   .page-rule { display: none; }
 }
+
+/* Section links land below the fixed header (and sticky sub-menu) */
+main [id] { scroll-margin-top: calc(var(--nav-h) + 72px); }

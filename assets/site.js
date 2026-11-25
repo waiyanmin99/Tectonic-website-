@@ -67,12 +67,16 @@
     { href: "it-support.html", name: "IT Support", note: "From $150/mo per office", art: "art-5", icon: "shield" }
   ];
 
-  var page = (location.pathname.split("/").pop() || "index.html").replace(/\.html$/, "") || "index";
+  var page, current;
+  function computePage() {
+    page = (location.pathname.split("/").pop() || "index.html").replace(/\.html$/, "") || "index";
+    current = activeFor[page] || "";
+  }
   var activeFor = {
     services: "services", websites: "services", portals: "services", "ai-solutions": "services", "it-support": "services",
     pricing: "pricing", build: "pricing", portfolio: "work", about: "about", contact: "contact", faq: "contact"
   };
-  var current = activeFor[page] || "";
+  computePage();
 
   function navLink(key, href, label) {
     return '<a class="nav-link' + (current === key ? " active" : "") + '" href="' + href + '">' + label + "</a>";
@@ -176,38 +180,18 @@
     );
   }
 
-  /* ---------- Page-change line (orange bar across the top) ---------- */
-  var rule = document.createElement("div");
-  rule.className = "page-rule";
-  rule.setAttribute("aria-hidden", "true");
-  document.body.insertBefore(rule, document.body.firstChild);
-  rule.addEventListener("animationend", function () { rule.remove(); });
-
-  /* ---------- Mount header/footer ---------- */
+  /* ---------- Mount header/footer (once) ---------- */
   var headerSlot = document.getElementById("site-header");
   if (headerSlot) headerSlot.outerHTML = headerHTML();
   var footerSlot = document.getElementById("site-footer");
   if (footerSlot) footerSlot.outerHTML = footerHTML();
 
-  document.querySelectorAll("[data-icon]").forEach(function (el) {
-    var svg = I[el.getAttribute("data-icon")];
-    if (svg) el.innerHTML = svg;
-  });
-  document.querySelectorAll("[data-contact]").forEach(function (el) {
-    var k = el.getAttribute("data-contact");
-    if (k === "email") { el.textContent = CONTACT.email; if (el.tagName === "A") el.href = "mailto:" + CONTACT.email; }
-    if (k === "phone") { el.textContent = CONTACT.phone; if (el.tagName === "A") el.href = CONTACT.phoneHref; }
-  });
-
   /* ---------- Header behavior ---------- */
   var header = document.getElementById("siteHeader");
-  var darkTop = document.body.getAttribute("data-header") === "dark";
-  if (header && darkTop) header.classList.add("on-dark");
   function onScroll() {
     if (!header) return;
     header.classList.toggle("scrolled", window.scrollY > 8);
   }
-  onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
   var megaBtn = document.getElementById("megaBtn");
@@ -264,49 +248,118 @@
     window.addEventListener("pageshow", function () { setDrawer(false); });
   }
 
-  /* ---------- Tabs ---------- */
-  document.querySelectorAll("[data-tabs]").forEach(function (group) {
-    var tabs = group.querySelectorAll('[role="tab"]');
-    tabs.forEach(function (tab) {
-      tab.addEventListener("click", function () {
-        tabs.forEach(function (t) {
-          var on = t === tab;
-          t.setAttribute("aria-selected", String(on));
-          t.tabIndex = on ? 0 : -1;
-          var panel = document.getElementById(t.getAttribute("aria-controls"));
-          if (panel) panel.hidden = !on;
+  var NAV_KEYS = { "pricing.html": "pricing", "portfolio.html": "work", "about.html": "about", "contact.html": "contact" };
+  function updateNavState() {
+    if (!header) return;
+    header.classList.toggle("on-dark", document.body.getAttribute("data-header") === "dark");
+    header.querySelectorAll(".nav-menu a.nav-link").forEach(function (a) {
+      a.classList.toggle("active", NAV_KEYS[a.getAttribute("href")] === current);
+    });
+    if (megaBtn) megaBtn.classList.toggle("active", current === "services");
+    if (drawerList) drawerList.innerHTML = drawerItems();
+    onScroll();
+  }
+
+  /* ---------- Page change animation (same as the MYTTA site) ----------
+     The new content fades in and rises 14px, and a thin orange line
+     sweeps across the top like a loading bar. */
+  function playPageEnter() {
+    var main = document.getElementById("main");
+    if (main) {
+      main.classList.remove("page-enter");
+      void main.offsetWidth;
+      main.classList.add("page-enter");
+    }
+    var old = document.querySelector(".page-rule");
+    if (old) old.remove();
+    var rule = document.createElement("div");
+    rule.className = "page-rule";
+    rule.setAttribute("aria-hidden", "true");
+    document.body.insertBefore(rule, document.body.firstChild);
+    rule.addEventListener("animationend", function () { rule.remove(); });
+  }
+
+  /* ---------- Per-page setup (runs on load and after every page swap) ---------- */
+  var subnavObserver = null;
+  function initPage() {
+    computePage();
+    updateNavState();
+
+    document.querySelectorAll("#main [data-icon]").forEach(function (el) {
+      var svg = I[el.getAttribute("data-icon")];
+      if (svg) el.innerHTML = svg;
+    });
+    document.querySelectorAll("#main [data-contact]").forEach(function (el) {
+      var k = el.getAttribute("data-contact");
+      if (k === "email") { el.textContent = CONTACT.email; if (el.tagName === "A") el.href = "mailto:" + CONTACT.email; }
+      if (k === "phone") { el.textContent = CONTACT.phone; if (el.tagName === "A") el.href = CONTACT.phoneHref; }
+    });
+
+    /* Tabs */
+    document.querySelectorAll("#main [data-tabs]").forEach(function (group) {
+      var tabs = group.querySelectorAll('[role="tab"]');
+      tabs.forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          tabs.forEach(function (t) {
+            var on = t === tab;
+            t.setAttribute("aria-selected", String(on));
+            t.tabIndex = on ? 0 : -1;
+            var panel = document.getElementById(t.getAttribute("aria-controls"));
+            if (panel) panel.hidden = !on;
+          });
+        });
+        tab.addEventListener("keydown", function (e) {
+          var list = Array.prototype.slice.call(tabs);
+          var i = list.indexOf(tab);
+          if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+            var next = list[(i + (e.key === "ArrowRight" ? 1 : -1) + list.length) % list.length];
+            next.focus(); next.click();
+          }
         });
       });
-      tab.addEventListener("keydown", function (e) {
-        var list = Array.prototype.slice.call(tabs);
-        var i = list.indexOf(tab);
-        if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-          var next = list[(i + (e.key === "ArrowRight" ? 1 : -1) + list.length) % list.length];
-          next.focus(); next.click();
-        }
-      });
     });
-  });
 
-  /* ---------- Sub-nav active section ---------- */
-  var subLinks = document.querySelectorAll(".subnav-links a[href^='#']");
-  if (subLinks.length && "IntersectionObserver" in window) {
-    var map = {};
-    subLinks.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
-    var so = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting && map[en.target.id]) {
-          subLinks.forEach(function (a) { a.classList.remove("active"); });
-          map[en.target.id].classList.add("active");
-        }
+    /* Sub-nav active section */
+    if (subnavObserver) { subnavObserver.disconnect(); subnavObserver = null; }
+    var subLinks = document.querySelectorAll("#main .subnav-links a[href^='#']");
+    if (subLinks.length && "IntersectionObserver" in window) {
+      var map = {};
+      subLinks.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
+      subnavObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting && map[en.target.id]) {
+            subLinks.forEach(function (a) { a.classList.remove("active"); });
+            map[en.target.id].classList.add("active");
+          }
+        });
+      }, { rootMargin: "-40% 0px -55% 0px" });
+      Object.keys(map).forEach(function (id) { var sec = document.getElementById(id); if (sec) subnavObserver.observe(sec); });
+    }
+
+    /* Quote builder and contact form need the price list */
+    var needsEstimate = document.getElementById("builderSteps") || document.getElementById("contactForm");
+    if (needsEstimate) {
+      ensureEstimate(function () {
+        if (window.TectonicEstimate && window.TectonicEstimate.initBuilder) window.TectonicEstimate.initBuilder();
+        initContactForm();
       });
-    }, { rootMargin: "-40% 0px -55% 0px" });
-    Object.keys(map).forEach(function (id) { var s = document.getElementById(id); if (s) so.observe(s); });
+    }
+  }
+
+  function ensureEstimate(done) {
+    if (window.TectonicEstimate) return done();
+    var sc = document.createElement("script");
+    sc.src = "assets/estimate.js";
+    sc.onload = done;
+    sc.onerror = done;
+    document.head.appendChild(sc);
   }
 
   /* ---------- Contact form ---------- */
-  var form = document.getElementById("contactForm");
-  if (form) {
+  function initContactForm() {
+    var form = document.getElementById("contactForm");
+    if (!form || form.dataset.ready) return;
+    form.dataset.ready = "1";
     form.action = CONTACT.formspree;
     var params = new URLSearchParams(location.search);
     var svc = params.get("service");
@@ -342,4 +395,90 @@
         });
     });
   }
+
+  /* ---------- Page swapping (no full reload, like the MYTTA site) ----------
+     Clicking a link to another page loads it in the background, swaps only
+     the content under the header, and plays the page animation. If anything
+     goes wrong it falls back to a normal page load. */
+  var pageCache = {};
+  function pageUrl(href) { var u = new URL(href, location.href); u.hash = ""; return u.href; }
+  function isSitePage(u) {
+    return u.origin === location.origin && /(\.html|\/)$/.test(u.pathname);
+  }
+  function fetchPage(href) {
+    var key = pageUrl(href);
+    if (!pageCache[key]) {
+      pageCache[key] = fetch(key, { credentials: "same-origin" }).then(function (res) {
+        if (!res.ok && res.status !== 404) throw new Error("load failed");
+        return res.text();
+      }).catch(function (err) { delete pageCache[key]; throw err; });
+    }
+    return pageCache[key];
+  }
+  function scrollToNow(y, hash) {
+    var root = document.documentElement;
+    var prev = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    var target = hash ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
+    if (target) target.scrollIntoView();
+    else window.scrollTo(0, y || 0);
+    root.style.scrollBehavior = prev;
+  }
+  function goTo(href, push, restoreY) {
+    setDrawer(false);
+    setMega(false);
+    var u = new URL(href, location.href);
+    return fetchPage(href).then(function (html) {
+      var doc = new DOMParser().parseFromString(html, "text/html");
+      var newMain = doc.getElementById("main");
+      if (!newMain) throw new Error("no main");
+      if (push) {
+        history.replaceState({ y: window.scrollY }, "");
+        history.pushState({ y: 0 }, "", u.href);
+      }
+      document.title = doc.title;
+      var desc = doc.querySelector('meta[name="description"]');
+      var myDesc = document.querySelector('meta[name="description"]');
+      if (desc && myDesc) myDesc.setAttribute("content", desc.getAttribute("content"));
+      var dh = doc.body.getAttribute("data-header");
+      if (dh) document.body.setAttribute("data-header", dh); else document.body.removeAttribute("data-header");
+      document.getElementById("main").replaceWith(document.importNode(newMain, true));
+      shownPath = location.pathname + location.search;
+      initPage();
+      scrollToNow(restoreY, push ? u.hash : "");
+      playPageEnter();
+    }).catch(function () { location.href = u.href; });
+  }
+  if (window.history && window.fetch && window.DOMParser) {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    document.addEventListener("click", function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest && e.target.closest("a[href]");
+      if (!a || a.hasAttribute("download") || (a.target && a.target !== "_self")) return;
+      var u = new URL(a.href, location.href);
+      if (!isSitePage(u)) return;
+      var samePage = u.pathname === location.pathname && u.search === location.search;
+      if (samePage && u.hash) return; /* jump within this page */
+      e.preventDefault();
+      if (samePage && !u.hash) { scrollToNow(0); return; }
+      goTo(u.href, true);
+    });
+    /* Start loading a page as soon as the pointer is on its link */
+    ["mouseover", "touchstart", "focusin"].forEach(function (type) {
+      document.addEventListener(type, function (e) {
+        var a = e.target.closest && e.target.closest("a[href]");
+        if (!a || (a.target && a.target !== "_self")) return;
+        var u = new URL(a.href, location.href);
+        if (isSitePage(u) && u.pathname !== location.pathname) fetchPage(u.href).catch(function () {});
+      }, { passive: true });
+    });
+    var shownPath = location.pathname + location.search;
+    window.addEventListener("popstate", function (e) {
+      if (location.pathname + location.search === shownPath) return; /* only the #section changed */
+      goTo(location.href, false, e.state && e.state.y);
+    });
+  }
+
+  initPage();
+  playPageEnter();
 })();
