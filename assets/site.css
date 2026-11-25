@@ -729,3 +729,9 @@ td .muted { font-size: 13px; }
   .svc .svc-price, .svc .btn { grid-row: auto; justify-self: start; }
   .section-head { margin-bottom: 28px; }
 }
+
+/* work feature, image on the right */
+@media (min-width: 901px) {
+  .work-feature.reverse { grid-template-columns: 1fr 1.2fr; }
+  .work-feature.reverse .wf-art { order: 2; }
+}

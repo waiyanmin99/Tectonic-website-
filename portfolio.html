@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Our Work — Tectonic</title>
-<meta name="description" content="Selected Tectonic projects: the MYTTA Foundation multilingual website and staff portal, a Shopify jewelry store redesign, and full-stack work for agencies.">
+<meta name="description" content="Selected Tectonic projects: the MYTTA Foundation multilingual website, the MYTTA Member Portal, and the Legacy Timeless Jewel Shopify store.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +32,9 @@
   </section>
 
   <section class="section">
-    <div class="container">
+    <div class="container" style="display:grid;gap:32px">
+
+      <!-- 1. MYTTA website -->
       <article class="work-feature reveal" id="mytta">
         <div class="wf-art">
           <div class="mock mock-site" style="width:100%;max-width:520px">
@@ -42,18 +44,78 @@
           </div>
         </div>
         <div class="wf-body">
-          <span class="live-dot small">Live</span>
-          <h2 class="h2">MYTTA Foundation</h2>
-          <p>A nonprofit providing immigration legal services. We rebuilt and maintain their public website in English, Burmese, Spanish and Chinese, and built a private staff and member portal.</p>
+          <span class="live-dot small">Live · Website</span>
+          <h2 class="h2">MYTTA Foundation Website</h2>
+          <p>The public website for a nonprofit immigration legal services organization, rebuilt and maintained in English, Burmese, Spanish and Chinese so families can find help in their own language.</p>
           <dl class="meta-list">
             <div><dt>Industry</dt><dd>Nonprofit / legal services</dd></div>
             <div><dt>Role</dt><dd>Volunteer CTO, 2024–present</dd></div>
-            <div><dt>Website</dt><dd>CMS-driven, multilingual</dd></div>
-            <div><dt>Portal</dt><dd>Next.js, TypeScript, Firebase</dd></div>
+            <div><dt>Built with</dt><dd>CMS collections, custom search</dd></div>
+            <div><dt>Languages</dt><dd>English, Burmese, Spanish, Chinese</dd></div>
           </dl>
-          <div class="btn-row"><a class="btn btn-light" href="https://www.myttafoundation.com/" target="_blank" rel="noopener">Visit site</a></div>
+          <div class="btn-row"><a class="btn btn-light" href="https://www.myttafoundation.com/" target="_blank" rel="noopener">Visit site ↗</a></div>
         </div>
       </article>
+
+      <!-- 2. MYTTA portal -->
+      <article class="work-feature reverse reveal" id="mytta-portal">
+        <div class="wf-art">
+          <div class="mock mock-dash" style="width:100%;max-width:520px">
+            <div class="mock-bar"><i></i><i></i><i></i><span class="mock-url">mytta-portal.vercel.app</span></div>
+            <div class="dash">
+              <div class="dash-side"><span class="sk on" style="width:70%"></span><span class="sk" style="width:80%"></span><span class="sk" style="width:60%"></span><span class="sk" style="width:75%"></span></div>
+              <div class="dash-main">
+                <div class="tiles"><div class="tile"><b>Today</b><small>Appointments</small></div><div class="tile"><b>Staff</b><small>Role-based views</small></div><div class="tile"><b>SMS</b><small>Verified sign-in</small></div></div>
+                <div class="rows">
+                  <div class="row"><span class="sk dark" style="width:70%"></span><span class="sk" style="width:60%"></span><span class="pill">Booked</span></div>
+                  <div class="row"><span class="sk dark" style="width:55%"></span><span class="sk" style="width:70%"></span><span class="pill wait">Pending</span></div>
+                  <div class="row"><span class="sk dark" style="width:62%"></span><span class="sk" style="width:50%"></span><span class="pill">Confirmed</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <span class="live-dot small">Live · Portal</span>
+          <h2 class="h2">MYTTA Member Portal</h2>
+          <p>A secure staff and member portal where members book appointments and staff manage their day, with each person seeing only what their role allows.</p>
+          <dl class="meta-list">
+            <div><dt>Type</dt><dd>Client &amp; staff portal</dd></div>
+            <div><dt>Built with</dt><dd>Next.js, TypeScript, Firebase</dd></div>
+            <div><dt>Features</dt><dd>Roles, booking, SMS verification</dd></div>
+            <div><dt>Status</dt><dd>In daily use, still growing</dd></div>
+          </dl>
+          <div class="btn-row"><a class="btn btn-light" href="https://mytta-portal.vercel.app/" target="_blank" rel="noopener">Visit portal ↗</a><a class="btn btn-outline-light" href="portals.html">About portals</a></div>
+        </div>
+      </article>
+
+      <!-- 3. Legacy Timeless Jewel -->
+      <article class="work-feature reveal" id="legacy">
+        <div class="wf-art">
+          <div class="mock mock-site" style="width:100%;max-width:520px">
+            <div class="mock-bar"><i></i><i></i><i></i><span class="mock-url">legacytimelessjewel.com</span></div>
+            <div class="site-hero" style="background:linear-gradient(135deg,#2a2118,#4a3a28)"><div class="site-nav"><span class="sk"></span><span class="links"><span class="sk"></span><span class="sk"></span><span class="sk"></span></span></div><div class="site-title">Timeless pieces,<br>made to last.</div><div class="site-btns"><span style="background:#c8a24a;color:#1b1d23">Shop now</span><span>Collections</span></div></div>
+            <div class="site-cards">
+              <div><span class="thumb" style="background:linear-gradient(135deg,#f6efe2,#eadcc2)"></span><span class="sk dark" style="width:70%"></span><span class="sk" style="width:35%;background:#c8a24a"></span></div>
+              <div><span class="thumb" style="background:linear-gradient(135deg,#f6efe2,#eadcc2)"></span><span class="sk dark" style="width:60%"></span><span class="sk" style="width:30%;background:#c8a24a"></span></div>
+              <div><span class="thumb" style="background:linear-gradient(135deg,#f6efe2,#eadcc2)"></span><span class="sk dark" style="width:65%"></span><span class="sk" style="width:32%;background:#c8a24a"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <span class="live-dot small">Live · Online store</span>
+          <h2 class="h2">Legacy Timeless Jewel</h2>
+          <p>A live Shopify jewelry store. We redesigned the homepage, customized the theme code, and cleaned up a 2,000+ product catalog so shoppers can filter and find pieces easily.</p>
+          <dl class="meta-list">
+            <div><dt>Industry</dt><dd>Jewelry / e-commerce</dd></div>
+            <div><dt>Platform</dt><dd>Shopify</dd></div>
+            <div><dt>Work</dt><dd>Redesign, theme code, ongoing care</dd></div>
+            <div><dt>Catalog</dt><dd>2,000+ products standardized</dd></div>
+          </dl>
+          <div class="btn-row"><a class="btn btn-light" href="https://legacytimelessjewel.com/" target="_blank" rel="noopener">Visit store ↗</a><a class="btn btn-outline-light" href="websites.html#store">About stores</a></div>
+        </div>
+      </article>
+
     </div>
   </section>
 
@@ -67,7 +129,7 @@
           <ul class="checks">
             <li>Template-driven resource pages backed by CMS collections, so one update appears consistently across the site</li>
             <li>Site-wide search with a custom index, so families can find programs and resources quickly</li>
-            <li>A staff and member portal with role-based access, appointment booking and SMS verification</li>
+            <li>A member portal with role-based access, appointment booking and SMS verification</li>
             <li>New features shipped directly from staff requests, without a middleman</li>
           </ul>
         </div>
@@ -81,18 +143,8 @@
 
   <section class="section">
     <div class="container">
-      <div class="section-head"><div><p class="eyebrow">More work</p><h2 class="h2">Stores and full-stack builds</h2></div></div>
-      <div class="lineup">
-        <article class="l-card">
-          <div class="l-art"><div class="art art-2" data-icon="cart"></div></div>
-          <div class="l-body"><span class="l-tag">E-commerce · Live</span><h3>Legacy Timeless Jewel</h3><p>Redesigned and maintain a live Shopify jewelry store: a new homepage, custom theme code, and a cleanup of 2,000+ products so filters work properly.</p>
-          <div class="l-links"><a href="https://legacytimelessjewel.com/" target="_blank" rel="noopener">Visit store ↗</a></div></div>
-        </article>
-        <article class="l-card">
-          <div class="l-art"><div class="art art-3" data-icon="portal"></div></div>
-          <div class="l-body"><span class="l-tag">Portal · Private</span><h3>MYTTA Staff Portal</h3><p>Role-based staff and member portal with appointment booking and SMS sign-in verification. Private, so no public link.</p>
-          <div class="l-links"><a href="portals.html">About portals</a></div></div>
-        </article>
+      <div class="section-head"><div><p class="eyebrow">More work</p><h2 class="h2">Agency builds and open slots</h2></div></div>
+      <div class="cards two">
         <article class="l-card">
           <div class="l-art"><div class="art art-1" data-icon="rocket"></div></div>
           <div class="l-body"><span class="l-tag">Full-stack · Agencies</span><h3>EEAIO &amp; Blank Digital Marketing</h3><p>Freelance full-stack projects for international clients with React, React Native, Node.js, Express and MongoDB.</p>
