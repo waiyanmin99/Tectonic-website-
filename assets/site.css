@@ -735,3 +735,9 @@ td .muted { font-size: 13px; }
   .work-feature.reverse { grid-template-columns: 1fr 1.2fr; }
   .work-feature.reverse .wf-art { order: 2; }
 }
+
+/* about: smaller founder block */
+@media (min-width: 901px) {
+  .founder.compact { grid-template-columns: minmax(220px, 340px) 1fr; }
+}
+.founder.compact .founder-photo { max-width: 340px; }
