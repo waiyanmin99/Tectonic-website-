@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build Your Quote — Tectonic</title>
+<meta name="description" content="Pick the services you need and see an instant price estimate for your website, portal, AI assistant or IT support. Send it to Tectonic for a fixed quote.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div id="site-header"></div>
+
+<main id="main">
+  <section class="page-hero light" style="padding-bottom:48px">
+    <div class="container">
+      <p class="eyebrow">Build your quote</p>
+      <h1 class="h1">Build your project, see your price</h1>
+      <p class="lead">Choose what you need. Your estimate updates as you go. Send it to us and we'll reply within 24 hours with a fixed quote.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:48px">
+    <div class="container">
+      <div class="builder">
+        <div id="builderSteps">
+          <noscript><p>The quote builder needs JavaScript. You can see every price on the <a class="text-link" href="pricing.html">pricing page</a>.</p></noscript>
+        </div>
+        <aside class="summary" aria-live="polite" aria-label="Your estimate">
+          <h3>Your estimate</h3>
+          <div class="summary-lines" id="sumLines"></div>
+          <div class="summary-total">
+            <div><span>One-time</span><b id="sumOnce">$0</b></div>
+            <div><span>Monthly</span><b class="mo" id="sumMonthly">$0/mo</b></div>
+            <div class="small muted"><span>Deposit to start (about 50%)</span><span id="sumDeposit">$0</span></div>
+          </div>
+          <p class="fine">Starting prices for a typical small business. Your fixed quote may change with scope. Platform fees such as domain, hosting and AI usage are paid by you directly.</p>
+          <a class="btn btn-ghost btn-block" id="sendEstimate" href="contact.html">Send this estimate</a>
+          <p class="fine" style="margin:12px 0 0;text-align:center">No payment needed. Just a conversation.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/estimate.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

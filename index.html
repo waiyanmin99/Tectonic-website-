@@ -1,601 +1,338 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tectonic — We Build Digital Products</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tectonic — Websites, Portals, AI & IT for Small Business</title>
+<meta name="description" content="Tectonic builds websites, client portals, AI assistants with the Claude API, and IT support for small businesses. Based in Los Angeles. Websites from $1,200.">
+<meta property="og:title" content="Tectonic — Technology that moves your business">
+<meta property="og:description" content="Websites, portals, AI assistants and IT support for small businesses. Based in Los Angeles.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
+<body data-header="dark">
+<div id="site-header"></div>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<main id="main">
 
-<!-- Nav -->
-<nav>
-  <a href="index.html" class="nav-logo">TEC<span>.</span>TONIC</a>
-  <ul class="nav-links">
-    <li><a href="services.html">Services</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="portfolio.html">Work</a></li>
-    <li><a href="services.html#pricing">Pricing</a></li>
-  </ul>
-  <div style="display:flex; align-items:center; gap:1.25rem;">
-    <a href="https://github.com/waiyanmin99" target="_blank" class="nav-gh">GitHub</a>
-    <a href="contact.html" class="nav-cta">Start a project</a>
-  </div>
-</nav>
+  <!-- Panel 1: brand -->
+  <section class="panel panel-dark" aria-labelledby="p1">
+    <div class="panel-art" aria-hidden="true">
+      <div class="grid-bg"></div>
+      <div class="glow" style="right:-20vmax;bottom:-30vmax"></div>
+      <div class="plates"><div class="plate p1"></div><div class="plate p2"></div><div class="plate p3"></div><div class="fault"></div></div>
+    </div>
+    <div class="panel-copy">
+      <h1 class="h-display" id="p1">Technology that moves your business</h1>
+      <p>Websites, client portals, AI assistants and IT support, built in Los Angeles and delivered in weeks, not months.</p>
+      <div class="panel-meta"><span class="chip chip-accent">Now booking projects</span><span class="chip">Reply within 24 hours</span></div>
+    </div>
+    <div class="panel-actions">
+      <a class="btn btn-primary btn-lg" href="build.html">Build your quote</a>
+      <a class="btn btn-outline-light btn-lg" href="services.html">Explore services</a>
+    </div>
+    <svg class="scroll-hint" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+  </section>
 
-<!-- Hero -->
-<section class="hero" id="home">
-  <div class="hero-bg">
-    <div class="hero-grid"></div>
-    <div class="hero-glow"></div>
-  </div>
-  <div class="hero-content">
-    <p class="hero-eyebrow">// Burmese-American developer bridging cultures through technology</p>
-    <h1 class="hero-title">
-      WE BUILD<br>
-      <span class="outline">DIGITAL</span><br>
-      PROD<span class="red">U</span>CTS
-    </h1>
-    <div class="hero-bottom">
-      <p class="hero-sub">
-        Websites, web apps, mobile apps &amp; e-commerce — <strong>fast 1–2 week delivery</strong>, modern designs, personal communication. Based in Los Angeles.
-      </p>
-      <div class="hero-cta-group">
-        <a href="portfolio.html" class="btn-ghost">View our work</a>
-        <a href="contact.html" class="btn-primary">Start a project →</a>
-      </div>
+  <!-- Panel 2: websites -->
+  <section class="panel panel-light" aria-labelledby="p2">
+    <div class="panel-art" aria-hidden="true"><div class="grid-bg"></div></div>
+    <div class="panel-copy">
+      <h2 class="h-display" id="p2">Websites</h2>
+      <p>Fast, mobile-ready sites that turn visitors into customers. <a href="websites.html">See what's included</a></p>
+      <div class="panel-meta"><span class="chip">From $1,200</span><span class="chip">Ready in 1–2 weeks</span></div>
     </div>
-  </div>
-</section>
-
-<!-- Ticker -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <span class="ticker-item">Website Design</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Business Portals</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Mobile Apps</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">E-Commerce</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Startup MVPs</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">AI Integration</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Maintenance</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Branding Setup</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Website Design</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Business Portals</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Mobile Apps</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">E-Commerce</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Startup MVPs</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">AI Integration</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Maintenance</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Branding Setup</span>
-    <span class="ticker-item ticker-dot">✦</span>
-  </div>
-</div>
-
-<!-- Services Preview -->
-<section class="services" id="services">
-  <div class="services-header">
-    <div>
-      <p class="section-label">What we do</p>
-      <h2 class="section-title">OUR<br>SERVICES</h2>
-    </div>
-    <p class="services-desc">From concept to launch — we handle the full digital stack so you can focus on running your business.</p>
-  </div>
-  <div class="services-grid">
-    <div class="service-card">
-      <p class="service-num">01</p>
-      <span class="service-icon">🌐</span>
-      <h3 class="service-name">Website Design & Redesign</h3>
-      <p class="service-desc">Modern websites and redesigns that help businesses look professional, trustworthy, and mobile-friendly.</p>
-    </div>
-    <div class="service-card">
-      <p class="service-num">02</p>
-      <span class="service-icon">⚙️</span>
-      <h3 class="service-name">Business Portals & Dashboards</h3>
-      <p class="service-desc">Private login systems for clients, staff, and admins to manage information in one place.</p>
-    </div>
-    <div class="service-card">
-      <p class="service-num">03</p>
-      <span class="service-icon">📱</span>
-      <h3 class="service-name">Mobile App Development</h3>
-      <p class="service-desc">iOS and Android apps that improve the customer or member experience.</p>
-    </div>
-    <div class="service-card">
-      <p class="service-num">04</p>
-      <span class="service-icon">🛒</span>
-      <h3 class="service-name">E-Commerce Stores</h3>
-      <p class="service-desc">Online stores built to sell — payments, checkout, and product pages done right.</p>
-    </div>
-    <div class="service-card">
-      <p class="service-num">05</p>
-      <span class="service-icon">🚀</span>
-      <h3 class="service-name">Startup MVP Development</h3>
-      <p class="service-desc">Fast first versions of digital products so founders can test, launch, and improve.</p>
-    </div>
-    <div class="service-card">
-      <p class="service-num">06</p>
-      <span class="service-icon">🤖</span>
-      <h3 class="service-name">AI Integration & Automation</h3>
-      <p class="service-desc">AI assistants and workflow automation that save time and support customers.</p>
-    </div>
-    <div class="service-card">
-      <p class="service-num">07</p>
-      <span class="service-icon">🔧</span>
-      <h3 class="service-name">Website Maintenance & Support</h3>
-      <p class="service-desc">Ongoing updates, bug fixes, and monthly support so your site stays healthy.</p>
-    </div>
-    <div class="service-card">
-      <p class="service-num">08</p>
-      <span class="service-icon">🎨</span>
-      <h3 class="service-name">Branding & Digital Setup</h3>
-      <p class="service-desc">Domain, email, logo, and digital identity setup for new and growing businesses.</p>
-    </div>
-  </div>
-  <div style="margin-top:3rem; text-align:center;">
-    <a href="services.html" class="btn-ghost">See all services & pricing →</a>
-  </div>
-</section>
-
-<!-- Why Tectonic -->
-<section style="background:var(--black); padding:7rem 4rem;">
-  <p class="section-label">Why choose us</p>
-  <h2 class="section-title">WHY<br>TECTONIC</h2>
-  <div class="why-grid" style="display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--gray2); margin-top:4rem;">
-    <div style="background:var(--gray); padding:2.5rem 2rem; position:relative; overflow:hidden; cursor:none; transition:background 0.3s;" onmouseenter="this.style.background='#222'" onmouseleave="this.style.background='var(--gray)'">
-      <span style="font-size:1.8rem; display:block; margin-bottom:1.25rem;">💰</span>
-      <h3 style="font-family:var(--font-display); font-size:1.4rem; letter-spacing:0.05em; color:var(--white); margin-bottom:0.75rem;">Affordable</h3>
-      <p style="font-size:0.82rem; color:var(--muted); line-height:1.6;">Agency-quality work at startup-friendly prices. Starting at $499 — no hidden fees.</p>
-    </div>
-    <div style="background:var(--gray); padding:2.5rem 2rem; border-left:1px solid var(--gray2); position:relative; overflow:hidden; cursor:none; transition:background 0.3s;" onmouseenter="this.style.background='#222'" onmouseleave="this.style.background='var(--gray)'">
-      <span style="font-size:1.8rem; display:block; margin-bottom:1.25rem;">⚡</span>
-      <h3 style="font-family:var(--font-display); font-size:1.4rem; letter-spacing:0.05em; color:var(--white); margin-bottom:0.75rem;">Fast Delivery</h3>
-      <p style="font-size:0.82rem; color:var(--muted); line-height:1.6;">Most websites ship in 1–2 weeks. We move fast without cutting corners.</p>
-    </div>
-    <div style="background:var(--gray); padding:2.5rem 2rem; border-left:1px solid var(--gray2); position:relative; overflow:hidden; cursor:none; transition:background 0.3s;" onmouseenter="this.style.background='#222'" onmouseleave="this.style.background='var(--gray)'">
-      <span style="font-size:1.8rem; display:block; margin-bottom:1.25rem;">🎨</span>
-      <h3 style="font-family:var(--font-display); font-size:1.4rem; letter-spacing:0.05em; color:var(--white); margin-bottom:0.75rem;">Modern Design</h3>
-      <p style="font-size:0.82rem; color:var(--muted); line-height:1.6;">Designs that look current and convert — not a WordPress template from 2015.</p>
-    </div>
-    <div style="background:var(--gray); padding:2.5rem 2rem; border-left:1px solid var(--gray2); position:relative; overflow:hidden; cursor:none; transition:background 0.3s;" onmouseenter="this.style.background='#222'" onmouseleave="this.style.background='var(--gray)'">
-      <span style="font-size:1.8rem; display:block; margin-bottom:1.25rem;">🔧</span>
-      <h3 style="font-family:var(--font-display); font-size:1.4rem; letter-spacing:0.05em; color:var(--white); margin-bottom:0.75rem;">Full-Stack</h3>
-      <p style="font-size:0.82rem; color:var(--muted); line-height:1.6;">Frontend, backend, mobile, database — one team handles everything, end to end.</p>
-    </div>
-    <div style="background:var(--gray); padding:2.5rem 2rem; border-left:1px solid var(--gray2); position:relative; overflow:hidden; cursor:none; transition:background 0.3s;" onmouseenter="this.style.background='#222'" onmouseleave="this.style.background='var(--gray)'">
-      <span style="font-size:1.8rem; display:block; margin-bottom:1.25rem;">🤝</span>
-      <h3 style="font-family:var(--font-display); font-size:1.4rem; letter-spacing:0.05em; color:var(--white); margin-bottom:0.75rem;">Personal</h3>
-      <p style="font-size:0.82rem; color:var(--muted); line-height:1.6;">You talk directly to the developer — no account managers, no miscommunication.</p>
-    </div>
-  </div>
-</section>
-
-<!-- About Preview -->
-<section class="about" id="about">
-  <div class="about-grid">
-    <div class="about-visual">
-      <div class="about-card main">
-        <div class="about-initials">WYM</div>
-        <p class="about-name">Wai Yan Min</p>
-        <p class="about-role">Founder & CTO · Tectonic</p>
-      </div>
-      <div class="about-card float">
-        <p class="float-num">10+</p>
-        <p class="float-label">Projects delivered</p>
-      </div>
-    </div>
-    <div class="about-content">
-      <p class="section-label">Who we are</p>
-      <h2 class="section-title">THE<br>FOUNDER</h2>
-      <p class="about-text">
-        I'm <strong>Wai Yan Min</strong> — a Burmese-American full-stack developer studying Computer Science at <strong>Mt. San Antonio College</strong> and currently serving as <strong>CTO at MYTTA Foundation</strong>, where I built and manage their entire digital platform.
-      </p>
-      <p class="about-text">
-        Tectonic is built on the belief that every business deserves a powerful digital presence — not just big corporations. I founded this to bring <strong>startup-level execution to businesses of all sizes</strong>.
-      </p>
-      <div class="about-tags">
-        <span class="tag">React</span>
-        <span class="tag">Node.js</span>
-        <span class="tag">Swift</span>
-        <span class="tag">PostgreSQL</span>
-        <span class="tag">MongoDB</span>
-        <span class="tag">Figma</span>
-        <span class="tag">AWS</span>
-        <span class="tag">TypeScript</span>
-      </div>
-      <div style="margin-top:2.5rem;">
-        <a href="about.html" class="btn-ghost">Learn more about us →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Portfolio Preview -->
-<section class="portfolio" id="work">
-  <div class="portfolio-header">
-    <div>
-      <p class="section-label">What we've built</p>
-      <h2 class="section-title">SELECTED<br>WORK</h2>
-    </div>
-    <a href="portfolio.html" class="btn-ghost">View all work →</a>
-  </div>
-  <div class="portfolio-grid">
-    <a href="https://www.myttafoundation.com/" target="_blank" class="project-card featured">
-      <span class="project-num">01</span>
-      <div class="project-tags">
-        <span class="project-tag live">● Live</span>
-        <span class="project-tag">Website</span>
-        <span class="project-tag">Non-profit</span>
-      </div>
-      <h3 class="project-name">MYTTA Foundation</h3>
-      <p class="project-desc">Full website for an immigration legal services organization in Brooklyn, NY — covering asylum, green cards, work permits, and more. Built and maintained as CTO.</p>
-      <span class="project-arrow">↗</span>
-    </a>
-    <div class="project-card">
-      <span class="project-num">02</span>
-      <div class="project-tags">
-        <span class="project-tag">Web App</span>
-        <span class="project-tag">React</span>
-      </div>
-      <h3 class="project-name">Your Next Project</h3>
-      <p class="project-desc">Your business could be featured here. Let's build something together.</p>
-      <span class="project-arrow">↗</span>
-    </div>
-    <div class="project-card">
-      <span class="project-num">03</span>
-      <div class="project-tags">
-        <span class="project-tag">Mobile App</span>
-        <span class="project-tag">iOS</span>
-      </div>
-      <h3 class="project-name">Your Next App</h3>
-      <p class="project-desc">Got an idea for a mobile app? We can build it from concept to launch.</p>
-      <span class="project-arrow">↗</span>
-    </div>
-  </div>
-</section>
-
-<!-- Testimonials -->
-<section class="testimonials" id="testimonials">
-  <div class="testimonials-header">
-    <div>
-      <p class="section-label">What clients say</p>
-      <h2 class="section-title">CLIENT<br>REVIEWS</h2>
-    </div>
-  </div>
-  <div class="testimonials-grid">
-    <!-- Testimonial 1 -->
-    <div class="testi-card">
-      <div class="testi-stars">
-        <span class="testi-star">★</span>
-        <span class="testi-star">★</span>
-        <span class="testi-star">★</span>
-        <span class="testi-star">★</span>
-        <span class="testi-star">★</span>
-      </div>
-      <p class="testi-quote">"Wai Yan built our entire digital platform from the ground up — website, client portal, and backend systems. Everything went live in under three weeks and has been rock-solid ever since. We couldn't serve our community the same way without his work."</p>
-      <div class="testi-author">
-        <div class="testi-avatar">KM</div>
-        <div>
-          <p class="testi-name">Ko Htut Maw Oo</p>
-          <p class="testi-role">Executive Director · MYTTA Foundation</p>
+    <div class="panel-stage reveal" aria-hidden="true">
+      <div class="mock mock-site">
+        <div class="mock-bar"><i></i><i></i><i></i><span class="mock-url">yourbusiness.com</span></div>
+        <div class="site-hero">
+          <div class="site-nav"><span class="sk"></span><span class="links"><span class="sk"></span><span class="sk"></span><span class="sk"></span></span></div>
+          <div class="site-title">Fresh food,<br>ready when you are.</div>
+          <span class="sk" style="width:55%;background:rgba(255,255,255,.25)"></span>
+          <div class="site-btns"><span>Order online</span><span>Book a table</span></div>
+        </div>
+        <div class="site-cards">
+          <div><span class="thumb"></span><span class="sk dark" style="width:70%"></span><span class="sk" style="width:90%"></span></div>
+          <div><span class="thumb"></span><span class="sk dark" style="width:60%"></span><span class="sk" style="width:80%"></span></div>
+          <div><span class="thumb"></span><span class="sk dark" style="width:65%"></span><span class="sk" style="width:85%"></span></div>
         </div>
       </div>
     </div>
-    <!-- Testimonial 2 -->
-    <div class="testi-card">
-      <div class="testi-stars">
-        <span class="testi-star">★</span>
-        <span class="testi-star">★</span>
-        <span class="testi-star">★</span>
-        <span class="testi-star">★</span>
-        <span class="testi-star">★</span>
-      </div>
-      <p class="testi-quote">"I needed a new website for my restaurant fast. Tectonic delivered a beautiful, mobile-friendly site in one week. The design looked nothing like a template — it felt completely ours. Online traffic and orders picked up right away."</p>
-      <div class="testi-author">
-        <div class="testi-avatar">ML</div>
-        <div>
-          <p class="testi-name">Mei L.</p>
-          <p class="testi-role">Owner · Jade Garden LA</p>
-        </div>
-      </div>
+    <div class="panel-actions">
+      <a class="btn btn-dark btn-lg" href="build.html?pick=site-starter">Get a quote</a>
+      <a class="btn btn-light btn-lg" href="websites.html">Learn more</a>
     </div>
-    <!-- Testimonial 3 -->
-    <div class="testi-card">
-      <div class="testi-stars">
-        <span class="testi-star">★</span>
-        <span class="testi-star">★</span>
-        <span class="testi-star">★</span>
-        <span class="testi-star">★</span>
-        <span class="testi-star">★</span>
-      </div>
-      <p class="testi-quote">"Wai Yan took my app idea and turned it into a working MVP in two weeks. The code quality was excellent, the communication was direct, and he genuinely understood what we were building. I hired him again for the next phase immediately."</p>
-      <div class="testi-author">
-        <div class="testi-avatar">DK</div>
-        <div>
-          <p class="testi-name">David K.</p>
-          <p class="testi-role">Founder · QuickHire App</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- Pricing Preview -->
-<section class="pricing" id="pricing">
-  <div class="pricing-header">
-    <p class="section-label">Investment</p>
-    <h2 class="section-title">SIMPLE<br>PRICING</h2>
-  </div>
-  <div class="pricing-grid">
-    <div class="pricing-card">
-      <span class="pricing-badge">Starter</span>
-      <h3 class="pricing-name">Launch</h3>
-      <p class="pricing-price">$499<span> / project</span></p>
-      <p class="pricing-sub">Perfect for small businesses getting online</p>
-      <div class="pricing-divider"></div>
-      <ul class="pricing-features">
-        <li><span class="check">✓</span> Custom 5-page website</li>
-        <li><span class="check">✓</span> Mobile responsive design</li>
-        <li><span class="check">✓</span> Contact form integration</li>
-        <li><span class="check">✓</span> Basic SEO setup</li>
-        <li><span class="check">✓</span> 30 days of support</li>
-      </ul>
-      <a href="contact.html" class="btn-pricing">Get started →</a>
+  <!-- Panel 3: portals -->
+  <section class="panel panel-dark" aria-labelledby="p3">
+    <div class="panel-art" aria-hidden="true"><div class="grid-bg"></div><div class="glow" style="left:-30vmax;top:-20vmax;opacity:.6"></div></div>
+    <div class="panel-copy">
+      <h2 class="h-display" id="p3">Client Portals</h2>
+      <p>One secure place for clients, staff and admins: logins, files, bookings and status updates. <a href="portals.html">Explore portals</a></p>
+      <div class="panel-meta"><span class="chip">From $4,000</span><span class="chip">2–4 weeks</span></div>
     </div>
-    <div class="pricing-card featured">
-      <span class="pricing-badge">Most Popular</span>
-      <h3 class="pricing-name">Growth</h3>
-      <p class="pricing-price">$999<span> / project</span></p>
-      <p class="pricing-sub">For businesses ready to scale digitally</p>
-      <div class="pricing-divider"></div>
-      <ul class="pricing-features">
-        <li><span class="check">✓</span> Custom 10-page website or web app</li>
-        <li><span class="check">✓</span> E-commerce or booking system</li>
-        <li><span class="check">✓</span> CMS integration</li>
-        <li><span class="check">✓</span> Advanced SEO & analytics</li>
-        <li><span class="check">✓</span> 60 days of support</li>
-        <li><span class="check">✓</span> Performance optimization</li>
-      </ul>
-      <a href="contact.html" class="btn-pricing">Get started →</a>
-    </div>
-    <div class="pricing-card">
-      <span class="pricing-badge">Enterprise</span>
-      <h3 class="pricing-name">Tectonic</h3>
-      <p class="pricing-price">Custom<span> pricing</span></p>
-      <p class="pricing-sub">Full-scale apps, platforms & startup MVPs</p>
-      <div class="pricing-divider"></div>
-      <ul class="pricing-features">
-        <li><span class="check">✓</span> Full-stack web or mobile app</li>
-        <li><span class="check">✓</span> Custom API & database design</li>
-        <li><span class="check">✓</span> User authentication & dashboards</li>
-        <li><span class="check">✓</span> Scalable cloud infrastructure</li>
-        <li><span class="check">✓</span> Ongoing maintenance available</li>
-        <li><span class="check">✓</span> Dedicated project management</li>
-      </ul>
-      <a href="contact.html" class="btn-pricing">Let's talk →</a>
-    </div>
-  </div>
-</section>
-
-<!-- Contact -->
-<section class="contact" id="contact">
-  <div class="contact-grid">
-    <div>
-      <p class="section-label">Get in touch</p>
-      <h2 class="contact-title">LET'S BUILD<br><span class="outline">SOMETHING</span><br>TECTONIC</h2>
-      <div class="contact-info">
-        <div class="contact-item">
-          <span class="contact-item-label">Email</span>
-          <span class="contact-item-val">waiyanmin.lane@gmail.com</span>
-        </div>
-        <div class="contact-item">
-          <span class="contact-item-label">Phone</span>
-          <span class="contact-item-val">+1 (669) 213-7967</span>
-        </div>
-        <div class="contact-item">
-          <span class="contact-item-label">Based in</span>
-          <span class="contact-item-val">Los Angeles, California</span>
-        </div>
-        <div class="contact-item">
-          <span class="contact-item-label">Response time</span>
-          <span class="contact-item-val">Within 24 hours</span>
-        </div>
-      </div>
-    </div>
-    <div>
-      <form id="contact-form" action="https://formspree.io/f/xojyezqb" method="POST">
-        <div class="form-group form-row">
-          <div>
-            <label class="form-label">Your name</label>
-            <input type="text" name="name" class="form-input" placeholder="John Smith" required>
-          </div>
-          <div>
-            <label class="form-label">Your email</label>
-            <input type="email" name="email" class="form-input" placeholder="john@company.com" required>
+    <div class="panel-stage reveal" aria-hidden="true">
+      <div class="mock mock-dash">
+        <div class="mock-bar"><i></i><i></i><i></i><span class="mock-url">portal.yourbusiness.com</span></div>
+        <div class="dash">
+          <div class="dash-side"><span class="sk on" style="width:70%"></span><span class="sk" style="width:80%"></span><span class="sk" style="width:60%"></span><span class="sk" style="width:75%"></span><span class="sk" style="width:55%"></span></div>
+          <div class="dash-main">
+            <div class="tiles">
+              <div class="tile"><b>128</b><small>Active clients</small></div>
+              <div class="tile"><b>34</b><small>Appointments this week</small></div>
+              <div class="tile"><b>12</b><small>Cases waiting</small></div>
+            </div>
+            <div class="chart"><i style="height:40%"></i><i style="height:55%"></i><i style="height:48%"></i><i style="height:70%"></i><i style="height:62%"></i><i class="hi" style="height:86%"></i><i style="height:74%"></i></div>
+            <div class="rows">
+              <div class="row"><span class="sk dark" style="width:70%"></span><span class="sk" style="width:60%"></span><span class="pill">Done</span></div>
+              <div class="row"><span class="sk dark" style="width:55%"></span><span class="sk" style="width:70%"></span><span class="pill wait">Review</span></div>
+            </div>
           </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Service needed</label>
-          <select name="service" class="form-select">
-            <option value="">Select a service...</option>
-            <option>Website Design & Redesign</option>
-            <option>Business Portals & Dashboard Systems</option>
-            <option>Mobile App Development</option>
-            <option>E-Commerce Store</option>
-            <option>Startup MVP Development</option>
-            <option>AI Integration & Automation</option>
-            <option>Website Maintenance & Support</option>
-            <option>Branding & Digital Setup</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Budget range</label>
-          <select name="budget" class="form-select">
-            <option value="">Select a budget...</option>
-            <option>Under $1,000</option>
-            <option>$1,000 – $3,000</option>
-            <option>$3,000 – $10,000</option>
-            <option>$10,000+</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Tell us about your project</label>
-          <textarea name="message" class="form-textarea" placeholder="Describe your idea, goals, or what you need..." required></textarea>
-        </div>
-        <button type="submit" class="btn-submit" id="submit-btn">Send message →</button>
-        <div id="form-success" style="display:none; margin-top:1rem; font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:#1D9E75;">
-          ✓ Message sent! I'll get back to you within 24 hours.
-        </div>
-        <div id="form-error" style="display:none; margin-top:1rem; font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent);">
-          ✕ Something went wrong. Please email me directly.
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer>
-  <div class="footer-main">
-    <div class="footer-brand">
-      <a href="index.html" class="footer-logo">TEC<span>.</span>TONIC</a>
-      <p class="footer-tagline">Burmese-American developer bridging cultures through technology.</p>
-      <div class="footer-social">
-        <a href="https://www.linkedin.com/in/waiyanmin999" target="_blank" aria-label="LinkedIn">LinkedIn</a>
-        <a href="#" aria-label="Facebook">Facebook</a>
-        <a href="#" aria-label="Instagram">Instagram</a>
-        <a href="https://github.com/waiyanmin99" target="_blank" aria-label="GitHub">GitHub</a>
       </div>
     </div>
-    <div class="footer-nav-group">
-      <div class="footer-nav-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="about.html">About</a></li>
-          <li><a href="portfolio.html">Work</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-nav-col">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="services.html">Website Design</a></li>
-          <li><a href="services.html">Business Portals</a></li>
-          <li><a href="services.html">Mobile Apps</a></li>
-          <li><a href="services.html">E-Commerce</a></li>
-          <li><a href="services.html">Startup MVPs</a></li>
-          <li><a href="services.html">AI Integration</a></li>
-          <li><a href="services.html">Maintenance</a></li>
-          <li><a href="services.html">Branding Setup</a></li>
-        </ul>
-      </div>
-      <div class="footer-nav-col">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="mailto:waiyanmin.lane@gmail.com">Email us</a></li>
-          <li><a href="tel:+16692137967">Call us</a></li>
-        </ul>
+    <div class="panel-actions">
+      <a class="btn btn-primary btn-lg" href="build.html?pick=portal">Get a quote</a>
+      <a class="btn btn-outline-light btn-lg" href="portals.html">Learn more</a>
+    </div>
+  </section>
+
+  <!-- Panel 4: AI -->
+  <section class="panel panel-light" aria-labelledby="p4">
+    <div class="panel-art" aria-hidden="true"><div class="grid-bg"></div></div>
+    <div class="panel-copy">
+      <h2 class="h-display" id="p4">AI that works for you</h2>
+      <p>Receptionists, document readers and staff assistants built with the Claude API. <a href="ai-solutions.html">See AI solutions</a></p>
+      <div class="panel-meta"><span class="chip">From $400</span><span class="chip">Live in about a week</span></div>
+    </div>
+    <div class="panel-stage narrow reveal" aria-hidden="true">
+      <div class="mock mock-chat">
+        <div class="chat-head"><span class="avatar">AI</span><div><b>Front desk assistant</b><small>● Online 24/7</small></div></div>
+        <div class="chat-body">
+          <div class="bubble bot">Hi! I can answer questions or book you in. How can I help?</div>
+          <div class="bubble me">Do you have anything open Saturday morning?</div>
+          <div class="bubble bot">Yes, Saturday has three openings:<div class="slots"><span>9:00</span><span>10:30</span><span>11:15</span></div></div>
+        </div>
+        <div class="chat-input"><span class="sk"></span><i></i></div>
       </div>
     </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2026 Tectonic. All rights reserved.</span>
-    <div class="footer-legal">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
+    <div class="panel-actions">
+      <a class="btn btn-dark btn-lg" href="build.html?pick=receptionist">Get a quote</a>
+      <a class="btn btn-light btn-lg" href="ai-solutions.html">Learn more</a>
     </div>
-  </div>
-</footer>
+  </section>
 
-<script>
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top = my + 'px';
-  });
-  function animRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(animRing);
-  }
-  animRing();
-  document.querySelectorAll('a, button, .service-card, .project-card, .pricing-card, .testi-card').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.width = '20px'; cursor.style.height = '20px';
-      ring.style.width = '52px'; ring.style.height = '52px';
-      ring.style.borderColor = 'rgba(232,68,10,0.8)';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.width = '12px'; cursor.style.height = '12px';
-      ring.style.width = '36px'; ring.style.height = '36px';
-      ring.style.borderColor = 'rgba(232,68,10,0.5)';
-    });
-  });
+  <!-- Panel 5: IT -->
+  <section class="panel panel-dark" aria-labelledby="p5">
+    <div class="panel-art" aria-hidden="true"><div class="grid-bg"></div><div class="glow" style="right:-30vmax;top:10vh;opacity:.5"></div></div>
+    <div class="panel-copy">
+      <h2 class="h-display" id="p5">IT Support</h2>
+      <p>Business email, devices, Wi-Fi, backups and security for small offices, with a person you can call. <a href="it-support.html">See IT plans</a></p>
+      <div class="panel-meta"><span class="chip">Setup from $300</span><span class="chip">Support from $150/mo</span></div>
+    </div>
+    <div class="panel-stage wide reveal" aria-hidden="true">
+      <div class="mock-net">
+        <svg viewBox="0 0 800 400" fill="none">
+          <g stroke="rgba(255,255,255,.18)" stroke-width="1.5">
+            <path d="M400 200L170 90M400 200L630 90M400 200L150 300M400 200L650 300M400 200L400 360"/>
+          </g>
+          <g stroke="#e8440a" stroke-width="2" stroke-dasharray="6 8"><path d="M400 200L630 90"/><path d="M400 200L150 300"/></g>
+          <circle cx="400" cy="200" r="58" fill="#17181c" stroke="#e8440a" stroke-width="2"/>
+          <path d="M400 168l26 10v18c0 16-11 28-26 33-15-5-26-17-26-33v-18z" fill="none" stroke="#fff" stroke-width="2.5"/>
+          <path d="M389 197l8 8 15-15" stroke="#e8440a" stroke-width="3" stroke-linecap="round"/>
+          <g fill="#17181c" stroke="rgba(255,255,255,.35)" stroke-width="1.5">
+            <rect x="120" y="60" width="100" height="62" rx="8"/><rect x="580" y="60" width="100" height="62" rx="8"/>
+            <rect x="100" y="270" width="100" height="62" rx="8"/><rect x="600" y="270" width="100" height="62" rx="8"/>
+            <rect x="360" y="330" width="80" height="52" rx="8"/>
+          </g>
+          <g fill="#a2a4aa" font-family="Inter, sans-serif" font-size="13" text-anchor="middle">
+            <text x="170" y="96">Email</text><text x="630" y="96">Laptops</text><text x="150" y="306">Wi-Fi</text><text x="650" y="306">Backups</text><text x="400" y="361">Printers</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="panel-actions">
+      <a class="btn btn-primary btn-lg" href="build.html?pick=none,it-setup,it-support">Get a quote</a>
+      <a class="btn btn-outline-light btn-lg" href="it-support.html">Learn more</a>
+    </div>
+  </section>
 
-  const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const btn = document.getElementById('submit-btn');
-      const success = document.getElementById('form-success');
-      const error = document.getElementById('form-error');
-      btn.textContent = 'Sending...';
-      btn.disabled = true;
-      try {
-        const res = await fetch(contactForm.action, {
-          method: 'POST',
-          body: new FormData(contactForm),
-          headers: { 'Accept': 'application/json' }
-        });
-        if (res.ok) {
-          success.style.display = 'block'; error.style.display = 'none';
-          contactForm.reset(); btn.textContent = 'Sent ✓';
-        } else { throw new Error(); }
-      } catch {
-        error.style.display = 'block'; success.style.display = 'none';
-        btn.textContent = 'Send message →'; btn.disabled = false;
-      }
-    });
-  }
+  <!-- Lineup -->
+  <section class="section" aria-labelledby="lineup-h">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Services</p>
+          <h2 class="h2" id="lineup-h">Find what your business needs</h2>
+          <p class="lead">Every price is a starting price. You'll get a fixed quote before any work begins.</p>
+        </div>
+        <a class="btn btn-outline" href="services.html">View all services</a>
+      </div>
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.service-card, .project-card, .pricing-card, .testi-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(24px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, background 0.3s';
-    observer.observe(el);
-  });
-</script>
+      <div data-tabs>
+        <div class="tabs" role="tablist" aria-label="Service categories">
+          <button class="tab" role="tab" id="t-build" aria-selected="true" aria-controls="tp-build">Build</button>
+          <button class="tab" role="tab" id="t-ai" aria-selected="false" aria-controls="tp-ai" tabindex="-1">AI &amp; Automation</button>
+          <button class="tab" role="tab" id="t-it" aria-selected="false" aria-controls="tp-it" tabindex="-1">IT Support</button>
+          <button class="tab" role="tab" id="t-grow" aria-selected="false" aria-controls="tp-grow" tabindex="-1">Grow</button>
+        </div>
+
+        <div class="tab-panel" role="tabpanel" id="tp-build" aria-labelledby="t-build">
+          <div class="lineup">
+            <article class="l-card"><div class="l-art"><div class="art art-1" data-icon="globe"></div></div><div class="l-body"><span class="l-tag">Website</span><h3>Starter Website</h3><p>Up to 5 pages, mobile-ready, contact form and basic SEO.</p><div class="l-price"><div><small>Starting at</small><b>$1,200</b></div><span class="per">1–2 weeks</span></div><div class="l-links"><a href="build.html?pick=site-starter">Price it</a><a href="websites.html">Details</a></div></div></article>
+            <article class="l-card"><div class="l-art"><div class="art art-2" data-icon="cart"></div></div><div class="l-body"><span class="l-tag">E-commerce</span><h3>Online Store</h3><p>Product pages, cart and secure checkout with Stripe or Shopify.</p><div class="l-price"><div><small>Starting at</small><b>$2,000</b></div><span class="per">2–3 weeks</span></div><div class="l-links"><a href="build.html?pick=store">Price it</a><a href="websites.html#store">Details</a></div></div></article>
+            <article class="l-card"><div class="l-art"><div class="art art-3" data-icon="portal"></div></div><div class="l-body"><span class="l-tag">Portal</span><h3>Client Portal</h3><p>Logins, user roles, file uploads and status tracking.</p><div class="l-price"><div><small>Starting at</small><b>$4,000</b></div><span class="per">2–4 weeks</span></div><div class="l-links"><a href="build.html?pick=portal">Price it</a><a href="portals.html">Details</a></div></div></article>
+            <article class="l-card"><div class="l-art"><div class="art art-6" data-icon="rocket"></div></div><div class="l-body"><span class="l-tag">Product</span><h3>Startup MVP &amp; Apps</h3><p>The first working version of your idea, on web or mobile.</p><div class="l-price"><div><small>Starting at</small><b>$5,000</b></div><span class="per">3–6 weeks</span></div><div class="l-links"><a href="build.html?pick=mvp">Price it</a><a href="portals.html#mvp">Details</a></div></div></article>
+          </div>
+        </div>
+
+        <div class="tab-panel" role="tabpanel" id="tp-ai" aria-labelledby="t-ai" hidden>
+          <div class="lineup">
+            <article class="l-card"><div class="l-art"><div class="art art-4" data-icon="call"></div></div><div class="l-body"><span class="l-tag">AI</span><h3>AI Receptionist</h3><p>Answers messages after hours, books appointments, sends you the lead.</p><div class="l-price"><div><small>Starting at</small><b>$1,200</b></div><span class="per">+ $200/mo</span></div><div class="l-links"><a href="build.html?pick=none,receptionist">Price it</a><a href="ai-solutions.html#receptionist">Details</a></div></div></article>
+            <article class="l-card"><div class="l-art"><div class="art art-2" data-icon="doc"></div></div><div class="l-body"><span class="l-tag">AI</span><h3>Document Reading</h3><p>Pulls details from PDFs, invoices and forms into your spreadsheet or portal.</p><div class="l-price"><div><small>Starting at</small><b>$1,500</b></div><span class="per">+ $200/mo</span></div><div class="l-links"><a href="build.html?pick=none,docs">Price it</a><a href="ai-solutions.html#documents">Details</a></div></div></article>
+            <article class="l-card"><div class="l-art"><div class="art art-1" data-icon="chat"></div></div><div class="l-body"><span class="l-tag">AI</span><h3>Website Assistant</h3><p>A chat assistant trained on your FAQs that captures leads 24/7.</p><div class="l-price"><div><small>Starting at</small><b>$800</b></div><span class="per">+ $150/mo</span></div><div class="l-links"><a href="build.html?pick=none,chatbot">Price it</a><a href="ai-solutions.html#assistant">Details</a></div></div></article>
+            <article class="l-card"><div class="l-art"><div class="art art-3" data-icon="bolt"></div></div><div class="l-body"><span class="l-tag">Automation</span><h3>Workflow Automation</h3><p>Connect forms to email, text alerts, spreadsheets or your CRM.</p><div class="l-price"><div><small>Starting at</small><b>$400</b></div><span class="per">one-time</span></div><div class="l-links"><a href="build.html?pick=none,automation">Price it</a><a href="ai-solutions.html#automation">Details</a></div></div></article>
+          </div>
+        </div>
+
+        <div class="tab-panel" role="tabpanel" id="tp-it" aria-labelledby="t-it" hidden>
+          <div class="lineup">
+            <article class="l-card"><div class="l-art"><div class="art art-5" data-icon="laptop"></div></div><div class="l-body"><span class="l-tag">IT</span><h3>Office IT Setup</h3><p>Business email, domain, laptops, Wi-Fi, printers and backups.</p><div class="l-price"><div><small>Starting at</small><b>$300</b></div><span class="per">one-time</span></div><div class="l-links"><a href="build.html?pick=none,it-setup">Price it</a><a href="it-support.html#setup">Details</a></div></div></article>
+            <article class="l-card"><div class="l-art"><div class="art art-1" data-icon="wrench"></div></div><div class="l-body"><span class="l-tag">IT</span><h3>Monthly IT Support</h3><p>Remote help desk, password resets and new-device setup.</p><div class="l-price"><div><small>Starting at</small><b>$150</b></div><span class="per">per month</span></div><div class="l-links"><a href="build.html?pick=none,it-support">Price it</a><a href="it-support.html#support">Details</a></div></div></article>
+            <article class="l-card"><div class="l-art"><div class="art art-6" data-icon="shield"></div></div><div class="l-body"><span class="l-tag">Security</span><h3>Security Check-up</h3><p>Two-step sign-in, access review and a password manager for your team.</p><div class="l-price"><div><small>Starting at</small><b>$300</b></div><span class="per">one-time</span></div><div class="l-links"><a href="build.html?pick=none,security">Price it</a><a href="it-support.html#security">Details</a></div></div></article>
+          </div>
+        </div>
+
+        <div class="tab-panel" role="tabpanel" id="tp-grow" aria-labelledby="t-grow" hidden>
+          <div class="lineup">
+            <article class="l-card"><div class="l-art"><div class="art art-5" data-icon="map"></div></div><div class="l-body"><span class="l-tag">Local</span><h3>Google Business &amp; Local SEO</h3><p>Show up on Google Maps and local searches.</p><div class="l-price"><div><small>Starting at</small><b>$300</b></div><span class="per">one-time</span></div><div class="l-links"><a href="build.html?pick=none,local-seo">Price it</a><a href="services.html#grow">Details</a></div></div></article>
+            <article class="l-card"><div class="l-art"><div class="art art-2" data-icon="translate"></div></div><div class="l-body"><span class="l-tag">Language</span><h3>Translation</h3><p>Your website and documents in Burmese, Spanish and more.</p><div class="l-price"><div><small>Starting at</small><b>$500</b></div><span class="per">per language</span></div><div class="l-links"><a href="build.html?pick=none,translate">Price it</a><a href="ai-solutions.html#translation">Details</a></div></div></article>
+            <article class="l-card"><div class="l-art"><div class="art art-3" data-icon="gauge"></div></div><div class="l-body"><span class="l-tag">Website</span><h3>Speed &amp; Accessibility</h3><p>Faster pages that more people can use, on any device.</p><div class="l-price"><div><small>Starting at</small><b>$400</b></div><span class="per">one-time</span></div><div class="l-links"><a href="build.html?pick=none,speed">Price it</a><a href="services.html#grow">Details</a></div></div></article>
+            <article class="l-card"><div class="l-art"><div class="art art-4" data-icon="pen"></div></div><div class="l-body"><span class="l-tag">AI</span><h3>Content Writing Tool</h3><p>Social posts and product copy drafted in your brand voice.</p><div class="l-price"><div><small>Starting at</small><b>$800</b></div><span class="per">+ $120/mo</span></div><div class="l-links"><a href="build.html?pick=none,content">Price it</a><a href="ai-solutions.html#content">Details</a></div></div></article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Packages -->
+  <section class="section section-surface" aria-labelledby="pk-h">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Packages</p>
+          <h2 class="h2" id="pk-h">Three simple ways to start</h2>
+          <p class="lead">Most clients pick one of these. Add anything else from the full menu.</p>
+        </div>
+        <a class="btn btn-outline" href="pricing.html">Compare all pricing</a>
+      </div>
+      <div class="plans">
+        <div class="plan reveal">
+          <h3>Launch</h3><p class="plan-for">Get your business online, done right.</p>
+          <p class="amount">$1,200</p><p class="monthly">+ $150/mo Website care</p>
+          <ul class="checks"><li>Up to 5 custom pages</li><li>Mobile-ready and fast</li><li>Contact form and basic SEO</li><li>Google Business Profile check</li></ul>
+          <a class="btn btn-outline btn-block" href="build.html?pick=site-starter,care-site">Start with Launch</a>
+        </div>
+        <div class="plan featured reveal">
+          <span class="ribbon">Most popular</span>
+          <h3>Automate</h3><p class="plan-for">A website that answers and books for you.</p>
+          <p class="amount">$3,000</p><p class="monthly">+ $250/mo Website + AI care</p>
+          <ul class="checks"><li>Growth website (up to 10 pages)</li><li>AI website assistant</li><li>Booking and lead alerts</li><li>One workflow automation</li></ul>
+          <a class="btn btn-dark btn-block" href="build.html?pick=site-growth,chatbot,automation,care-ai">Start with Automate</a>
+        </div>
+        <div class="plan reveal">
+          <h3>Scale</h3><p class="plan-for">Run clients and staff from one portal.</p>
+          <p class="amount"><small>from</small> $4,000</p><p class="monthly">+ $400/mo Portal care</p>
+          <ul class="checks"><li>Client portal with logins and roles</li><li>Online payments</li><li>Automations and reports</li><li>Priority support</li></ul>
+          <a class="btn btn-outline btn-block" href="build.html?pick=portal,payments,care-portal">Start with Scale</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="section" aria-labelledby="pr-h">
+    <div class="container">
+      <p class="eyebrow">How it works</p>
+      <h2 class="h2" id="pr-h" style="margin-bottom:40px">From first call to launch in four steps</h2>
+      <div class="steps">
+        <div class="step reveal"><h3>Free call</h3><p>We talk about your business, goals and budget. No pressure, no jargon.</p></div>
+        <div class="step reveal"><h3>Fixed quote</h3><p>You get a written plan and a fixed price. 50% deposit to begin.</p></div>
+        <div class="step reveal"><h3>Build &amp; review</h3><p>You see progress every week and get two rounds of changes.</p></div>
+        <div class="step reveal"><h3>Launch &amp; care</h3><p>We launch, train your team, and keep things running.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured work -->
+  <section class="section section-surface" aria-labelledby="wk-h">
+    <div class="container">
+      <div class="section-head">
+        <div><p class="eyebrow">Featured work</p><h2 class="h2" id="wk-h">Built for real organizations</h2></div>
+        <a class="btn btn-outline" href="portfolio.html">See all work</a>
+      </div>
+      <article class="work-feature reveal">
+        <div class="wf-art">
+          <div class="mock mock-site" style="width:100%;max-width:520px">
+            <div class="mock-bar"><i></i><i></i><i></i><span class="mock-url">myttafoundation.com</span></div>
+            <div class="site-hero"><div class="site-nav"><span class="sk"></span><span class="links"><span class="sk"></span><span class="sk"></span><span class="sk"></span></span></div><div class="site-title">Immigration help,<br>in your language.</div><div class="site-btns"><span>Get help</span><span>Resources</span></div></div>
+            <div class="site-cards"><div><span class="thumb"></span><span class="sk dark" style="width:70%"></span></div><div><span class="thumb"></span><span class="sk dark" style="width:60%"></span></div><div><span class="thumb"></span><span class="sk dark" style="width:65%"></span></div></div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <span class="live-dot small">Live</span>
+          <h3 class="h2">MYTTA Foundation</h3>
+          <p>A nonprofit immigration legal services organization. We rebuilt their public website in four languages and built a staff portal with role-based access, appointment booking and SMS verification.</p>
+          <dl class="meta-list">
+            <div><dt>Work</dt><dd>Website + staff portal</dd></div>
+            <div><dt>Languages</dt><dd>English, Burmese, Spanish, Chinese</dd></div>
+          </dl>
+          <div class="btn-row"><a class="btn btn-light" href="https://www.myttafoundation.com/" target="_blank" rel="noopener">Visit site</a><a class="btn btn-outline-light" href="portfolio.html">Case study</a></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="section" aria-label="Client review">
+    <div class="container">
+      <figure class="quote-block reveal">
+        <blockquote>“Wai Yan built our entire digital platform from the ground up: website, client portal, and backend systems. We couldn't serve our community the same way without his work.”</blockquote>
+        <figcaption class="who"><span class="av">KM</span><span><b>Ko Htut Maw Oo</b><span>Executive Director, MYTTA Foundation</span></span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Planning tools -->
+  <section class="section-sm section-surface" aria-labelledby="tools-h">
+    <div class="container">
+      <h2 class="h3 center" id="tools-h" style="margin-bottom:28px">Plan your project</h2>
+      <div class="tools">
+        <a class="tool" href="build.html"><span data-icon="calc"></span><strong>Build your quote</strong><span>Pick services, see your price</span></a>
+        <a class="tool" href="pricing.html#compare"><span data-icon="compare"></span><strong>Compare plans</strong><span>See what each package includes</span></a>
+        <a class="tool" href="contact.html"><span data-icon="call"></span><strong>Book a free call</strong><span>Talk to the developer directly</span></a>
+        <a class="tool" href="faq.html"><span data-icon="question"></span><strong>Questions</strong><span>Payments, timelines, ownership</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band" aria-labelledby="cta-h">
+    <div class="glow" style="left:50%;top:50%;transform:translate(-50%,-50%);z-index:-1;opacity:.7" aria-hidden="true"></div>
+    <div class="container center">
+      <h2 class="h1" id="cta-h">Let's build something that lasts</h2>
+      <p class="lead">Tell us what you need. You'll hear back within 24 hours with next steps.</p>
+      <div class="btn-row"><a class="btn btn-primary btn-lg" href="contact.html">Start a project</a><a class="btn btn-outline-light btn-lg" href="build.html">Build your quote</a></div>
+    </div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site.js"></script>
 </body>
 </html>

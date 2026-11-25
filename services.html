@@ -1,796 +1,150 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Services — Tectonic</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<style>
-  /* ─── Services expanded ─── */
-  .services-full { background: var(--gray); }
-  .services-full-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5px;
-    background: var(--gray2);
-    margin-top: 4rem;
-  }
-  .service-full-card {
-    background: var(--gray);
-    padding: 3rem;
-    position: relative;
-    overflow: hidden;
-    cursor: none;
-    transition: background 0.3s;
-  }
-  .service-full-card:hover { background: #222; }
-  .service-full-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transition: transform 0.35s;
-  }
-  .service-full-card:hover::after { transform: scaleX(1); }
-  .sfc-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-  }
-  .sfc-icon-wrap {
-    width: 56px; height: 56px;
-    background: rgba(232,68,10,0.12);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    flex-shrink: 0;
-  }
-  .sfc-meta { flex: 1; }
-  .sfc-num {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    color: var(--accent);
-    letter-spacing: 0.12em;
-    margin-bottom: 0.4rem;
-  }
-  .sfc-name {
-    font-family: var(--font-display);
-    font-size: 1.8rem;
-    letter-spacing: 0.04em;
-    color: var(--white);
-    line-height: 1.05;
-  }
-  .sfc-desc {
-    font-size: 0.88rem;
-    color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 1.75rem;
-  }
-  .sfc-deliverables { margin-bottom: 1.25rem; }
-  .sfc-deliverables h4 {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.6rem;
-  }
-  .sfc-deliverables p {
-    font-size: 0.82rem;
-    color: rgba(245,242,238,0.65);
-    line-height: 1.65;
-  }
-  .sfc-deliverables ul { list-style: none; }
-  .sfc-deliverables li {
-    font-size: 0.82rem;
-    color: rgba(245,242,238,0.65);
-    padding: 0.3rem 0;
-    display: flex;
-    gap: 0.6rem;
-    align-items: center;
-  }
-  .sfc-deliverables li::before {
-    content: '—';
-    color: var(--accent);
-    font-size: 0.7rem;
-    flex-shrink: 0;
-  }
-  .sfc-cta { margin-top: 2rem; }
-  .sfc-cta a {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .sfc-cta a:hover { color: var(--white); }
-
-  /* ─── Process ─── */
-  .process { background: var(--black); }
-  .process-steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--gray2);
-    margin-top: 4rem;
-  }
-  .process-step {
-    background: var(--black);
-    padding: 3rem 2rem;
-    position: relative;
-    cursor: none;
-    transition: background 0.3s;
-  }
-  .process-step:hover { background: var(--gray); }
-  .process-step-num {
-    font-family: var(--font-display);
-    font-size: 5rem;
-    color: rgba(232,68,10,0.1);
-    line-height: 1;
-    margin-bottom: 1.5rem;
-  }
-  .process-step-name {
-    font-family: var(--font-display);
-    font-size: 1.8rem;
-    letter-spacing: 0.04em;
-    color: var(--white);
-    margin-bottom: 1rem;
-  }
-  .process-step-desc {
-    font-size: 0.83rem;
-    color: var(--muted);
-    line-height: 1.7;
-  }
-  .process-step-arrow {
-    position: absolute;
-    top: 3rem; right: 2rem;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--gray2);
-    letter-spacing: 0.1em;
-  }
-  .process-step:last-child .process-step-arrow { display: none; }
-
-  /* ─── FAQ ─── */
-  .faq { background: var(--gray); }
-  .faq-list { margin-top: 3rem; border-top: 1px solid var(--gray2); }
-  .faq-item {
-    border-bottom: 1px solid var(--gray2);
-    cursor: none;
-  }
-  .faq-question {
-    padding: 1.75rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-  }
-  .faq-question h3 {
-    font-family: var(--font-display);
-    font-size: 1.3rem;
-    letter-spacing: 0.03em;
-    color: var(--white);
-    transition: color 0.2s;
-  }
-  .faq-question:hover h3 { color: var(--accent); }
-  .faq-toggle {
-    font-family: var(--font-mono);
-    font-size: 1.2rem;
-    color: var(--accent);
-    flex-shrink: 0;
-    transition: transform 0.3s;
-    background: none;
-    border: none;
-    cursor: none;
-  }
-  .faq-item.open .faq-toggle { transform: rotate(45deg); }
-  .faq-answer {
-    font-size: 0.88rem;
-    color: var(--muted);
-    line-height: 1.8;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease, padding 0.35s;
-    padding-bottom: 0;
-  }
-  .faq-item.open .faq-answer {
-    max-height: 300px;
-    padding-bottom: 1.75rem;
-  }
-  @media (max-width: 768px) {
-    .services-full-grid { grid-template-columns: 1fr; gap: 1px; }
-  }
-</style>
+<meta name="description" content="All Tectonic services with starting prices: websites, online stores, client portals, AI assistants built with the Claude API, automations, IT support and local growth.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
+<body data-header="dark">
+<div id="site-header"></div>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<main id="main">
+  <section class="page-hero">
+    <div class="grid-bg" aria-hidden="true" style="z-index:-1"></div>
+    <div class="glow" aria-hidden="true" style="right:-30vmax;top:-30vmax;z-index:-1"></div>
+    <div class="container">
+      <p class="eyebrow">Services</p>
+      <h1 class="h-display">Everything your business runs on</h1>
+      <p class="lead">Build it, automate it, keep it running. Pick one service or combine them. Every price below is a starting price, and you get a fixed quote before work begins.</p>
+      <div class="btn-row"><a class="btn btn-primary btn-lg" href="build.html">Build your quote</a><a class="btn btn-outline-light btn-lg" href="pricing.html">See packages</a></div>
+      <div class="stats">
+        <div class="stat"><b>20+</b><span>services</span></div>
+        <div class="stat"><b>1–2 wks</b><span>typical website launch</span></div>
+        <div class="stat"><b>24 hrs</b><span>reply time</span></div>
+        <div class="stat"><b>4</b><span>languages we've shipped</span></div>
+      </div>
+    </div>
+  </section>
 
-<!-- Nav -->
-<nav>
-  <a href="index.html" class="nav-logo">TEC<span>.</span>TONIC</a>
-  <ul class="nav-links">
-    <li><a href="services.html" class="active">Services</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="portfolio.html">Work</a></li>
-    <li><a href="services.html#pricing">Pricing</a></li>
-  </ul>
-  <div style="display:flex; align-items:center; gap:1.25rem;">
-    <a href="https://github.com/waiyanmin99" target="_blank" class="nav-gh">GitHub</a>
-    <a href="contact.html" class="nav-cta">Start a project</a>
-  </div>
-</nav>
+  <nav class="subnav" aria-label="Service categories">
+    <div class="container">
+      <div class="subnav-links">
+        <a href="#build">Build</a><a href="#ai">AI</a><a href="#automate">Automate</a><a href="#it">IT Support</a><a href="#grow">Grow</a><a href="#care">Care plans</a>
+      </div>
+      <a class="btn btn-dark" href="contact.html">Talk to us</a>
+    </div>
+  </nav>
 
-<!-- Page Hero -->
-<section class="page-hero">
-  <div class="hero-bg">
-    <div class="hero-grid"></div>
-    <div class="hero-glow" style="left:-100px; right:auto;"></div>
-  </div>
-  <div class="page-hero-content">
-    <p class="page-hero-eyebrow">// What we do</p>
-    <h1 class="page-hero-title">
-      WE BUILD<br>
-      <span class="outline">DIGITAL</span><br>
-      <span class="red">PRODUCTS</span>
-    </h1>
-    <p class="page-hero-sub">From a simple marketing site to a full-stack platform — we scope it, design it, build it, and ship it.</p>
-  </div>
-</section>
+  <section class="section">
+    <div class="container">
 
-<!-- Ticker -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <span class="ticker-item">Website Design</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Business Portals</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Mobile Apps</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">E-Commerce</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Startup MVPs</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">AI Integration</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Maintenance</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Branding Setup</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Website Design</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Business Portals</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Mobile Apps</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">E-Commerce</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Startup MVPs</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">AI Integration</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Maintenance</span>
-    <span class="ticker-item ticker-dot">✦</span>
-    <span class="ticker-item">Branding Setup</span>
-    <span class="ticker-item ticker-dot">✦</span>
-  </div>
-</div>
-
-<!-- Services Full -->
-<section class="services-full">
-  <p class="section-label">Our offerings</p>
-  <h2 class="section-title">EVERYTHING<br>WE BUILD</h2>
-  <div class="services-full-grid">
-
-    <!-- 01 Website Design & Redesign -->
-    <div class="service-full-card">
-      <div class="sfc-header">
-        <div class="sfc-icon-wrap">🌐</div>
-        <div class="sfc-meta">
-          <p class="sfc-num">01</p>
-          <h3 class="sfc-name">Website Design & Redesign</h3>
+      <!-- BUILD -->
+      <div class="svc-group" id="build">
+        <div class="svc-group-head">
+          <div><p class="eyebrow">Build</p><h2 class="h2">Websites, stores, portals &amp; apps</h2></div>
+          <p class="lead">Custom code, built to load fast and work on every phone. You own the code, the domain and the accounts.</p>
+        </div>
+        <div class="svc-list">
+          <div class="svc"><div><h3>Starter Website</h3><p class="for">Restaurants, salons, contractors, new businesses</p></div><p>Up to 5 custom pages, mobile-ready design, contact form, basic SEO and Google Analytics.</p><div class="svc-price"><b>$1,200</b><span>1–2 weeks</span></div><a class="btn btn-outline" href="websites.html">Details</a></div>
+          <div class="svc"><div><h3>Growth Website</h3><p class="for">Service businesses that want leads and bookings</p></div><p>Up to 10 pages, content you can edit yourself, booking, blog and analytics setup.</p><div class="svc-price"><b>$2,500</b><span>2–3 weeks</span></div><a class="btn btn-outline" href="websites.html">Details</a></div>
+          <div class="svc"><div><h3>Online Store</h3><p class="for">Retail, jewelry, clothing, food, digital products</p></div><p>Product pages, cart and checkout with Stripe or Shopify, inventory and shipping setup.</p><div class="svc-price"><b>$2,000</b><span>2–3 weeks</span></div><a class="btn btn-outline" href="websites.html#store">Details</a></div>
+          <div class="svc"><div><h3>Website Rescue &amp; Redesign</h3><p class="for">Slow, outdated or hard-to-edit sites (Wix, old WordPress)</p></div><p>A modern rebuild that keeps your content and your Google rankings.</p><div class="svc-price"><b>$1,000</b><span>1–2 weeks</span></div><a class="btn btn-outline" href="websites.html#redesign">Details</a></div>
+          <div class="svc"><div><h3>Client Portal <span class="badge">Popular</span></h3><p class="for">Law offices, clinics, nonprofits, agencies</p></div><p>Secure logins, 2–3 user roles, file uploads, status tracking and email alerts.</p><div class="svc-price"><b>$4,000</b><span>2–4 weeks</span></div><a class="btn btn-outline" href="portals.html">Details</a></div>
+          <div class="svc"><div><h3>Operations Portal</h3><p class="for">Teams running on spreadsheets</p></div><p>Admin, staff and client dashboards, payments, approvals and reports in one system.</p><div class="svc-price"><b>$8,000</b><span>4–8 weeks</span></div><a class="btn btn-outline" href="portals.html#operations">Details</a></div>
+          <div class="svc"><div><h3>Startup MVP &amp; Mobile App</h3><p class="for">Founders testing a new idea</p></div><p>The first working version of your product on web or mobile, ready for real users.</p><div class="svc-price"><b>$5,000</b><span>3–6 weeks</span></div><a class="btn btn-outline" href="portals.html#mvp">Details</a></div>
         </div>
       </div>
-      <p class="sfc-desc">Modern websites and redesigns that help businesses look professional, trustworthy, and mobile-friendly.</p>
-      <div class="sfc-deliverables">
-        <h4>What it means</h4>
-        <p>We build new websites or improve existing websites so they look modern, professional, mobile-friendly, and trustworthy.</p>
-      </div>
-      <div class="sfc-deliverables">
-        <h4>Good for</h4>
-        <p>Small businesses, nonprofits, personal brands, service providers, restaurants, salons, contractors, and organizations with outdated websites.</p>
-      </div>
-      <div class="sfc-deliverables">
-        <h4>Deliverables</h4>
-        <ul>
-          <li>Custom website design</li>
-          <li>Mobile-responsive pages</li>
-          <li>Homepage and service pages</li>
-          <li>Contact form setup</li>
-          <li>Basic SEO structure</li>
-          <li>Launch support</li>
-        </ul>
-      </div>
-      <div class="sfc-cta"><a href="contact.html">Start this project →</a></div>
-    </div>
 
-    <!-- 02 Business Portals & Dashboard Systems -->
-    <div class="service-full-card">
-      <div class="sfc-header">
-        <div class="sfc-icon-wrap">⚙️</div>
-        <div class="sfc-meta">
-          <p class="sfc-num">02</p>
-          <h3 class="sfc-name">Business Portals & Dashboard Systems</h3>
+      <!-- AI -->
+      <div class="svc-group" id="ai">
+        <div class="svc-group-head">
+          <div><p class="eyebrow">AI</p><h2 class="h2">AI assistants built with Claude</h2></div>
+          <p class="lead">Built on the Claude API from Anthropic. AI usage is billed to your own account, so you only pay for what you use. Monthly fees cover monitoring and updates.</p>
+        </div>
+        <div class="svc-list">
+          <div class="svc"><div><h3>AI Receptionist <span class="badge">New</span></h3><p class="for">Salons, dentists, restaurants, contractors</p></div><p>Answers messages after hours, books appointments and sends you every lead.</p><div class="svc-price"><b>$1,200</b><span>+ $200/mo</span></div><a class="btn btn-outline" href="ai-solutions.html#receptionist">Details</a></div>
+          <div class="svc"><div><h3>Document Reading <span class="badge">New</span></h3><p class="for">Accountants, law offices, clinics, immigration services</p></div><p>Reads PDFs, invoices, forms and scanned photos and puts the details into a spreadsheet or your portal.</p><div class="svc-price"><b>$1,500</b><span>+ $200/mo</span></div><a class="btn btn-outline" href="ai-solutions.html#documents">Details</a></div>
+          <div class="svc"><div><h3>Website AI Assistant</h3><p class="for">Any business that gets the same questions</p></div><p>A chat assistant trained on your services, prices and FAQs that captures leads 24/7.</p><div class="svc-price"><b>$800</b><span>+ $150/mo</span></div><a class="btn btn-outline" href="ai-solutions.html#assistant">Details</a></div>
+          <div class="svc"><div><h3>Staff Knowledge Assistant</h3><p class="for">Businesses with 10+ employees</p></div><p>Employees ask questions about your handbook, policies and price sheets and get answers with sources.</p><div class="svc-price"><b>$2,000</b><span>+ $250/mo</span></div><a class="btn btn-outline" href="ai-solutions.html#staff">Details</a></div>
+          <div class="svc"><div><h3>Review &amp; Email Replies</h3><p class="for">Restaurants, shops, service businesses</p></div><p>Drafts replies to Google reviews, support emails and messages for you to approve.</p><div class="svc-price"><b>$600</b><span>+ $100/mo</span></div><a class="btn btn-outline" href="ai-solutions.html#replies">Details</a></div>
+          <div class="svc"><div><h3>Content Writing Tool</h3><p class="for">Online stores, real estate, creators</p></div><p>Drafts social posts, product descriptions and blog posts in your brand voice.</p><div class="svc-price"><b>$800</b><span>+ $120/mo</span></div><a class="btn btn-outline" href="ai-solutions.html#content">Details</a></div>
+          <div class="svc"><div><h3>Translation &amp; Localization</h3><p class="for">Immigrant-serving and community businesses</p></div><p>Your website and documents in Burmese, Spanish, Chinese and more. Burmese is checked by a native speaker.</p><div class="svc-price"><b>$500</b><span>per language</span></div><a class="btn btn-outline" href="ai-solutions.html#translation">Details</a></div>
         </div>
       </div>
-      <p class="sfc-desc">Private systems for clients, staff, admins, or members to manage information in one place.</p>
-      <div class="sfc-deliverables">
-        <h4>What it means</h4>
-        <p>We build private login-based systems where clients, staff, admins, or members can manage information in one place.</p>
-      </div>
-      <div class="sfc-deliverables">
-        <h4>Good for</h4>
-        <p>Businesses, nonprofits, service providers, legal support teams, appointment-based teams, and organizations that need tracking systems.</p>
-      </div>
-      <div class="sfc-deliverables">
-        <h4>Deliverables</h4>
-        <ul>
-          <li>Client portal</li>
-          <li>Admin dashboard</li>
-          <li>Staff dashboard</li>
-          <li>Case or status tracking</li>
-          <li>Forms and data storage</li>
-          <li>Role-based user views</li>
-        </ul>
-      </div>
-      <div class="sfc-cta"><a href="contact.html">Start this project →</a></div>
-    </div>
 
-    <!-- 03 Mobile App Development -->
-    <div class="service-full-card">
-      <div class="sfc-header">
-        <div class="sfc-icon-wrap">📱</div>
-        <div class="sfc-meta">
-          <p class="sfc-num">03</p>
-          <h3 class="sfc-name">Mobile App Development</h3>
+      <!-- AUTOMATE -->
+      <div class="svc-group" id="automate">
+        <div class="svc-group-head">
+          <div><p class="eyebrow">Automate</p><h2 class="h2">Stop doing it by hand</h2></div>
+          <p class="lead">Connect the tools you already use so leads, invoices and reports move on their own.</p>
+        </div>
+        <div class="svc-list">
+          <div class="svc"><div><h3>Workflow Automation</h3><p class="for">Anyone copying data between apps</p></div><p>A form that saves to a spreadsheet, texts the owner and sends a welcome email, for example.</p><div class="svc-price"><b>$400</b><span>per workflow</span></div><a class="btn btn-outline" href="ai-solutions.html#automation">Details</a></div>
+          <div class="svc"><div><h3>Weekly AI Summary Report</h3><p class="for">Owners who want the numbers without the dashboards</p></div><p>Sales, bookings or reviews summarized and emailed to you every Monday.</p><div class="svc-price"><b>$300</b><span>+ $100/mo</span></div><a class="btn btn-outline" href="ai-solutions.html#automation">Details</a></div>
+          <div class="svc"><div><h3>Payments &amp; Invoicing</h3><p class="for">Service businesses, memberships, deposits</p></div><p>Stripe checkout, deposits, recurring billing and automatic invoices.</p><div class="svc-price"><b>$300</b><span>one-time</span></div><a class="btn btn-outline" href="ai-solutions.html#automation">Details</a></div>
         </div>
       </div>
-      <p class="sfc-desc">Mobile app MVPs and companion apps that improve the customer or member experience.</p>
-      <div class="sfc-deliverables">
-        <h4>What it means</h4>
-        <p>We build mobile app MVPs and companion apps that help businesses create a better customer or member experience.</p>
-      </div>
-      <div class="sfc-deliverables">
-        <h4>Good for</h4>
-        <p>Startups, service businesses, nonprofits, membership programs, booking services, and customer support systems.</p>
-      </div>
-      <div class="sfc-deliverables">
-        <h4>Deliverables</h4>
-        <ul>
-          <li>iOS/Android app MVP</li>
-          <li>Mobile UI design</li>
-          <li>User login flow</li>
-          <li>Booking or request features</li>
-          <li>Dashboard connection</li>
-          <li>App launch guidance</li>
-        </ul>
-      </div>
-      <div class="sfc-cta"><a href="contact.html">Start this project →</a></div>
-    </div>
 
-    <!-- 04 E-Commerce Stores -->
-    <div class="service-full-card">
-      <div class="sfc-header">
-        <div class="sfc-icon-wrap">🛒</div>
-        <div class="sfc-meta">
-          <p class="sfc-num">04</p>
-          <h3 class="sfc-name">E-Commerce Stores</h3>
+      <!-- IT -->
+      <div class="svc-group" id="it">
+        <div class="svc-group-head">
+          <div><p class="eyebrow">IT Support</p><h2 class="h2">Small-office IT, handled</h2></div>
+          <p class="lead">From help desk experience: accounts, devices and security done the right way.</p>
+        </div>
+        <div class="svc-list">
+          <div class="svc"><div><h3>Office IT Setup</h3><p class="for">New offices and growing teams</p></div><p>Business email (Google Workspace or Microsoft 365), domain, laptops, Wi-Fi, printers and backups.</p><div class="svc-price"><b>$300</b><span>per setup</span></div><a class="btn btn-outline" href="it-support.html#setup">Details</a></div>
+          <div class="svc"><div><h3>Monthly IT Support</h3><p class="for">Offices without an IT person</p></div><p>Remote help desk, account and password resets, new-device setup and updates.</p><div class="svc-price"><b>$150</b><span>per month</span></div><a class="btn btn-outline" href="it-support.html#support">Details</a></div>
+          <div class="svc"><div><h3>Security Check-up</h3><p class="for">Every business that handles customer data</p></div><p>Two-step sign-in, an access review, a password manager and a simple written checklist.</p><div class="svc-price"><b>$300</b><span>one-time</span></div><a class="btn btn-outline" href="it-support.html#security">Details</a></div>
         </div>
       </div>
-      <p class="sfc-desc">Online stores with clean product pages, payments, checkout, and selling tools.</p>
-      <div class="sfc-deliverables">
-        <h4>What it means</h4>
-        <p>We build online stores that make it easier for businesses to sell products or services with a clean shopping and checkout experience.</p>
-      </div>
-      <div class="sfc-deliverables">
-        <h4>Good for</h4>
-        <p>Retail stores, jewelry brands, clothing brands, restaurants, digital products, service packages, and local businesses selling online.</p>
-      </div>
-      <div class="sfc-deliverables">
-        <h4>Deliverables</h4>
-        <ul>
-          <li>Product pages</li>
-          <li>Shopping cart</li>
-          <li>Payment setup</li>
-          <li>Checkout flow</li>
-          <li>Inventory setup</li>
-          <li>Store design and launch support</li>
-        </ul>
-      </div>
-      <div class="sfc-cta"><a href="contact.html">Start this project →</a></div>
-    </div>
 
-    <!-- 05 Startup MVP Development -->
-    <div class="service-full-card">
-      <div class="sfc-header">
-        <div class="sfc-icon-wrap">🚀</div>
-        <div class="sfc-meta">
-          <p class="sfc-num">05</p>
-          <h3 class="sfc-name">Startup MVP Development</h3>
+      <!-- GROW -->
+      <div class="svc-group" id="grow">
+        <div class="svc-group-head">
+          <div><p class="eyebrow">Grow</p><h2 class="h2">Get found, look professional</h2></div>
+          <p class="lead">Smaller add-ons that make a big difference to how customers find and trust you.</p>
+        </div>
+        <div class="svc-list">
+          <div class="svc"><div><h3>Google Business Profile &amp; Local SEO</h3><p class="for">Local businesses</p></div><p>Set up and optimize your profile so you show up on Google Maps and local searches.</p><div class="svc-price"><b>$300</b><span>one-time</span></div><a class="btn btn-outline" href="build.html?pick=none,local-seo">Price it</a></div>
+          <div class="svc"><div><h3>Speed &amp; Accessibility Fixes</h3><p class="for">Existing websites</p></div><p>Faster load times, better mobile layouts and fixes so more people can use your site.</p><div class="svc-price"><b>$400</b><span>one-time</span></div><a class="btn btn-outline" href="build.html?pick=none,speed">Price it</a></div>
+          <div class="svc"><div><h3>Domain, Email &amp; Brand Setup</h3><p class="for">New businesses</p></div><p>Your domain, professional email address, logo files and social profiles set up together.</p><div class="svc-price"><b>$300</b><span>one-time</span></div><a class="btn btn-outline" href="build.html?pick=none,branding">Price it</a></div>
+          <div class="svc"><div><h3>AI Consulting</h3><p class="for">Owners deciding where AI fits</p></div><p>Hands-on sessions to find time-saving uses for AI in your business and set them up.</p><div class="svc-price"><b>$85</b><span>per hour</span></div><a class="btn btn-outline" href="contact.html?service=AI%20consulting">Book</a></div>
         </div>
       </div>
-      <p class="sfc-desc">Fast first versions of digital products so founders can test, launch, and improve.</p>
-      <div class="sfc-deliverables">
-        <h4>What it means</h4>
-        <p>We turn ideas into working first versions so founders can test, launch, learn from users, and improve quickly.</p>
-      </div>
-      <div class="sfc-deliverables">
-        <h4>Good for</h4>
-        <p>Startup founders, student founders, small teams, SaaS ideas, marketplaces, booking platforms, and AI tool ideas.</p>
-      </div>
-      <div class="sfc-deliverables">
-        <h4>Deliverables</h4>
-        <ul>
-          <li>MVP planning</li>
-          <li>Product wireframe</li>
-          <li>Core user flows</li>
-          <li>Web app prototype</li>
-          <li>Database setup</li>
-          <li>Launch-ready first version</li>
-        </ul>
-      </div>
-      <div class="sfc-cta"><a href="contact.html">Start this project →</a></div>
-    </div>
 
-    <!-- 06 AI Integration & Automation -->
-    <div class="service-full-card">
-      <div class="sfc-header">
-        <div class="sfc-icon-wrap">🤖</div>
-        <div class="sfc-meta">
-          <p class="sfc-num">06</p>
-          <h3 class="sfc-name">AI Integration & Automation</h3>
+      <!-- CARE -->
+      <div class="svc-group" id="care">
+        <div class="svc-group-head">
+          <div><p class="eyebrow">Care plans</p><h2 class="h2">We keep it running</h2></div>
+          <p class="lead">Monthly plans with a set number of hours. Unused hours don't roll over. Extra work is $75/hour.</p>
+        </div>
+        <div class="cards">
+          <div class="card"><span class="icon" data-icon="globe"></span><h3>Website care</h3><p>Updates, uptime monitoring, backups and up to 2 hours of edits each month.</p><p class="price-line">$150<span>/mo</span></p></div>
+          <div class="card"><span class="icon" data-icon="spark"></span><h3>Website + AI care</h3><p>Everything in Website care, plus AI assistant tuning and up to 3 hours of edits.</p><p class="price-line">$250<span>/mo</span></p></div>
+          <div class="card"><span class="icon" data-icon="portal"></span><h3>Portal care</h3><p>Monitoring, daily backups, security updates, bug fixes and up to 4 hours of changes.</p><p class="price-line">$400<span>/mo</span></p></div>
         </div>
       </div>
-      <p class="sfc-desc">AI assistants, smart forms, and workflow automation that save time and support customers.</p>
-      <div class="sfc-deliverables">
-        <h4>What it means</h4>
-        <p>We add AI tools and automation to websites, portals, and business workflows to save time and improve customer support.</p>
-      </div>
-      <div class="sfc-deliverables">
-        <h4>Good for</h4>
-        <p>Businesses with repeated questions, nonprofits with intake forms, service providers, support teams, and websites that need smarter user help.</p>
-      </div>
-      <div class="sfc-deliverables">
-        <h4>Deliverables</h4>
-        <ul>
-          <li>AI chatbot</li>
-          <li>FAQ assistant</li>
-          <li>Intake form assistant</li>
-          <li>Document helper</li>
-          <li>Workflow automation</li>
-          <li>AI-powered search or support flow</li>
-        </ul>
-      </div>
-      <div class="sfc-cta"><a href="contact.html">Start this project →</a></div>
-    </div>
 
-    <!-- 07 Website Maintenance & Support -->
-    <div class="service-full-card">
-      <div class="sfc-header">
-        <div class="sfc-icon-wrap">🔧</div>
-        <div class="sfc-meta">
-          <p class="sfc-num">07</p>
-          <h3 class="sfc-name">Website Maintenance & Support</h3>
-        </div>
-      </div>
-      <p class="sfc-desc">Ongoing website updates, bug fixes, small improvements, and monthly support.</p>
-      <div class="sfc-deliverables">
-        <h4>What it means</h4>
-        <p>We provide ongoing support after launch so websites stay updated, clean, secure, and working properly.</p>
-      </div>
-      <div class="sfc-deliverables">
-        <h4>Good for</h4>
-        <p>Business owners who do not want to manage updates themselves, organizations with changing content, and websites that need regular care.</p>
-      </div>
-      <div class="sfc-deliverables">
-        <h4>Deliverables</h4>
-        <ul>
-          <li>Website updates</li>
-          <li>Bug fixes</li>
-          <li>Small design changes</li>
-          <li>Content updates</li>
-          <li>Performance checks</li>
-          <li>Monthly support</li>
-        </ul>
-      </div>
-      <div class="sfc-cta"><a href="contact.html">Start this project →</a></div>
     </div>
+  </section>
 
-    <!-- 08 Branding & Digital Setup -->
-    <div class="service-full-card">
-      <div class="sfc-header">
-        <div class="sfc-icon-wrap">🎨</div>
-        <div class="sfc-meta">
-          <p class="sfc-num">08</p>
-          <h3 class="sfc-name">Branding & Digital Setup</h3>
-        </div>
-      </div>
-      <p class="sfc-desc">Basic digital identity setup like domain, email, Google profile, colors, copy, and social links.</p>
-      <div class="sfc-deliverables">
-        <h4>What it means</h4>
-        <p>We help new or growing businesses look professional online by setting up the basic digital identity and tools they need.</p>
-      </div>
-      <div class="sfc-deliverables">
-        <h4>Good for</h4>
-        <p>New businesses, small business owners, personal brands, nonprofits, local service providers, and anyone starting from zero.</p>
-      </div>
-      <div class="sfc-deliverables">
-        <h4>Deliverables</h4>
-        <ul>
-          <li>Logo cleanup</li>
-          <li>Color palette</li>
-          <li>Domain setup</li>
-          <li>Business email setup</li>
-          <li>Google Business Profile guidance</li>
-          <li>Website copy support</li>
-          <li>Social media link setup</li>
-        </ul>
-      </div>
-      <div class="sfc-cta"><a href="contact.html">Start this project →</a></div>
+  <section class="cta-band">
+    <div class="glow" aria-hidden="true" style="left:50%;top:50%;transform:translate(-50%,-50%);z-index:-1;opacity:.7"></div>
+    <div class="container center">
+      <h2 class="h1">Not sure what you need?</h2>
+      <p class="lead">Tell us about your business. We'll recommend the smallest setup that does the job.</p>
+      <div class="btn-row"><a class="btn btn-primary btn-lg" href="contact.html">Book a free call</a><a class="btn btn-outline-light btn-lg" href="build.html">Build your quote</a></div>
     </div>
+  </section>
+</main>
 
-  </div>
-</section>
-
-<!-- Process -->
-<section class="process">
-  <p class="section-label">How we work</p>
-  <h2 class="section-title">THE<br>PROCESS</h2>
-  <div class="process-steps">
-    <div class="process-step">
-      <p class="process-step-num">01</p>
-      <span class="process-step-arrow">→</span>
-      <h3 class="process-step-name">Discover</h3>
-      <p class="process-step-desc">We start with a call to understand your business, your goals, your users, and your timeline. No cookie-cutter proposals — we listen first.</p>
-    </div>
-    <div class="process-step">
-      <p class="process-step-num">02</p>
-      <span class="process-step-arrow">→</span>
-      <h3 class="process-step-name">Design</h3>
-      <p class="process-step-desc">We create wireframes and high-fidelity visual designs for your approval. You see exactly what you're getting before a single line of code is written.</p>
-    </div>
-    <div class="process-step">
-      <p class="process-step-num">03</p>
-      <span class="process-step-arrow">→</span>
-      <h3 class="process-step-name">Develop</h3>
-      <p class="process-step-desc">Clean, tested code built to your approved designs. You get progress updates throughout, and we don't disappear for weeks at a time.</p>
-    </div>
-    <div class="process-step">
-      <p class="process-step-num">04</p>
-      <h3 class="process-step-name">Deploy</h3>
-      <p class="process-step-desc">We launch, run final tests, set up monitoring, and hand over your fully live product. Support doesn't stop at delivery.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Pricing -->
-<section class="pricing" id="pricing">
-  <div class="pricing-header">
-    <p class="section-label">Investment</p>
-    <h2 class="section-title">SIMPLE<br>PRICING</h2>
-  </div>
-  <div class="pricing-grid">
-    <div class="pricing-card">
-      <span class="pricing-badge">Starter</span>
-      <h3 class="pricing-name">Launch</h3>
-      <p class="pricing-price">$499<span> / project</span></p>
-      <p class="pricing-sub">Perfect for small businesses getting online</p>
-      <div class="pricing-divider"></div>
-      <ul class="pricing-features">
-        <li><span class="check">✓</span> Custom 5-page website</li>
-        <li><span class="check">✓</span> Mobile responsive design</li>
-        <li><span class="check">✓</span> Contact form integration</li>
-        <li><span class="check">✓</span> Basic SEO setup</li>
-        <li><span class="check">✓</span> 30 days of support</li>
-      </ul>
-      <a href="contact.html" class="btn-pricing">Get started →</a>
-    </div>
-    <div class="pricing-card featured">
-      <span class="pricing-badge">Most Popular</span>
-      <h3 class="pricing-name">Growth</h3>
-      <p class="pricing-price">$999<span> / project</span></p>
-      <p class="pricing-sub">For businesses ready to scale digitally</p>
-      <div class="pricing-divider"></div>
-      <ul class="pricing-features">
-        <li><span class="check">✓</span> Custom 10-page website or web app</li>
-        <li><span class="check">✓</span> E-commerce or booking system</li>
-        <li><span class="check">✓</span> CMS integration</li>
-        <li><span class="check">✓</span> Advanced SEO & analytics</li>
-        <li><span class="check">✓</span> 60 days of support</li>
-        <li><span class="check">✓</span> Performance optimization</li>
-      </ul>
-      <a href="contact.html" class="btn-pricing">Get started →</a>
-    </div>
-    <div class="pricing-card">
-      <span class="pricing-badge">Enterprise</span>
-      <h3 class="pricing-name">Tectonic</h3>
-      <p class="pricing-price">Custom<span> pricing</span></p>
-      <p class="pricing-sub">Full-scale apps, platforms & startup MVPs</p>
-      <div class="pricing-divider"></div>
-      <ul class="pricing-features">
-        <li><span class="check">✓</span> Full-stack web or mobile app</li>
-        <li><span class="check">✓</span> Custom API & database design</li>
-        <li><span class="check">✓</span> User authentication & dashboards</li>
-        <li><span class="check">✓</span> Scalable cloud infrastructure</li>
-        <li><span class="check">✓</span> Ongoing maintenance available</li>
-        <li><span class="check">✓</span> Dedicated project management</li>
-      </ul>
-      <a href="contact.html" class="btn-pricing">Let's talk →</a>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="faq">
-  <p class="section-label">Common questions</p>
-  <h2 class="section-title">FAQ</h2>
-  <div class="faq-list">
-    <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">
-        <h3>How long does a typical project take?</h3>
-        <button class="faq-toggle">+</button>
-      </div>
-      <p class="faq-answer">Most website projects take 1–2 weeks from kickoff to launch. Web apps and mobile apps typically take 3–8 weeks depending on complexity. We'll give you a specific timeline after our discovery call.</p>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">
-        <h3>What's the process for getting started?</h3>
-        <button class="faq-toggle">+</button>
-      </div>
-      <p class="faq-answer">Simple — fill out the contact form or email me directly. We'll schedule a short discovery call, I'll send over a proposal and timeline, and once you approve we get to work.</p>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">
-        <h3>Do you offer ongoing maintenance and support?</h3>
-        <button class="faq-toggle">+</button>
-      </div>
-      <p class="faq-answer">Yes. All projects include post-launch support (30 or 60 days depending on the plan). Beyond that, we offer monthly maintenance retainers for content updates, security patches, and new features.</p>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">
-        <h3>Can I make changes during the project?</h3>
-        <button class="faq-toggle">+</button>
-      </div>
-      <p class="faq-answer">Minor adjustments are part of the process and expected. Major scope changes may affect timeline and budget — we'll always communicate clearly before any changes take effect.</p>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">
-        <h3>Do I own everything after the project is done?</h3>
-        <button class="faq-toggle">+</button>
-      </div>
-      <p class="faq-answer">100%. Once the project is paid in full, you own all code, designs, and assets outright. No licensing fees, no lock-in.</p>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<div class="cta-section">
-  <div>
-    <h2 class="cta-title">NOT SURE WHAT<br>YOU NEED?</h2>
-    <p class="cta-sub">Let's hop on a call. No pressure, no pitch — just a conversation about your project.</p>
-  </div>
-  <a href="contact.html" class="btn-white">Get in touch →</a>
-</div>
-
-<!-- Footer -->
-<footer>
-  <div class="footer-main">
-    <div class="footer-brand">
-      <a href="index.html" class="footer-logo">TEC<span>.</span>TONIC</a>
-      <p class="footer-tagline">Burmese-American developer bridging cultures through technology.</p>
-      <div class="footer-social">
-        <a href="https://www.linkedin.com/in/waiyanmin999" target="_blank" aria-label="LinkedIn">LinkedIn</a>
-        <a href="#" aria-label="Facebook">Facebook</a>
-        <a href="#" aria-label="Instagram">Instagram</a>
-        <a href="https://github.com/waiyanmin99" target="_blank" aria-label="GitHub">GitHub</a>
-      </div>
-    </div>
-    <div class="footer-nav-group">
-      <div class="footer-nav-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="about.html">About</a></li>
-          <li><a href="portfolio.html">Work</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-nav-col">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="services.html">Website Design</a></li>
-          <li><a href="services.html">Business Portals</a></li>
-          <li><a href="services.html">Mobile Apps</a></li>
-          <li><a href="services.html">E-Commerce</a></li>
-          <li><a href="services.html">Startup MVPs</a></li>
-          <li><a href="services.html">AI Integration</a></li>
-          <li><a href="services.html">Maintenance</a></li>
-          <li><a href="services.html">Branding Setup</a></li>
-        </ul>
-      </div>
-      <div class="footer-nav-col">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="mailto:waiyanmin.lane@gmail.com">Email us</a></li>
-          <li><a href="tel:+16692137967">Call us</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2026 Tectonic. All rights reserved.</span>
-    <div class="footer-legal">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-    </div>
-  </div>
-</footer>
-
-<script>
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-  });
-  function animRing() {
-    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(animRing);
-  }
-  animRing();
-  document.querySelectorAll('a, button, .service-full-card, .pricing-card, .process-step, .faq-item').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.width = '20px'; cursor.style.height = '20px';
-      ring.style.width = '52px'; ring.style.height = '52px';
-      ring.style.borderColor = 'rgba(232,68,10,0.8)';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.width = '12px'; cursor.style.height = '12px';
-      ring.style.width = '36px'; ring.style.height = '36px';
-      ring.style.borderColor = 'rgba(232,68,10,0.5)';
-    });
-  });
-
-  function toggleFaq(el) {
-    const item = el.parentElement;
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  }
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.service-full-card, .pricing-card, .process-step').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(24px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, background 0.3s';
-    observer.observe(el);
-  });
-</script>
+<div id="site-footer"></div>
+<script src="assets/site.js"></script>
 </body>
 </html>
