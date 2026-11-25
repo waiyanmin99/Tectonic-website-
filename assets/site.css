@@ -812,30 +812,21 @@ td .muted { font-size: 13px; }
    Motion: page transitions, entrance, scroll reveals
    ========================================================= */
 
-/* 1. Page-to-page transitions (Chrome, Edge, Safari 18+). The header stays put. */
-@view-transition { navigation: auto; }
-.site-header { view-transition-name: site-header; }
-::view-transition-group(site-header) { animation: none; }
-::view-transition-old(root) { animation: vt-out 0.22s ease both; }
-::view-transition-new(root) { animation: vt-in 0.38s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-@keyframes vt-out { to { opacity: 0; } }
-@keyframes vt-in { from { opacity: 0; } }
-
-/* 2. Entrance: the top of each page rises in, one piece after another */
-@keyframes enter-up { from { opacity: 0; transform: translate3d(0, 22px, 0); } to { opacity: 1; transform: none; } }
-.page-hero .container > *,
-.page-hero .hero-split > div:first-child > *,
-.panel:first-of-type .panel-copy > *,
-.panel:first-of-type .panel-actions,
-.notfound > div > * {
-  animation: enter-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+/* 1. Page change: the new page fades in and rises 14px, while a thin
+   orange line sweeps across the top like a loading bar. */
+@keyframes page-in { from { opacity: 0; transform: translate3d(0, 14px, 0); } to { opacity: 1; transform: none; } }
+#main { animation: page-in 0.6s cubic-bezier(0.32, 0.72, 0, 1) backwards; }
+@keyframes page-rule {
+  0% { transform: scaleX(0); opacity: 1; }
+  70% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
 }
-.page-hero .container > :nth-child(2), .page-hero .hero-split > div:first-child > :nth-child(2), .panel-copy > :nth-child(2), .notfound > div > :nth-child(2) { animation-delay: 0.08s; }
-.page-hero .container > :nth-child(3), .page-hero .hero-split > div:first-child > :nth-child(3), .panel-copy > :nth-child(3), .notfound > div > :nth-child(3) { animation-delay: 0.16s; }
-.page-hero .container > :nth-child(4), .page-hero .hero-split > div:first-child > :nth-child(4), .notfound > div > :nth-child(4) { animation-delay: 0.24s; }
-.page-hero .container > :nth-child(n+5), .page-hero .hero-split > div:first-child > :nth-child(n+5), .panel:first-of-type .panel-actions { animation-delay: 0.32s; }
-.page-hero .hero-split > .hero-art { animation: enter-up 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s both; }
-.page-hero .hero-split { animation: none; }
+.page-rule {
+  position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 200; pointer-events: none;
+  background: var(--accent); box-shadow: 0 0 10px rgba(232, 68, 10, 0.6);
+  transform-origin: left; transform: scaleX(0);
+  animation: page-rule 0.8s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
 
 /* 3. Scroll reveals: see .reveal above, staggered by --d (set in site.js) */
 
@@ -849,6 +840,6 @@ td .muted { font-size: 13px; }
 .l-card:hover .l-art .art svg { transform: scale(1.08) rotate(-3deg); }
 
 @media (prefers-reduced-motion: reduce) {
-  @view-transition { navigation: none; }
   .reveal { opacity: 1; transform: none; }
+  .page-rule { display: none; }
 }

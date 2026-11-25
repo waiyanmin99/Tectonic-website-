@@ -176,6 +176,13 @@
     );
   }
 
+  /* ---------- Page-change line (orange bar across the top) ---------- */
+  var rule = document.createElement("div");
+  rule.className = "page-rule";
+  rule.setAttribute("aria-hidden", "true");
+  document.body.insertBefore(rule, document.body.firstChild);
+  rule.addEventListener("animationend", function () { rule.remove(); });
+
   /* ---------- Mount header/footer ---------- */
   var headerSlot = document.getElementById("site-header");
   if (headerSlot) headerSlot.outerHTML = headerHTML();
