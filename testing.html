@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Resource Hub | MYTTA Foundation</title>
+<!-- Updated to match MYTTA public Wix site screenshots: blue branding, red CTA, white cards, soft gray background. -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Myanmar:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --mytta-bg: #F5F7FB;
+    --mytta-soft: #EEF5FF;
+    --mytta-card: #FFFFFF;
+    --mytta-ink: #1D2A3B;
+    --mytta-text: #24364A;
+    --mytta-muted: #5D6B7A;
+    --mytta-line: #D8E2EF;
+    --mytta-blue: #0B6FD3;
+    --mytta-blue-soft: #DDEBFF;
+    --mytta-red: #E51F2A;
+    --mytta-red-dark: #B91520;
+    --mytta-green: #1F8A5B;
+    --mytta-shadow: 0 18px 45px rgba(10, 77, 160, .12);
+    --mytta-shadow-sm: 0 10px 24px rgba(10, 77, 160, .10);
+    --font-main: Inter, Arial, Helvetica, sans-serif;
+    --font-mm: "Noto Sans Myanmar", Inter, Arial, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-main);
+    background: var(--mytta-bg);
+    color: var(--mytta-ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .mytta-resource-hub {
+    position: relative;
+    overflow: hidden;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 58px 28px 70px;
+  }
+
+  .mytta-resource-hub::before,
+  .mytta-resource-hub::after {
+    content: "";
+    position: absolute;
+    border-radius: 999px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .mytta-resource-hub::before {
+    width: 340px;
+    height: 340px;
+    right: -150px;
+    top: 20px;
+    background: radial-gradient(circle, rgba(11,111,211,.16), rgba(217,164,65,0) 68%);
+  }
+
+  .mytta-resource-hub::after {
+    width: 280px;
+    height: 280px;
+    left: -140px;
+    bottom: 40px;
+    background: radial-gradient(circle, rgba(201,118,42,.13), rgba(201,118,42,0) 68%);
+  }
+
+  .hub-inner { position: relative; z-index: 1; }
+
+  /* ---------- Hero ---------- */
+  .hub-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+    gap: 32px;
+    align-items: stretch;
+    margin-bottom: 34px;
+  }
+
+  .hero-copy {
+    padding: 36px;
+    border: 1px solid var(--mytta-line);
+    border-radius: 26px;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,.94), rgba(238,245,255,.94)),
+      radial-gradient(circle at 85% 12%, rgba(11,111,211,.20), transparent 38%);
+    box-shadow: var(--mytta-shadow);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 13px;
+    border: 1px solid var(--mytta-line);
+    border-radius: 999px;
+    background: rgba(255,255,255,.78);
+    color: var(--mytta-red-dark);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .eyebrow-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--mytta-blue);
+    box-shadow: 0 0 0 5px rgba(11,111,211,.16);
+  }
+
+  .hero-copy h1 {
+    max-width: 720px;
+    font-size: clamp(34px, 5vw, 58px);
+    line-height: 1.03;
+    letter-spacing: -.045em;
+    color: var(--mytta-ink);
+    margin-bottom: 16px;
+  }
+
+  .hero-copy h1 span { color: var(--mytta-red); }
+
+  .hero-copy p {
+    max-width: 660px;
+    color: var(--mytta-text);
+    font-size: 17px;
+    margin-bottom: 22px;
+  }
+
+  .mm-line {
+    font-family: var(--font-mm);
+    color: var(--mytta-red-dark);
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .hero-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 11px 18px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 800;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+  }
+
+  .hero-btn.primary {
+    background: var(--mytta-red);
+    color: #fff;
+    box-shadow: 0 12px 22px rgba(229,31,42,.24);
+  }
+
+  .hero-btn.secondary {
+    background: #fff;
+    color: var(--mytta-ink);
+    border-color: var(--mytta-line);
+  }
+
+  .hero-btn:hover { transform: translateY(-2px); }
+  .hero-btn.primary:hover { background: var(--mytta-red-dark); }
+  .hero-btn.secondary:hover { border-color: var(--mytta-blue); }
+
+  .hero-side {
+    border-radius: 26px;
+    padding: 28px;
+    background: #fff;
+    border: 1px solid var(--mytta-line);
+    box-shadow: var(--mytta-shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+  }
+
+  .side-icon {
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--mytta-blue-soft), #f2f7ff);
+    color: var(--mytta-red-dark);
+    font-size: 30px;
+    margin-bottom: 22px;
+  }
+
+  .hero-side h3 {
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -.02em;
+    margin-bottom: 10px;
+  }
+
+  .hero-side p {
+    color: var(--mytta-muted);
+    font-size: 14px;
+  }
+
+  .quick-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .quick-stat {
+    padding: 14px;
+    border-radius: 18px;
+    background: var(--mytta-soft);
+    border: 1px solid rgba(216,226,239,.85);
+  }
+
+  .quick-stat strong {
+    display: block;
+    color: var(--mytta-ink);
+    font-size: 19px;
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+
+  .quick-stat span {
+    color: var(--mytta-muted);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* ---------- Search and filters ---------- */
+  .toolbar {
+    padding: 18px;
+    border-radius: 24px;
+    background: #fff;
+    border: 1px solid var(--mytta-line);
+    box-shadow: var(--mytta-shadow-sm);
+    margin-bottom: 32px;
+  }
+
+  .search-bar {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto 15px;
+  }
+
+  .search-bar svg {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--mytta-red);
+  }
+
+  .search-bar input {
+    width: 100%;
+    min-height: 50px;
+    padding: 14px 18px 14px 48px;
+    background: var(--mytta-bg);
+    border: 1px solid var(--mytta-line);
+    border-radius: 999px;
+    font-family: var(--font-main);
+    font-size: 15px;
+    color: var(--mytta-ink);
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+
+  .search-bar input::placeholder { color: var(--mytta-muted); }
+
+  .search-bar input:focus {
+    background: #fff;
+    border-color: var(--mytta-blue);
+    box-shadow: 0 0 0 5px rgba(11,111,211,.16);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    justify-content: center;
+  }
+
+  .chip {
+    padding: 9px 15px;
+    background: var(--mytta-bg);
+    border: 1px solid var(--mytta-line);
+    color: var(--mytta-text);
+    border-radius: 999px;
+    font-family: var(--font-main);
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all .2s ease;
+  }
+
+  .chip:hover {
+    border-color: var(--mytta-blue);
+    color: var(--mytta-red-dark);
+    transform: translateY(-1px);
+  }
+
+  .chip.active {
+    background: var(--mytta-red);
+    border-color: var(--mytta-red);
+    color: #fff;
+    box-shadow: 0 10px 20px rgba(11,111,211,.18);
+  }
+
+  /* ---------- Categories ---------- */
+  .category-block { margin-bottom: 34px; }
+
+  .category-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--mytta-ink);
+    margin: 0 0 15px;
+    font-size: 23px;
+    letter-spacing: -.025em;
+  }
+
+  .category-title .icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--mytta-blue-soft), #f3f8ff);
+    border: 1px solid rgba(216,226,239,.85);
+    font-size: 19px;
+  }
+
+  .form-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .form-item {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 16px;
+    padding: 18px;
+    background: var(--mytta-card);
+    border: 1px solid var(--mytta-line);
+    border-radius: 22px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+
+  .form-item::after {
+    content: "";
+    position: absolute;
+    inset: auto -45px -55px auto;
+    width: 130px;
+    height: 130px;
+    border-radius: 999px;
+    background: rgba(11,111,211,.09);
+    pointer-events: none;
+  }
+
+  .form-item:hover {
+    transform: translateY(-3px);
+    border-color: rgba(11,111,211,.55);
+    box-shadow: var(--mytta-shadow-sm);
+  }
+
+  .form-badge {
+    position: relative;
+    z-index: 1;
+    width: 68px;
+    height: 68px;
+    display: grid;
+    place-items: center;
+    align-self: start;
+    border-radius: 19px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--mytta-blue-soft), #f3f8ff);
+    border: 1px solid rgba(11,111,211,.28);
+  }
+
+  .form-badge .num {
+    color: var(--mytta-red-dark);
+    font-weight: 900;
+    font-size: 13px;
+    line-height: 1.1;
+  }
+
+  .form-badge .label {
+    font-size: 9px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--mytta-muted);
+    margin-top: 3px;
+    font-weight: 800;
+  }
+
+  .form-info {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+  }
+
+  .form-info h4 {
+    color: var(--mytta-ink);
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 1.32;
+    letter-spacing: -.015em;
+    margin-bottom: 6px;
+  }
+
+  .form-info p {
+    color: var(--mytta-muted);
+    font-size: 13px;
+    line-height: 1.55;
+    margin-bottom: 14px;
+  }
+
+  .form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 38px;
+    padding: 9px 13px;
+    border-radius: 999px;
+    font-family: var(--font-main);
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all .2s ease;
+    background: #fff;
+    white-space: nowrap;
+  }
+
+  .btn svg { width: 14px; height: 14px; }
+
+  .btn-secondary {
+    border-color: var(--mytta-line);
+    color: var(--mytta-ink);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--mytta-blue);
+    background: var(--mytta-soft);
+  }
+
+  .btn-primary {
+    background: var(--mytta-red);
+    color: #fff;
+    border-color: var(--mytta-red);
+  }
+
+  .btn-primary:hover {
+    background: var(--mytta-red-dark);
+    border-color: var(--mytta-red-dark);
+  }
+
+  .btn-primary.downloading { opacity: .72; cursor: wait; }
+  .btn-primary.success { background: var(--mytta-green); border-color: var(--mytta-green); }
+
+  .notice {
+    margin-top: 34px;
+    padding: 18px 20px;
+    border-radius: 20px;
+    background: #fff;
+    border: 1px solid var(--mytta-line);
+    color: var(--mytta-muted);
+    font-size: 13px;
+  }
+
+  .notice strong { color: var(--mytta-ink); }
+
+  .empty {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--mytta-muted);
+    background: #fff;
+    border: 1px solid var(--mytta-line);
+    border-radius: 22px;
+  }
+
+  .empty h4 {
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--mytta-ink);
+    margin-bottom: 6px;
+  }
+
+  .hidden { display: none !important; }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--mytta-ink);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 12px 32px rgba(0,0,0,.25);
+    transition: transform .35s cubic-bezier(.2,.8,.2,1);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 90vw;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast svg { width: 14px; height: 14px; color: var(--mytta-blue); flex-shrink: 0; }
+
+
+  /* MYTTA public site match: blue headings/active states + red legal-advisor CTA */
+  .hero-copy h1 span, .category-title, .form-info h4, .btn-secondary { color: var(--mytta-blue); }
+  .eyebrow { color: var(--mytta-blue); }
+  .chip.active { background: var(--mytta-blue); border-color: var(--mytta-blue); box-shadow: 0 10px 20px rgba(11,111,211,.18); }
+  .chip:hover, .btn-secondary:hover { border-color: var(--mytta-blue); color: var(--mytta-blue); }
+  .search-bar svg, .form-badge .num { color: var(--mytta-blue); }
+  .side-icon, .category-title .icon, .form-badge { color: var(--mytta-blue); }
+  .hero-btn.primary, .btn-primary { background: var(--mytta-red); border-color: var(--mytta-red); }
+  .hero-btn.primary:hover, .btn-primary:hover { background: var(--mytta-red-dark); border-color: var(--mytta-red-dark); }
+
+  @media (max-width: 860px) {
+    .hub-hero { grid-template-columns: 1fr; }
+    .form-list { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .mytta-resource-hub { padding: 38px 16px 52px; }
+    .hero-copy, .hero-side, .toolbar { border-radius: 22px; }
+    .hero-copy { padding: 28px 20px; }
+    .hero-copy h1 { font-size: 36px; }
+    .hero-copy p { font-size: 15px; }
+    .quick-stats { grid-template-columns: 1fr; }
+    .form-item { grid-template-columns: 56px 1fr; gap: 13px; padding: 15px; border-radius: 19px; }
+    .form-badge { width: 56px; height: 56px; border-radius: 16px; }
+    .form-badge .num { font-size: 11px; }
+    .form-actions { grid-column: 1 / -1; }
+    .btn { flex: 1; }
+    .chip { font-size: 12px; padding: 8px 12px; }
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<section class="mytta-resource-hub">
+  <div class="hub-inner">
+    <div class="hub-hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> MYTTA Foundation</div>
+        <h1>Resource <span>Hub</span></h1>
+        <p>Find commonly used immigration forms and preparation resources in one place. Browse by MYTTA service area, view official PDFs, or download copies for preparation.</p>
+        <div class="mm-line">မေတ္တာဖောင်ဒေးရှင်းမှ လူဝင်မှုကြီးကြပ်ရေးဆိုင်ရာ form များကို လွယ်ကူစွာရှာဖွေနိုင်ရန် စုစည်းထားပါသည်။</div>
+        <div class="hero-actions">
+          <a class="hero-btn primary" href="#forms-content">Browse Resources</a>
+          <a class="hero-btn secondary" href="https://www.myttafoundation.com/contact" target="_blank" rel="noopener">Contact A Legal Advisor</a>
+        </div>
+      </div>
+
+      <aside class="hero-side" aria-label="Resource hub summary">
+        <div>
+          <div class="side-icon">📚</div>
+          <h3>Clear resources for your immigration journey.</h3>
+          <p>Organized around the same service areas MYTTA supports, including asylum, family petitions, green card, work permits, humanitarian relief, and citizenship.</p>
+        </div>
+        <div class="quick-stats">
+          <div class="quick-stat"><strong>7</strong><span>Categories</span></div>
+          <div class="quick-stat"><strong>25+</strong><span>Forms &amp; guides</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="toolbar">
+      <div class="search-bar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" id="search" placeholder="Search by form number or topic, like I-485, asylum, work permit…" />
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div id="forms-content"></div>
+
+    <div class="notice">
+      <strong>Important:</strong> These links are provided for general information and preparation. Immigration forms and fees can change, so always confirm details on the official USCIS website or speak with a qualified legal professional before filing.
+    </div>
+  </div>
+</section>
+
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+    <polyline points="20 6 9 17 4 12"/>
+  </svg>
+  <span id="toast-msg">Download started</span>
+</div>
+
+<script>
+  /* ============================================================
+     FORMS — edit URLs/titles as needed.
+     Default URLs point to USCIS. To force instant download,
+     host PDFs on Wix and replace the `url` field.
+  ============================================================ */
+  const CATEGORIES = [
+    {
+      id: "asylum", icon: "🛡️", name: "Asylum & Refugee",
+      forms: [
+        { num: "I-589", title: "Application for Asylum and Withholding of Removal", desc: "For individuals seeking protection in the U.S.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-589.pdf", filename: "I-589.pdf" },
+        { num: "I-589 Instr.", title: "Instructions for Form I-589", desc: "Step-by-step guide for completing the asylum application.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-589instr.pdf", filename: "I-589-Instructions.pdf" },
+        { num: "I-730", title: "Refugee/Asylee Relative Petition", desc: "Bring qualifying spouse and children to the U.S. after status is granted.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-730.pdf", filename: "I-730.pdf" }
+      ]
+    },
+    {
+      id: "employment", icon: "💼", name: "Employment Authorization",
+      forms: [
+        { num: "I-765", title: "Application for Employment Authorization", desc: "Apply for an Employment Authorization Document (EAD / work permit).", url: "https://www.uscis.gov/sites/default/files/document/forms/i-765.pdf", filename: "I-765.pdf" },
+        { num: "I-765 Instr.", title: "Instructions for Form I-765", desc: "Eligibility categories and required documentation.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-765instr.pdf", filename: "I-765-Instructions.pdf" },
+        { num: "I-9", title: "Employment Eligibility Verification", desc: "Required by employers to verify eligibility of new hires.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-9.pdf", filename: "I-9.pdf" }
+      ]
+    },
+    {
+      id: "family", icon: "👨‍👩‍👧", name: "Family-Based Immigration",
+      forms: [
+        { num: "I-130", title: "Petition for Alien Relative", desc: "U.S. citizens and LPRs use this to petition for family members.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-130.pdf", filename: "I-130.pdf" },
+        { num: "I-130A", title: "Supplemental Information for Spouse Beneficiary", desc: "Additional information when filing I-130 for a spouse.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-130a.pdf", filename: "I-130A.pdf" },
+        { num: "I-129F", title: "Petition for Alien Fiancé(e)", desc: "Bring a fiancé(e) to the U.S. to marry a U.S. citizen (K-1 visa).", url: "https://www.uscis.gov/sites/default/files/document/forms/i-129f.pdf", filename: "I-129F.pdf" }
+      ]
+    },
+    {
+      id: "green-card", icon: "🪪", name: "Green Card",
+      forms: [
+        { num: "I-485", title: "Application to Register Permanent Residence or Adjust Status", desc: "Apply for a Green Card while in the United States.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-485.pdf", filename: "I-485.pdf" },
+        { num: "I-864", title: "Affidavit of Support", desc: "Required from financial sponsors of family-based immigrants.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-864.pdf", filename: "I-864.pdf" },
+        { num: "I-693", title: "Report of Medical Examination", desc: "Medical exam — must be completed by a USCIS-designated civil surgeon.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-693.pdf", filename: "I-693.pdf" },
+        { num: "I-90", title: "Application to Replace Permanent Resident Card", desc: "Replace a lost, stolen, damaged, or expired Green Card.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-90.pdf", filename: "I-90.pdf" },
+        { num: "I-751", title: "Petition to Remove Conditions on Residence", desc: "For conditional permanent residents to become full Green Card holders.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-751.pdf", filename: "I-751.pdf" }
+      ]
+    },
+    {
+      id: "humanitarian", icon: "❤️", name: "VAWA & U Visa / Humanitarian Relief",
+      forms: [
+        { num: "I-360", title: "Petition for VAWA / Special Immigrant", desc: "VAWA self-petition for abused spouses, children, and parents.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-360.pdf", filename: "I-360.pdf" },
+        { num: "I-918", title: "Petition for U Nonimmigrant Status", desc: "For victims of qualifying crimes who have helped law enforcement.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-918.pdf", filename: "I-918.pdf" },
+        { num: "I-918 B", title: "U Visa Supplement B — Law Enforcement Certification", desc: "Required certification confirming victim cooperation.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-918supb.pdf", filename: "I-918-Supplement-B.pdf" },
+        { num: "I-914", title: "Application for T Nonimmigrant Status", desc: "For victims of severe forms of human trafficking.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-914.pdf", filename: "I-914.pdf" }
+      ]
+    },
+    {
+      id: "naturalization", icon: "🌟", name: "Naturalization & Citizenship",
+      forms: [
+        { num: "N-400", title: "Application for Naturalization", desc: "Apply to become a naturalized U.S. citizen.", url: "https://www.uscis.gov/sites/default/files/document/forms/n-400.pdf", filename: "N-400.pdf" },
+        { num: "N-600", title: "Application for Certificate of Citizenship", desc: "Document U.S. citizenship acquired through a U.S. citizen parent.", url: "https://www.uscis.gov/sites/default/files/document/forms/n-600.pdf", filename: "N-600.pdf" }
+      ]
+    },
+    {
+      id: "other", icon: "📄", name: "Travel & Other Documents",
+      forms: [
+        { num: "I-131", title: "Application for Travel Document", desc: "Advance parole, refugee travel document, or re-entry permit.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-131.pdf", filename: "I-131.pdf" },
+        { num: "I-821", title: "Application for Temporary Protected Status (TPS)", desc: "Apply for or re-register for Temporary Protected Status.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-821.pdf", filename: "I-821.pdf" },
+        { num: "AR-11", title: "Change of Address", desc: "Notify USCIS of an address change — required within 10 days of moving.", url: "https://www.uscis.gov/sites/default/files/document/forms/ar-11.pdf", filename: "AR-11.pdf" },
+        { num: "G-28", title: "Notice of Entry of Appearance as Attorney", desc: "Designate an attorney or representative to act on your behalf.", url: "https://www.uscis.gov/sites/default/files/document/forms/g-28.pdf", filename: "G-28.pdf" },
+        { num: "I-912", title: "Request for Fee Waiver", desc: "Request waiver of USCIS filing fees due to financial hardship.", url: "https://www.uscis.gov/sites/default/files/document/forms/i-912.pdf", filename: "I-912.pdf" }
+      ]
+    }
+  ];
+
+  const $  = (s) => document.querySelector(s);
+  const $$ = (s) => document.querySelectorAll(s);
+
+  function renderChips() {
+    $("#chips").innerHTML = `
+      <button class="chip active" data-cat="all">All Forms</button>
+      ${CATEGORIES.map(c => `<button class="chip" data-cat="${c.id}">${c.name}</button>`).join("")}
+    `;
+    $$(".chip").forEach(chip => {
+      chip.addEventListener("click", () => {
+        $$(".chip").forEach(c => c.classList.remove("active"));
+        chip.classList.add("active");
+        const cat = chip.dataset.cat;
+        $$(".category-block").forEach(b => {
+          b.classList.toggle("hidden", cat !== "all" && b.id !== cat);
+          b.style.display = "";
+        });
+        $("#search").value = "";
+        $$(".form-item").forEach(i => i.style.display = "");
+        $("#empty")?.remove();
+      });
+    });
+  }
+
+  function renderContent() {
+    $("#forms-content").innerHTML = CATEGORIES.map(c => `
+      <section class="category-block" id="${c.id}">
+        <h3 class="category-title">
+          <span class="icon">${c.icon}</span>
+          ${c.name}
+        </h3>
+        <div class="form-list">
+          ${c.forms.map(f => `
+            <article class="form-item" data-form="${(f.num + " " + f.title + " " + f.desc).toLowerCase()}">
+              <div class="form-badge">
+                <div>
+                  <div class="num">${f.num}</div>
+                  <div class="label">PDF</div>
+                </div>
+              </div>
+              <div class="form-info">
+                <h4>${f.title}</h4>
+                <p>${f.desc}</p>
+                <div class="form-actions">
+                  <a href="${f.url}" target="_blank" rel="noopener" class="btn btn-secondary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    View
+                  </a>
+                  <button class="btn btn-primary download-btn" data-url="${f.url}" data-filename="${f.filename}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="7 10 12 15 17 10"/>
+                      <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    Download
+                  </button>
+                </div>
+              </div>
+            </article>
+          `).join("")}
+        </div>
+      </section>
+    `).join("");
+
+    $$(".download-btn").forEach(btn => {
+      btn.addEventListener("click", () => downloadFile(btn));
+    });
+  }
+
+  async function downloadFile(btn) {
+    const url = btn.dataset.url;
+    const filename = btn.dataset.filename;
+    const original = btn.innerHTML;
+
+    btn.classList.add("downloading");
+    btn.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite">
+        <circle cx="12" cy="12" r="10" stroke-dasharray="40 20" />
+      </svg>
+      Preparing…`;
+
+    try {
+      const res = await fetch(url, { mode: "cors" });
+      if (!res.ok) throw new Error();
+      const blob = await res.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(blobUrl);
+      finishBtn(btn, original, "Downloaded!");
+    } catch {
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.target = "_blank";
+      a.rel = "noopener";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      finishBtn(btn, original, "Opened in a new tab — use your browser's save icon to download.");
+    }
+  }
+
+  function finishBtn(btn, original, toastMsg) {
+    btn.classList.remove("downloading");
+    btn.classList.add("success");
+    btn.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      Done`;
+    showToast(toastMsg);
+    setTimeout(() => {
+      btn.classList.remove("success");
+      btn.innerHTML = original;
+    }, 2400);
+  }
+
+  let toastT;
+  function showToast(msg) {
+    clearTimeout(toastT);
+    $("#toast-msg").textContent = msg;
+    $("#toast").classList.add("show");
+    toastT = setTimeout(() => $("#toast").classList.remove("show"), 3500);
+  }
+
+  $("#search").addEventListener("input", e => {
+    const q = e.target.value.trim().toLowerCase();
+    let totalVisible = 0;
+
+    if (q) {
+      $$(".chip").forEach(c => c.classList.toggle("active", c.dataset.cat === "all"));
+      $$(".category-block").forEach(b => {
+        b.classList.remove("hidden");
+        b.style.display = "";
+      });
+    }
+
+    $$(".category-block").forEach(block => {
+      const items = block.querySelectorAll(".form-item");
+      let visible = 0;
+      items.forEach(item => {
+        const match = !q || item.dataset.form.includes(q);
+        item.style.display = match ? "" : "none";
+        if (match) visible++;
+      });
+      block.style.display = visible === 0 ? "none" : "";
+      totalVisible += visible;
+    });
+
+    $("#empty")?.remove();
+    if (q && totalVisible === 0) {
+      const empty = document.createElement("div");
+      empty.id = "empty";
+      empty.className = "empty";
+      empty.innerHTML = `<h4>No forms match "${e.target.value}"</h4><p>Try a form number like "I-485" or a topic like "asylum".</p>`;
+      $("#forms-content").appendChild(empty);
+    }
+  });
+
+  renderChips();
+  renderContent();
+</script>
+
+</body>
+</html>
