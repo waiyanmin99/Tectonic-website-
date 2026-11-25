@@ -46,6 +46,8 @@
     lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>',
     gauge: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 17a8 8 0 1 1 16 0"/><path d="M12 17l4-5"/></svg>',
     map: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>',
+    menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>',
+    close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>',
     clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
   };
   window.TectonicIcons = I;
@@ -76,6 +78,31 @@
     return '<a class="nav-link' + (current === key ? " active" : "") + '" href="' + href + '">' + label + "</a>";
   }
 
+  /* Mobile menu items (same items as before; only the design changed) */
+  function drawerItems() {
+    var i = 0;
+    function item(href, label, on, extra) {
+      return '<li style="--i:' + (i++) + '"><a class="drawer-link' + (extra || "") + (on ? " active" : "") + '" href="' + href + '" tabindex="-1"' +
+        (on ? ' aria-current="page"' : "") + ">" + label + '<span class="dot" aria-hidden="true"></span></a></li>';
+    }
+    var svcOn = current === "services";
+    var html = '<li style="--i:' + (i++) + '"><details class="drawer-group"' + (svcOn ? " open" : "") + ">" +
+      '<summary class="drawer-link' + (svcOn ? " active" : "") + '" tabindex="-1">Services ' + I.chevron + "</summary>" +
+      '<a class="drawer-link drawer-sub' + (page === "services" ? " active" : "") + '" href="services.html" tabindex="-1">All services<span class="dot" aria-hidden="true"></span></a>' +
+      SERVICES.map(function (sv) {
+        var on = page === sv.href.replace(".html", "");
+        return '<a class="drawer-link drawer-sub' + (on ? " active" : "") + '" href="' + sv.href + '" tabindex="-1">' + sv.name.replace("&", "&amp;") + '<span class="dot" aria-hidden="true"></span></a>';
+      }).join("") + "</details></li>";
+    html += item("pricing.html", "Pricing", page === "pricing");
+    html += item("build.html", "Build your quote", page === "build");
+    html += item("portfolio.html", "Work", page === "portfolio");
+    html += item("about.html", "About", page === "about");
+    html += item("faq.html", "FAQ", page === "faq");
+    html += item("contact.html", "Contact", page === "contact");
+    html += item(CONTACT.phoneHref, "Call " + CONTACT.phone, false);
+    return html;
+  }
+
   function headerHTML() {
     var tiles = SERVICES.map(function (s) {
       return (
@@ -90,7 +117,7 @@
       '<a class="skip-link" href="#main">Skip to content</a>' +
       '<header class="site-header" id="siteHeader">' +
       '<nav class="nav" aria-label="Main">' +
-      '<a class="logo" href="index.html" aria-label="Tectonic home">' + LOGO_MARK + "TEC<span>.</span>TONIC</a>" +
+      '<a class="logo" href="index.html" aria-label="Tectonic home">' + LOGO_MARK + '<span class="logo-text"><span class="logo-name">TEC<span class="dot">.</span>TONIC</span><span class="logo-tag">Websites · Portals · AI · IT</span></span></a>' +
       '<div class="nav-menu">' +
       '<button class="nav-link' + (current === "services" ? " active" : "") + '" id="megaBtn" aria-expanded="false" aria-controls="megaMenu">Services ' + I.chevron + "</button>" +
       navLink("pricing", "pricing.html", "Pricing") +
@@ -100,8 +127,9 @@
       "</div>" +
       '<div class="nav-actions">' +
       '<a class="nav-phone" href="' + CONTACT.phoneHref + '">' + CONTACT.phone + "</a>" +
-      '<a class="btn btn-primary" href="build.html">Build your quote</a>' +
-      '<button class="menu-toggle" id="menuBtn" aria-expanded="false" aria-controls="drawer">Menu</button>' +
+      '<a class="btn btn-primary nav-quote" href="build.html">Build your quote</a>' +
+      '<button class="menu-toggle" id="menuBtn" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">' +
+      '<span class="mt-icon mt-menu">' + I.menu + '</span><span class="mt-icon mt-close">' + I.close + "</span></button>" +
       "</div></nav>" +
       '<div class="mega" id="megaMenu" role="region" aria-label="Services menu"><div class="mega-inner">' +
       '<div class="mega-tiles">' + tiles + "</div>" +
@@ -110,16 +138,11 @@
       '<a href="pricing.html#care">Care plans</a><a href="build.html">Build your quote</a>' +
       '<a href="portfolio.html">Our work</a><a href="faq.html">FAQ</a></div>' +
       "</div></div></header>" +
-      '<div class="drawer" id="drawer" aria-label="Menu">' +
-      "<details><summary>Services " + I.arrow.replace("<svg", '<svg width="18" height="18"') + "</summary>" +
-      '<a href="services.html">All services</a>' +
-      SERVICES.map(function (s) { return '<a href="' + s.href + '">' + s.name + "</a>"; }).join("") +
-      "</details>" +
-      '<a href="pricing.html">Pricing</a><a href="build.html">Build your quote</a><a href="portfolio.html">Work</a>' +
-      '<a href="about.html">About</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a>' +
-      '<a href="' + CONTACT.phoneHref + '">Call ' + CONTACT.phone + "</a>" +
-      '<a class="btn btn-primary btn-block" href="contact.html" style="justify-content:center;border:0">Start a project</a>' +
-      "</div>"
+      '<div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>' +
+      '<div class="drawer-wrap"><nav class="drawer" id="drawer" aria-label="Mobile menu">' +
+      '<ul class="drawer-list" id="drawerList">' + drawerItems() + "</ul>" +
+      '<a class="drawer-cta" href="contact.html" tabindex="-1">Start a project</a>' +
+      "</nav></div>"
     );
   }
 
@@ -128,7 +151,7 @@
     return (
       '<footer class="site-footer"><div class="container">' +
       '<div class="footer-top">' +
-      '<div class="footer-brand"><a class="logo" href="index.html">' + LOGO_MARK + "TEC<span>.</span>TONIC</a>" +
+      '<div class="footer-brand"><a class="logo" href="index.html">' + LOGO_MARK + 'TEC<span class="dot">.</span>TONIC</a>' +
       "<p>Websites, portals, AI assistants and IT support for small businesses. Based in Los Angeles, working with clients anywhere.</p>" +
       '<a class="btn btn-dark" href="contact.html">Start a project</a></div>' +
       '<div class="footer-col"><h4>Build</h4><ul>' +
@@ -174,7 +197,7 @@
   if (header && darkTop) header.classList.add("on-dark");
   function onScroll() {
     if (!header) return;
-    header.classList.toggle("scrolled", window.scrollY > 24);
+    header.classList.toggle("scrolled", window.scrollY > 8);
   }
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
@@ -206,15 +229,31 @@
 
   var menuBtn = document.getElementById("menuBtn");
   var drawer = document.getElementById("drawer");
+  var drawerBackdrop = document.getElementById("drawerBackdrop");
+  var drawerList = document.getElementById("drawerList");
+  function setDrawer(open) {
+    if (!drawer) return;
+    if (open === drawer.classList.contains("open")) return;
+    drawer.classList.toggle("open", open);
+    drawerBackdrop.classList.toggle("open", open);
+    menuBtn.setAttribute("aria-expanded", String(open));
+    menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    header.classList.toggle("menu-open", open);
+    document.documentElement.style.overflow = open ? "hidden" : "";
+    drawer.querySelectorAll("a, summary").forEach(function (a) { a.tabIndex = open ? 0 : -1; });
+    if (open) {
+      drawerList.classList.remove("animate");
+      void drawerList.offsetWidth; /* restart the slide-in for each item */
+      drawerList.classList.add("animate");
+    }
+  }
   if (menuBtn && drawer) {
-    menuBtn.addEventListener("click", function () {
-      var open = !drawer.classList.contains("open");
-      drawer.classList.toggle("open", open);
-      menuBtn.setAttribute("aria-expanded", String(open));
-      menuBtn.textContent = open ? "Close" : "Menu";
-      header.classList.toggle("menu-open", open);
-      document.body.classList.toggle("no-scroll", open);
-    });
+    menuBtn.addEventListener("click", function () { setDrawer(!drawer.classList.contains("open")); });
+    drawerBackdrop.addEventListener("click", function () { setDrawer(false); });
+    drawer.addEventListener("click", function (e) { if (e.target.closest("a")) setDrawer(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") setDrawer(false); });
+    window.matchMedia("(min-width: 1101px)").addEventListener("change", function (e) { if (e.matches) setDrawer(false); });
+    window.addEventListener("pageshow", function () { setDrawer(false); });
   }
 
   /* ---------- Tabs ---------- */
