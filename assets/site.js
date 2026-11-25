@@ -318,6 +318,12 @@
     if (!el.closest(".page-hero")) el.classList.add("reveal");
   });
   var reveals = document.querySelectorAll(".reveal");
+  /* Anything already on screen when the page opens shows right away, no fade */
+  reveals.forEach(function (el) {
+    var r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) { el.classList.add("in"); el.style.animation = "none"; }
+  });
+  reveals = document.querySelectorAll(".reveal:not(.in)");
   if ("IntersectionObserver" in window) {
     var ro = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); ro.unobserve(en.target); } });
