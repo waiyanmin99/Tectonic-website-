@@ -710,9 +710,8 @@ td .muted { font-size: 13px; }
 .footer-bottom a:hover { color: var(--ink); }
 
 /* reveal */
-.reveal { opacity: 0; }
-.reveal.in { opacity: 1; animation: reveal-up 0.75s var(--ease) var(--d, 0s) backwards; }
-@keyframes reveal-up { from { opacity: 0; transform: translate3d(0, 24px, 0); } to { opacity: 1; transform: none; } }
+/* Scroll fade-ins removed: content always shows right away. */
+.reveal { opacity: 1; }
 .no-js .reveal { opacity: 1; transform: none; }
 
 /* 404 */
@@ -831,7 +830,6 @@ td .muted { font-size: 13px; }
   animation: page-rule 0.8s cubic-bezier(0.32, 0.72, 0, 1) forwards;
 }
 
-/* 3. Scroll reveals: see .reveal above, staggered by --d (set in site.js) */
 
 /* small hover lifts */
 .btn-primary:hover, .btn-dark:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -10px rgba(232, 68, 10, 0.55); }
