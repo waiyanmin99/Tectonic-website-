@@ -86,7 +86,8 @@
         (on ? ' aria-current="page"' : "") + ">" + label + '<span class="dot" aria-hidden="true"></span></a></li>';
     }
     var svcOn = current === "services";
-    var html = '<li style="--i:' + (i++) + '"><details class="drawer-group"' + (svcOn ? " open" : "") + ">" +
+    var html = item("index.html", "Home", page === "index");
+    html += '<li style="--i:' + (i++) + '"><details class="drawer-group"' + (svcOn ? " open" : "") + ">" +
       '<summary class="drawer-link' + (svcOn ? " active" : "") + '" tabindex="-1">Services ' + I.chevron + "</summary>" +
       '<a class="drawer-link drawer-sub' + (page === "services" ? " active" : "") + '" href="services.html" tabindex="-1">All services<span class="dot" aria-hidden="true"></span></a>' +
       SERVICES.map(function (sv) {
