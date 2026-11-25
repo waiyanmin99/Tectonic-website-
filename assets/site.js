@@ -298,6 +298,18 @@
   }
 
   /* ---------- Reveal on scroll ---------- */
+  /* Give common blocks a reveal, staggered by their position in the row */
+  var REVEAL_GROUPS = ".lineup, .plans, .cards, .steps, .tools, .stats, .svc-list, .faq, .stack-grid, .timeline";
+  document.querySelectorAll(REVEAL_GROUPS).forEach(function (group) {
+    if (group.closest(".page-hero, .mega, .drawer")) return;
+    Array.prototype.forEach.call(group.children, function (el, i) {
+      el.classList.add("reveal");
+      el.style.setProperty("--d", Math.min(i % 6, 5) * 0.07 + "s");
+    });
+  });
+  document.querySelectorAll("main .section-head, main .svc-group-head, main .split > *, main .work-feature, main .table-wrap, main .builder-step").forEach(function (el) {
+    if (!el.closest(".page-hero")) el.classList.add("reveal");
+  });
   var reveals = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
     var ro = new IntersectionObserver(function (entries) {
