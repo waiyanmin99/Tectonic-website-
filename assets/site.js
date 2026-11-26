@@ -410,7 +410,7 @@
       var err = document.getElementById("formErr");
       ok.classList.remove("show"); err.classList.remove("show");
       btn.disabled = true; btn.textContent = "Sending…";
-      fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } })
+      fetch(form.action, { method: "POST", body: buildInquiry(form), headers: { Accept: "application/json" } })
         .then(function (res) {
           if (!res.ok) throw new Error("send failed");
           var first = (form.querySelector('[name="name"]').value || "").trim().split(" ")[0];
@@ -426,6 +426,29 @@
           err.classList.add("show"); btn.disabled = false; btn.textContent = "Send message";
         });
     });
+  }
+
+  /* ---------- Inquiry email: clear subject, sensible order, readable labels ----------
+     Formspree emails fields in the order they're sent, so we send them in a
+     tidy order, with friendly names, and skip anything left blank. */
+  function buildInquiry(form) {
+    var get = function (n) { var el = form.querySelector('[name="' + n + '"]'); return el ? String(el.value || "").trim() : ""; };
+    var name = get("name"), email = get("email"), service = get("service");
+    var data = new FormData();
+    var subject = "New inquiry" + (service ? ": " + service : "") + (name ? " from " + name : "");
+    data.append("_subject", subject);
+    if (email) data.append("_replyto", email);
+    [
+      ["Name", name],
+      ["Email", email],
+      ["Phone", get("phone")],
+      ["Business", get("company")],
+      ["Service needed", service],
+      ["Budget", get("budget")],
+      ["Project details", get("message")],
+      ["Estimate from quote builder", get("estimate")]
+    ].forEach(function (pair) { if (pair[1]) data.append(pair[0], pair[1]); });
+    return data;
   }
 
   /* ---------- "Message sent" pop-up ---------- */
