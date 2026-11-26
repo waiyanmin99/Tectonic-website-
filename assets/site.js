@@ -377,6 +377,7 @@
     var form = document.getElementById("contactForm");
     if (!form || form.dataset.ready) return;
     form.dataset.ready = "1";
+    form.dataset.startedAt = String(Date.now());
     form.action = CONTACT.formspree;
     var params = new URLSearchParams(location.search);
     var svc = params.get("service");
@@ -410,9 +411,8 @@
       var err = document.getElementById("formErr");
       ok.classList.remove("show"); err.classList.remove("show");
       btn.disabled = true; btn.textContent = "Sending…";
-      fetch(form.action, { method: "POST", body: buildInquiry(form), headers: { Accept: "application/json" } })
-        .then(function (res) {
-          if (!res.ok) throw new Error("send failed");
+      sendInquiry(form)
+        .then(function () {
           var first = (form.querySelector('[name="name"]').value || "").trim().split(" ")[0];
           form.reset();
           var hidden = form.querySelector('[name="estimate"]');
@@ -448,6 +448,27 @@
       ["Estimate from quote builder", get("estimate")]
     ].forEach(function (pair) { if (pair[1]) data.append(pair[0], pair[1]); });
     return data;
+  }
+
+  /* Send through our own sender first (it also emails the client a
+     confirmation). If it isn't set up or is down, fall back to Formspree. */
+  function sendInquiry(form) {
+    var get = function (n) { var el = form.querySelector('[name="' + n + '"]'); return el ? String(el.value || "") : ""; };
+    var payload = {
+      name: get("name"), email: get("email"), phone: get("phone"), company: get("company"),
+      service: get("service"), budget: get("budget"), message: get("message"), estimate: get("estimate"),
+      website: get("website"), startedAt: Number(form.dataset.startedAt || 0)
+    };
+    function viaFormspree() {
+      return fetch(form.action, { method: "POST", body: buildInquiry(form), headers: { Accept: "application/json" } })
+        .then(function (res) { if (!res.ok) throw new Error("send failed"); });
+    }
+    return fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) })
+      .then(function (res) {
+        if (res.ok) return;
+        if (res.status === 400) throw new Error("invalid");
+        return viaFormspree();
+      }, viaFormspree);
   }
 
   /* ---------- "Message sent" pop-up ---------- */

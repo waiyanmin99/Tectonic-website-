@@ -1088,3 +1088,5 @@ a.quick-card:hover { border-color: var(--ink); box-shadow: var(--shadow); transf
 @media (prefers-reduced-motion: reduce) {
   .sent-check circle, .sent-check path { stroke-dashoffset: 0; }
 }
+/* spam trap field: hidden from people */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
