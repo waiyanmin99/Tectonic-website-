@@ -393,6 +393,14 @@
         var note = document.getElementById("prefillNote");
         if (note) { note.textContent = ""; note.appendChild(document.createTextNode("Your estimate is attached: " + text)); note.classList.add("show"); }
         if (select) select.value = "Not sure yet / a mix";
+        /* Arriving with an estimate: jump straight to the form */
+        requestAnimationFrame(function () {
+          var root = document.documentElement;
+          var prev = root.style.scrollBehavior;
+          root.style.scrollBehavior = "auto";
+          form.scrollIntoView({ block: "start" });
+          root.style.scrollBehavior = prev;
+        });
       }
     }
     form.addEventListener("submit", function (e) {

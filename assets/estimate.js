@@ -139,7 +139,7 @@
     once.textContent = money(t.once);
     monthly.textContent = money(t.monthly) + "/mo";
     deposit.textContent = t.once ? money(Math.round(t.once / 2)) : "$0";
-    send.href = "contact.html" + (ids.length ? "?estimate=" + encodeURIComponent(ids.join(",")) : "");
+    send.href = "contact.html" + (ids.length ? "?estimate=" + encodeURIComponent(ids.join(",")) : "") + "#contactForm";
     send.classList.toggle("btn-primary", ids.length > 0);
     send.classList.toggle("btn-ghost", ids.length === 0);
   }
