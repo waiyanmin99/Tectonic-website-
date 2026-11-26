@@ -437,10 +437,9 @@
     var data = new FormData();
     var subject = "New inquiry" + (service ? ": " + service : "") + (name ? " from " + name : "");
     data.append("_subject", subject);
-    if (email) data.append("_replyto", email);
     [
       ["Name", name],
-      ["Email", email],
+      ["email", email], /* lowercase "email" also sets the Reply-To address */
       ["Phone", get("phone")],
       ["Business", get("company")],
       ["Service needed", service],
