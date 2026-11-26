@@ -1090,3 +1090,63 @@ a.quick-card:hover { border-color: var(--ink); box-shadow: var(--shadow); transf
 }
 /* spam trap field: hidden from people */
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* =========================================================
+   Living product samples
+   ========================================================= */
+.mock { position: relative; }
+.demo-cursor {
+  position: absolute; left: 0; top: 0; z-index: 5; width: 22px; height: 22px; pointer-events: none;
+  opacity: 0; transition: opacity 0.3s;
+}
+.demo-cursor svg { width: 100%; height: 100%; fill: #171a20; stroke: #fff; stroke-width: 1.4; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3)); }
+.demo-cursor.show { opacity: 1; }
+.demo-cursor::after {
+  content: ""; position: absolute; left: -9px; top: -9px; width: 24px; height: 24px; border-radius: 50%;
+  border: 2px solid var(--accent); opacity: 0; transform: scale(0.4);
+}
+.demo-cursor.click::after { animation: demo-ripple 0.5s ease-out; }
+@keyframes demo-ripple { 0% { opacity: 0.9; transform: scale(0.4); } 100% { opacity: 0; transform: scale(1.6); } }
+.site-btns span { transition: transform 0.15s, filter 0.15s; display: inline-block; }
+.site-btns span.pressed { transform: scale(0.92); filter: brightness(1.15); }
+.demo-toast {
+  position: absolute; right: 14px; bottom: 14px; z-index: 6; display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 14px; border-radius: 10px; background: #fff; color: var(--ink); font-size: 12px; font-weight: 600;
+  box-shadow: 0 10px 30px -8px rgba(14, 15, 18, 0.35); border: 1px solid var(--line);
+  opacity: 0; transform: translateY(10px) scale(0.96); transition: opacity 0.35s, transform 0.4s var(--ease-ios, ease);
+}
+.demo-toast b { width: 18px; height: 18px; border-radius: 50%; background: #e3f5ee; color: var(--ok); display: grid; place-items: center; font-size: 11px; }
+.demo-toast.show { opacity: 1; transform: none; }
+.mock-site .site-title { transition: opacity 0.35s, transform 0.35s; }
+.mock-site .site-title.swap { opacity: 0; transform: translateY(-6px); }
+
+.mock-dash .chart i { transition: height 0.9s var(--ease-ios, ease), background 0.4s; }
+.mock-dash .tile b { transition: color 0.4s; }
+.mock-dash .tile b.tick { color: var(--accent-hover); }
+.mock-dash .pill { transition: background 0.3s, color 0.3s; }
+.mock-dash .dash-side .sk { transition: background 0.4s; }
+
+.bubble.pop { animation: bubble-in 0.35s var(--ease-ios, ease) both; }
+@keyframes bubble-in { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: none; } }
+.bubble.typing { display: inline-flex; gap: 4px; width: auto; padding: 11px 14px; }
+.bubble.typing i { width: 6px; height: 6px; border-radius: 50%; background: #a2a4aa; display: block; animation: typing-dot 1s infinite; }
+.bubble.typing i:nth-child(2) { animation-delay: 0.15s; }
+.bubble.typing i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes typing-dot { 0%, 60%, 100% { transform: none; opacity: 0.5; } 30% { transform: translateY(-3px); opacity: 1; } }
+.mock-chat .chat-body { transition: opacity 0.4s; align-content: start; }
+.mock-chat .chat-body.fade { opacity: 0; }
+.bubble .slots span { transition: background 0.3s, color 0.3s; }
+.bubble .slots span.picked { background: var(--accent); color: #fff; }
+
+.mock-doc .field b { min-height: 1.6em; display: inline-block; min-width: 2ch; transition: background 0.3s; }
+.mock-doc .field b.empty { background: #f1f1f3; }
+.demo-scan { position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--accent); box-shadow: 0 0 12px var(--accent); opacity: 0; }
+.doc-page.scanning .demo-scan { opacity: 0.9; animation: doc-scan 1.4s ease-in-out infinite alternate; }
+@keyframes doc-scan { from { top: 6%; } to { top: 94%; } }
+
+.net-live g[stroke="#e8440a"] path { animation: net-flow 1.2s linear infinite; }
+@keyframes net-flow { to { stroke-dashoffset: -28; } }
+.net-live circle { transform-origin: 400px 200px; animation: net-pulse 2.4s ease-in-out infinite; }
+@keyframes net-pulse { 0%, 100% { stroke-width: 2; } 50% { stroke-width: 5; } }
+.net-live rect { transition: stroke 0.3s, fill 0.3s; }
+.net-live rect.lit { stroke: #e8440a; fill: #241712; }

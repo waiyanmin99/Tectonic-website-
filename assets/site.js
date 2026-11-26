@@ -353,6 +353,17 @@
       Object.keys(map).forEach(function (id) { var sec = document.getElementById(id); if (sec) subnavObserver.observe(sec); });
     }
 
+    /* Living product samples (website, portal, chat, docs, network) */
+    if (document.querySelector("#main .mock, #main .mock-net")) {
+      if (window.TectonicDemos) window.TectonicDemos.init();
+      else {
+        var ds = document.createElement("script");
+        ds.src = "assets/demos.js";
+        ds.onload = function () { if (window.TectonicDemos) window.TectonicDemos.init(); };
+        document.head.appendChild(ds);
+      }
+    }
+
     /* Quote builder and contact form need the price list */
     var needsEstimate = document.getElementById("builderSteps") || document.getElementById("contactForm");
     if (needsEstimate) {
