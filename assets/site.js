@@ -413,11 +413,67 @@
       fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } })
         .then(function (res) {
           if (!res.ok) throw new Error("send failed");
-          ok.classList.add("show"); form.reset(); btn.textContent = "Sent";
+          var first = (form.querySelector('[name="name"]').value || "").trim().split(" ")[0];
+          form.reset();
+          var hidden = form.querySelector('[name="estimate"]');
+          if (hidden) hidden.value = "";
+          var note = document.getElementById("prefillNote");
+          if (note) note.classList.remove("show");
+          btn.disabled = false; btn.textContent = "Send message";
+          showSentDialog(first);
         })
         .catch(function () {
           err.classList.add("show"); btn.disabled = false; btn.textContent = "Send message";
         });
+    });
+  }
+
+  /* ---------- "Message sent" pop-up ---------- */
+  function showSentDialog(firstName) {
+    var old = document.getElementById("sentDialog");
+    if (old) old.remove();
+    var wrap = document.createElement("div");
+    wrap.className = "sent-dialog";
+    wrap.id = "sentDialog";
+    wrap.innerHTML =
+      '<div class="sent-backdrop" data-close></div>' +
+      '<div class="sent-card" role="dialog" aria-modal="true" aria-labelledby="sentTitle" aria-describedby="sentText">' +
+      '<button class="sent-x" type="button" aria-label="Close" data-close>' + I.close + "</button>" +
+      '<div class="sent-check" aria-hidden="true"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7.5 7.5L37.5 19"/></svg></div>' +
+      '<h2 id="sentTitle">Message sent' + (firstName ? ", " + firstName.replace(/[<>&"]/g, "") : "") + "!</h2>" +
+      '<p id="sentText">Thanks for reaching out. You\'ll hear back from us within 24 hours, usually much sooner.</p>' +
+      '<ul class="sent-next"><li><span>1</span>We read your message and reply by email</li><li><span>2</span>Free 30-minute call about your project</li><li><span>3</span>You get a fixed written quote</li></ul>' +
+      '<div class="sent-actions"><button class="btn btn-primary btn-block" type="button" data-close>Done</button>' +
+      '<a class="btn btn-ghost btn-block" href="portfolio.html">See our work</a></div>' +
+      '<p class="sent-foot">Need us sooner? Call <a href="' + CONTACT.phoneHref + '">' + CONTACT.phone + "</a></p>" +
+      "</div>";
+    document.body.appendChild(wrap);
+    var lastFocus = document.activeElement;
+    document.documentElement.style.overflow = "hidden";
+    void wrap.offsetWidth; /* let the closed state render, then animate open */
+    setTimeout(function () { wrap.classList.add("open"); }, 10);
+    var doneBtn = wrap.querySelector(".btn-primary");
+    setTimeout(function () { doneBtn.focus(); }, 50);
+    function close() {
+      wrap.classList.remove("open");
+      document.documentElement.style.overflow = "";
+      document.removeEventListener("keydown", onKey);
+      setTimeout(function () { wrap.remove(); }, 300);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    function onKey(e) {
+      if (e.key === "Escape") close();
+      if (e.key === "Tab") { /* keep focus inside the pop-up */
+        var f = wrap.querySelectorAll("button, a[href]");
+        var a = f[0], z = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); }
+        else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+      }
+    }
+    document.addEventListener("keydown", onKey);
+    wrap.addEventListener("click", function (e) {
+      if (e.target.closest("[data-close]")) close();
+      else if (e.target.closest("a[href]")) { document.documentElement.style.overflow = ""; wrap.remove(); }
     });
   }
 

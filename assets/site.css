@@ -1038,3 +1038,53 @@ a.quick-card:hover { border-color: var(--ink); box-shadow: var(--shadow); transf
 @media (max-width: 900px) {
   .svc-section { padding: 0; }
 }
+
+/* =========================================================
+   "Message sent" pop-up
+   ========================================================= */
+.sent-dialog { position: fixed; inset: 0; z-index: 300; display: grid; place-items: center; padding: 20px; }
+.sent-backdrop {
+  position: absolute; inset: 0; background: rgba(14, 15, 18, 0.55);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.sent-card {
+  position: relative; width: 100%; max-width: 420px; max-height: calc(100vh - 40px); overflow-y: auto;
+  background: var(--white); color: var(--ink); border-radius: 20px; padding: 36px 28px 24px; text-align: center;
+  box-shadow: 0 30px 80px -20px rgba(14, 15, 18, 0.45);
+  opacity: 0; transform: translateY(16px) scale(0.96);
+  transition: opacity 0.35s var(--ease-ios, ease), transform 0.45s var(--ease-ios, ease);
+}
+.sent-dialog.open .sent-backdrop { opacity: 1; }
+.sent-dialog.open .sent-card { opacity: 1; transform: none; }
+.sent-x {
+  position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border-radius: 999px; border: 0;
+  background: transparent; color: var(--muted); display: grid; place-items: center;
+}
+.sent-x:hover { background: var(--surface); color: var(--ink); }
+.sent-x svg { width: 18px; height: 18px; }
+.sent-check { width: 72px; height: 72px; margin: 0 auto 18px; border-radius: 50%; background: #e3f5ee; display: grid; place-items: center; }
+.sent-check svg { width: 52px; height: 52px; fill: none; stroke: var(--ok); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.sent-check circle { stroke-dasharray: 151; stroke-dashoffset: 151; opacity: 0.35; }
+.sent-check path { stroke-dasharray: 36; stroke-dashoffset: 36; }
+.sent-dialog.open .sent-check circle { animation: sent-draw 0.6s ease-out 0.15s forwards; }
+.sent-dialog.open .sent-check path { animation: sent-draw 0.4s ease-out 0.55s forwards; }
+@keyframes sent-draw { to { stroke-dashoffset: 0; } }
+.sent-card h2 { font-family: var(--font-head); font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 8px; }
+.sent-card > p#sentText { color: var(--muted); font-size: 15px; line-height: 1.55; margin: 0 auto; max-width: 320px; }
+.sent-next {
+  list-style: none; margin: 22px 0 22px; padding: 16px; display: grid; gap: 10px; text-align: left;
+  background: var(--surface); border-radius: 14px; font-size: 14px; color: var(--ink-2);
+}
+.sent-next li { display: flex; align-items: center; gap: 10px; }
+.sent-next span {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--white); border: 1px solid var(--line); font-size: 11.5px; font-weight: 600; color: var(--accent-hover);
+}
+.sent-actions { display: grid; gap: 8px; }
+.sent-actions .btn { min-height: 48px; }
+.sent-foot { margin-top: 14px; font-size: 13px; color: var(--muted); }
+.sent-foot a { color: var(--ink); font-weight: 500; border-bottom: 1px solid currentColor; }
+@media (prefers-reduced-motion: reduce) {
+  .sent-check circle, .sent-check path { stroke-dashoffset: 0; }
+}
