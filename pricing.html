@@ -26,7 +26,7 @@
 
   <nav class="subnav" aria-label="On this page">
     <div class="container">
-      <div class="subnav-links"><a href="#packages">Packages</a><a href="#build">Build</a><a href="#ai">AI &amp; automation</a><a href="#it">IT</a><a href="#care">Care plans</a><a href="#compare">Compare</a><a href="#terms">Payment terms</a></div>
+      <div class="subnav-links"><a href="#packages">Packages</a><a href="#prices">Price list</a><a href="#care">Care plans</a><a href="#compare">Compare</a><a href="#terms">Payment terms</a></div>
       <a class="btn btn-dark" href="contact.html">Get a fixed quote</a>
     </div>
   </nav>
@@ -34,6 +34,7 @@
   <section class="section" id="packages">
     <div class="container">
       <div class="section-head"><div><p class="eyebrow">Packages</p><h2 class="h2">Start with a package</h2><p class="lead">The easiest way to get going. Customize anything in the quote builder.</p></div></div>
+      <p class="swipe-hint">Swipe to see all packages →</p>
       <div class="plans">
         <div class="plan">
           <h3>Launch</h3><p class="plan-for">Get online, done right</p>
@@ -59,60 +60,71 @@
     </div>
   </section>
 
-  <section class="section section-surface">
+  <section class="section section-surface" id="prices">
     <div class="container">
       <div class="section-head"><div><p class="eyebrow">Full price list</p><h2 class="h2">Every service, every starting price</h2></div><a class="btn btn-outline" href="services.html">Service details</a></div>
 
-      <h3 class="h3" id="build" style="margin:8px 0 14px;scroll-margin-top:140px">Build</h3>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Service</th><th>Includes</th><th>Timeline</th><th class="num">Starting at</th></tr></thead>
-          <tbody>
-            <tr><td><b>Starter website</b></td><td>Up to 5 pages, contact form, basic SEO</td><td>1–2 weeks</td><td class="num">$1,200</td></tr>
-            <tr><td><b>Growth website</b></td><td>Up to 10 pages, editable content, booking, blog</td><td>2–3 weeks</td><td class="num">$2,500</td></tr>
-            <tr><td><b>Online store</b></td><td>Up to 25 products, cart, checkout, shipping</td><td>2–3 weeks</td><td class="num">$2,000</td></tr>
-            <tr><td><b>Website redesign</b></td><td>Rebuild an existing site, keep content and rankings</td><td>1–2 weeks</td><td class="num">$1,000</td></tr>
-            <tr><td><b>Client portal</b></td><td>Logins, 2–3 roles, uploads, status tracking</td><td>2–4 weeks</td><td class="num">$4,000</td></tr>
-            <tr><td><b>Operations portal</b></td><td>Admin, staff and client dashboards, payments, reports</td><td>4–8 weeks</td><td class="num">$8,000</td></tr>
-            <tr><td><b>Startup MVP or mobile app</b></td><td>First working version of your product</td><td>3–6 weeks</td><td class="num">$5,000</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <div data-tabs>
+        <div class="tabs" role="tablist" aria-label="Price list categories">
+          <button class="tab" role="tab" id="pt-build" aria-selected="true" aria-controls="pp-build">Build</button>
+          <button class="tab" role="tab" id="pt-ai" aria-selected="false" aria-controls="pp-ai" tabindex="-1">AI &amp; automation</button>
+          <button class="tab" role="tab" id="pt-it" aria-selected="false" aria-controls="pp-it" tabindex="-1">IT &amp; growth</button>
+        </div>
 
-      <h3 class="h3" id="ai" style="margin:40px 0 14px;scroll-margin-top:140px">AI &amp; automation</h3>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Service</th><th>Includes</th><th class="num">Setup</th><th class="num">Monthly</th></tr></thead>
-          <tbody>
-            <tr><td><b>Website AI assistant</b></td><td>Trained on your FAQs, captures leads</td><td class="num">$800</td><td class="num">$150</td></tr>
-            <tr><td><b>AI receptionist</b></td><td>After-hours answers, appointment booking</td><td class="num">$1,200</td><td class="num">$200</td></tr>
-            <tr><td><b>Document reading</b></td><td>PDFs, invoices, forms into your sheet or portal</td><td class="num">$1,500</td><td class="num">$200</td></tr>
-            <tr><td><b>Staff knowledge assistant</b></td><td>Answers from your handbook and policies</td><td class="num">$2,000</td><td class="num">$250</td></tr>
-            <tr><td><b>Review &amp; email replies</b></td><td>Drafts replies for your approval</td><td class="num">$600</td><td class="num">$100</td></tr>
-            <tr><td><b>Content writing tool</b></td><td>Posts and product copy in your voice</td><td class="num">$800</td><td class="num">$120</td></tr>
-            <tr><td><b>Translation</b></td><td>Website or documents, per language</td><td class="num">$500</td><td class="num">—</td></tr>
-            <tr><td><b>Workflow automation</b></td><td>Forms to email, SMS, Sheets or CRM</td><td class="num">$400</td><td class="num">—</td></tr>
-            <tr><td><b>Weekly AI summary</b></td><td>Monday email with your numbers</td><td class="num">$300</td><td class="num">$100</td></tr>
-            <tr><td><b>Payments &amp; invoicing</b></td><td>Stripe checkout, deposits, recurring billing</td><td class="num">$300</td><td class="num">—</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="small muted" style="margin-top:10px">AI usage is billed directly to your own Anthropic account at their price. Most small businesses spend a few dollars to a few tens of dollars a month.</p>
+        <div class="tab-panel" role="tabpanel" id="pp-build" aria-labelledby="pt-build">
+          <div class="table-wrap">
+            <table class="price-table">
+              <thead><tr><th>Service</th><th>Includes</th><th>Timeline</th><th class="num">Starting at</th></tr></thead>
+              <tbody>
+            <tr><td class="p-name"><b>Starter website</b></td><td class="p-inc">Up to 5 pages, contact form, basic SEO</td><td class="p-time">1–2 weeks</td><td class="num p-price">$1,200</td></tr>
+            <tr><td class="p-name"><b>Growth website</b></td><td class="p-inc">Up to 10 pages, editable content, booking, blog</td><td class="p-time">2–3 weeks</td><td class="num p-price">$2,500</td></tr>
+            <tr><td class="p-name"><b>Online store</b></td><td class="p-inc">Up to 25 products, cart, checkout, shipping</td><td class="p-time">2–3 weeks</td><td class="num p-price">$2,000</td></tr>
+            <tr><td class="p-name"><b>Website redesign</b></td><td class="p-inc">Rebuild an existing site, keep content and rankings</td><td class="p-time">1–2 weeks</td><td class="num p-price">$1,000</td></tr>
+            <tr><td class="p-name"><b>Client portal</b></td><td class="p-inc">Logins, 2–3 roles, uploads, status tracking</td><td class="p-time">2–4 weeks</td><td class="num p-price">$4,000</td></tr>
+            <tr><td class="p-name"><b>Operations portal</b></td><td class="p-inc">Admin, staff and client dashboards, payments, reports</td><td class="p-time">4–8 weeks</td><td class="num p-price">$8,000</td></tr>
+            <tr><td class="p-name"><b>Startup MVP or mobile app</b></td><td class="p-inc">First working version of your product</td><td class="p-time">3–6 weeks</td><td class="num p-price">$5,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-      <h3 class="h3" id="it" style="margin:40px 0 14px;scroll-margin-top:140px">IT &amp; growth</h3>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Service</th><th>Includes</th><th class="num">Price</th></tr></thead>
-          <tbody>
-            <tr><td><b>Office IT setup</b></td><td>Email, domain, devices, Wi-Fi, printers, backups</td><td class="num">from $300</td></tr>
-            <tr><td><b>Monthly IT support</b></td><td>Remote help desk for up to 5 people (+$20/person)</td><td class="num">$150/mo</td></tr>
-            <tr><td><b>Security check-up</b></td><td>Two-step sign-in, access review, password manager</td><td class="num">from $300</td></tr>
-            <tr><td><b>Google Business Profile &amp; local SEO</b></td><td>Profile setup and optimization</td><td class="num">from $300</td></tr>
-            <tr><td><b>Speed &amp; accessibility fixes</b></td><td>Faster pages, better mobile layout</td><td class="num">from $400</td></tr>
-            <tr><td><b>Domain, email &amp; brand setup</b></td><td>Domain, professional email, logo files</td><td class="num">from $300</td></tr>
-            <tr><td><b>AI consulting</b></td><td>Hands-on sessions</td><td class="num">$85/hr</td></tr>
-          </tbody>
-        </table>
+        <div class="tab-panel" role="tabpanel" id="pp-ai" aria-labelledby="pt-ai" hidden>
+          <div class="table-wrap">
+            <table class="price-table">
+              <thead><tr><th>Service</th><th>Includes</th><th class="num">Setup</th><th class="num">Monthly</th></tr></thead>
+              <tbody>
+            <tr><td class="p-name"><b>Website AI assistant</b></td><td class="p-inc">Trained on your FAQs, captures leads</td><td class="num p-price">$800</td><td class="num p-mo">$150</td></tr>
+            <tr><td class="p-name"><b>AI receptionist</b></td><td class="p-inc">After-hours answers, appointment booking</td><td class="num p-price">$1,200</td><td class="num p-mo">$200</td></tr>
+            <tr><td class="p-name"><b>Document reading</b></td><td class="p-inc">PDFs, invoices, forms into your sheet or portal</td><td class="num p-price">$1,500</td><td class="num p-mo">$200</td></tr>
+            <tr><td class="p-name"><b>Staff knowledge assistant</b></td><td class="p-inc">Answers from your handbook and policies</td><td class="num p-price">$2,000</td><td class="num p-mo">$250</td></tr>
+            <tr><td class="p-name"><b>Review &amp; email replies</b></td><td class="p-inc">Drafts replies for your approval</td><td class="num p-price">$600</td><td class="num p-mo">$100</td></tr>
+            <tr><td class="p-name"><b>Content writing tool</b></td><td class="p-inc">Posts and product copy in your voice</td><td class="num p-price">$800</td><td class="num p-mo">$120</td></tr>
+            <tr><td class="p-name"><b>Translation</b></td><td class="p-inc">Website or documents, per language</td><td class="num p-price">$500</td><td class="num p-mo none">—</td></tr>
+            <tr><td class="p-name"><b>Workflow automation</b></td><td class="p-inc">Forms to email, SMS, Sheets or CRM</td><td class="num p-price">$400</td><td class="num p-mo none">—</td></tr>
+            <tr><td class="p-name"><b>Weekly AI summary</b></td><td class="p-inc">Monday email with your numbers</td><td class="num p-price">$300</td><td class="num p-mo">$100</td></tr>
+            <tr><td class="p-name"><b>Payments &amp; invoicing</b></td><td class="p-inc">Stripe checkout, deposits, recurring billing</td><td class="num p-price">$300</td><td class="num p-mo none">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="small muted" style="margin-top:12px">AI usage is billed to your own Anthropic account at their price, usually a few dollars to a few tens of dollars a month.</p>
+        </div>
+
+        <div class="tab-panel" role="tabpanel" id="pp-it" aria-labelledby="pt-it" hidden>
+          <div class="table-wrap">
+            <table class="price-table">
+              <thead><tr><th>Service</th><th>Includes</th><th class="num">Price</th></tr></thead>
+              <tbody>
+            <tr><td class="p-name"><b>Office IT setup</b></td><td class="p-inc">Email, domain, devices, Wi-Fi, printers, backups</td><td class="num p-price">from $300</td></tr>
+            <tr><td class="p-name"><b>Monthly IT support</b></td><td class="p-inc">Remote help desk for up to 5 people (+$20/person)</td><td class="num p-price">$150/mo</td></tr>
+            <tr><td class="p-name"><b>Security check-up</b></td><td class="p-inc">Two-step sign-in, access review, password manager</td><td class="num p-price">from $300</td></tr>
+            <tr><td class="p-name"><b>Google Business Profile &amp; local SEO</b></td><td class="p-inc">Profile setup and optimization</td><td class="num p-price">from $300</td></tr>
+            <tr><td class="p-name"><b>Speed &amp; accessibility fixes</b></td><td class="p-inc">Faster pages, better mobile layout</td><td class="num p-price">from $400</td></tr>
+            <tr><td class="p-name"><b>Domain, email &amp; brand setup</b></td><td class="p-inc">Domain, professional email, logo files</td><td class="num p-price">from $300</td></tr>
+            <tr><td class="p-name"><b>AI consulting</b></td><td class="p-inc">Hands-on sessions</td><td class="num p-price">$85/hr</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -120,6 +132,7 @@
   <section class="section" id="care">
     <div class="container">
       <div class="section-head"><div><p class="eyebrow">Care plans</p><h2 class="h2">Monthly care plans</h2><p class="lead">Keep everything updated, secure and backed up. Cancel with 30 days' notice. Unused hours don't roll over.</p></div></div>
+      <p class="swipe-hint">Swipe to see all care plans →</p>
       <div class="plans">
         <div class="plan"><h3>Website care</h3><p class="amount">$150<small> /mo</small></p><ul class="checks"><li>Uptime monitoring</li><li>Updates and backups</li><li>Up to 2 hours of edits</li><li>Monthly check-in</li></ul><a class="btn btn-outline btn-block" href="build.html?pick=none,care-site">Add Website care</a></div>
         <div class="plan featured"><span class="ribbon">For AI clients</span><h3>Website + AI care</h3><p class="amount">$250<small> /mo</small></p><ul class="checks"><li>Everything in Website care</li><li>Care for one AI website assistant included</li><li>AI conversation review and tuning</li><li>Up to 3 hours of edits</li><li>Usage and cost report</li></ul><a class="btn btn-dark btn-block" href="build.html?pick=none,care-ai">Add Website + AI care</a></div>
@@ -133,30 +146,31 @@
     <div class="container">
       <div class="section-head"><div><p class="eyebrow">Compare</p><h2 class="h2">Compare packages</h2></div></div>
       <div class="table-wrap">
-        <table>
+        <table class="compare-table" id="compareTable">
           <thead><tr><th>Feature</th><th>Launch</th><th>Automate</th><th>Scale</th></tr></thead>
           <tbody>
-            <tr><td>Starting price</td><td><b>$1,200</b></td><td><b>$3,000</b></td><td><b>$4,000</b></td></tr>
-            <tr><td>Monthly care</td><td>$150</td><td>$250</td><td>$400</td></tr>
-            <tr><td>Custom website</td><td>Up to 5 pages</td><td>Up to 10 pages</td><td>Optional add-on</td></tr>
-            <tr><td>Edit content yourself</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-            <tr><td>Online booking</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-            <tr><td>AI website assistant</td><td class="no">—</td><td class="yes">✓</td><td>Add-on</td></tr>
-            <tr><td>Workflow automation</td><td class="no">—</td><td>1 included</td><td>Included</td></tr>
-            <tr><td>Client logins &amp; roles</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
-            <tr><td>Online payments</td><td class="no">—</td><td>Add-on</td><td class="yes">✓</td></tr>
-            <tr><td>Edits included each month</td><td>2 hrs</td><td>3 hrs</td><td>4 hrs</td></tr>
-            <tr><td>Typical timeline</td><td>1–2 weeks</td><td>2–3 weeks</td><td>2–4 weeks</td></tr>
+            <tr><td class="c-feat">Starting price</td><td data-label="Launch"><b>$1,200</b></td><td data-label="Automate"><b>$3,000</b></td><td data-label="Scale"><b>$4,000</b></td></tr>
+            <tr><td class="c-feat">Monthly care</td><td data-label="Launch">$150</td><td data-label="Automate">$250</td><td data-label="Scale">$400</td></tr>
+            <tr><td class="c-feat">Custom website</td><td data-label="Launch">Up to 5 pages</td><td data-label="Automate">Up to 10 pages</td><td data-label="Scale">Optional add-on</td></tr>
+            <tr><td class="c-feat">Edit content yourself</td><td data-label="Launch" class="no">—</td><td data-label="Automate" class="yes">✓</td><td data-label="Scale" class="yes">✓</td></tr>
+            <tr><td class="c-feat">Online booking</td><td data-label="Launch" class="no">—</td><td data-label="Automate" class="yes">✓</td><td data-label="Scale" class="yes">✓</td></tr>
+            <tr><td class="c-feat">AI website assistant</td><td data-label="Launch" class="no">—</td><td data-label="Automate" class="yes">✓</td><td data-label="Scale">Add-on</td></tr>
+            <tr><td class="c-feat">Workflow automation</td><td data-label="Launch" class="no">—</td><td data-label="Automate">1 included</td><td data-label="Scale">Included</td></tr>
+            <tr><td class="c-feat">Client logins &amp; roles</td><td data-label="Launch" class="no">—</td><td data-label="Automate" class="no">—</td><td data-label="Scale" class="yes">✓</td></tr>
+            <tr><td class="c-feat">Online payments</td><td data-label="Launch" class="no">—</td><td data-label="Automate">Add-on</td><td data-label="Scale" class="yes">✓</td></tr>
+            <tr><td class="c-feat">Edits included each month</td><td data-label="Launch">2 hrs</td><td data-label="Automate">3 hrs</td><td data-label="Scale">4 hrs</td></tr>
+            <tr><td class="c-feat">Typical timeline</td><td data-label="Launch">1–2 weeks</td><td data-label="Automate">2–3 weeks</td><td data-label="Scale">2–4 weeks</td></tr>
           </tbody>
         </table>
       </div>
+      <button class="show-more" type="button" data-expand="compareTable" aria-expanded="false">Show all features</button>
     </div>
   </section>
 
   <section class="section" id="terms">
     <div class="container">
       <div class="section-head"><div><p class="eyebrow">Payment terms</p><h2 class="h2">How payment works</h2></div></div>
-      <div class="cards four">
+      <div class="cards four terms-grid">
         <div class="card"><span class="icon" data-icon="doc"></span><h3>Fixed quote</h3><p>A written scope and price before any work starts.</p></div>
         <div class="card"><span class="icon" data-icon="card"></span><h3>50% to start</h3><p>Websites: 50% deposit, 50% at launch. Portals: 40% / 30% / 30% by milestone.</p></div>
         <div class="card"><span class="icon" data-icon="pen"></span><h3>2 rounds of changes</h3><p>Included in every project. More changes are billed at $75/hour.</p></div>

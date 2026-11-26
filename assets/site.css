@@ -910,3 +910,72 @@ a.quick-card:hover { border-color: var(--ink); box-shadow: var(--shadow); transf
   .contact-layout { grid-template-columns: 1fr; }
   .contact-aside { position: static; }
 }
+
+/* =========================================================
+   Pricing page: lighter on phones
+   ========================================================= */
+.swipe-hint { display: none; }
+.p-inc { color: var(--ink-2); }
+.p-time { white-space: nowrap; color: var(--muted); }
+.p-mo.none { color: #b0b2b7; }
+
+@media (max-width: 640px) {
+  /* Plans: swipe sideways instead of a long stack */
+  .swipe-hint { display: block; font-size: 13px; color: var(--muted); margin: -12px 0 4px; }
+  .plans {
+    display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    margin: 0 calc(var(--gutter) * -1); padding: 16px var(--gutter) 10px; scroll-padding: 0 var(--gutter);
+    scrollbar-width: none;
+  }
+  .plans::-webkit-scrollbar { display: none; }
+  .plans > .plan { flex: 0 0 84%; scroll-snap-align: start; padding: 24px 20px; gap: 10px; }
+  .plan .amount { font-size: 36px; }
+  .plan .checks { font-size: 14.5px; gap: 8px; margin: 4px 0 8px; }
+
+  /* Price list: one simple row per service, no sideways scrolling */
+  .price-table, .compare-table { min-width: 0; }
+  .price-table thead, .compare-table thead { display: none; }
+  .price-table, .price-table tbody, .compare-table, .compare-table tbody { display: block; }
+  .price-table tr { display: grid; grid-template-columns: 1fr auto; column-gap: 14px; row-gap: 3px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+  .price-table tr:last-child { border-bottom: 0; }
+  .price-table td { padding: 0; border: 0; }
+  .price-table .p-name { grid-column: 1; grid-row: 1; font-size: 15.5px; }
+  .price-table .p-inc { grid-column: 1; grid-row: 2; font-size: 13.5px; line-height: 1.45; color: var(--muted); }
+  .price-table .p-time { grid-column: 1; grid-row: 3; font-size: 12.5px; }
+  .price-table .p-time::before { content: "Timeline: "; }
+  .price-table .p-price { grid-column: 2; grid-row: 1; text-align: right; font-family: var(--font-head); font-weight: 600; font-size: 15.5px; }
+  .price-table .p-mo { grid-column: 2; grid-row: 2; text-align: right; font-size: 13px; color: var(--muted); }
+  .price-table .p-mo::before { content: "+ "; }
+  .price-table .p-mo::after { content: "/mo"; }
+  .price-table .p-mo.none { display: none; }
+  #prices .tabs { margin-bottom: 18px; }
+  #prices .tab { padding: 12px 12px; font-size: 14px; }
+
+  /* Compare: each feature with three small columns */
+  .compare-table tr { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 10px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+  .compare-table tr:last-child { border-bottom: 0; }
+  .compare-table td { padding: 0; border: 0; font-size: 14px; }
+  .compare-table .c-feat { grid-column: 1 / -1; font-weight: 600; font-size: 14.5px; margin-bottom: 4px; }
+  .compare-table td[data-label]::before { content: attr(data-label); display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); margin-bottom: 1px; }
+
+  .compare-table:not(.expanded) tr:nth-child(n+5) { display: none; }
+  #compare .show-more { display: flex; }
+
+  /* Payment terms: compact 2 x 2 */
+  .cards.four.terms-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .terms-grid .card { padding: 16px; gap: 6px; }
+  .terms-grid .card .icon { width: 34px; height: 34px; margin-bottom: 2px; }
+  .terms-grid .card .icon svg { width: 18px; height: 18px; }
+  .terms-grid .card h3 { font-size: 15px; }
+  .terms-grid .card p { font-size: 13px; line-height: 1.45; }
+
+  #packages .section-head, #care .section-head, #prices .section-head, #compare .section-head, #terms .section-head { margin-bottom: 20px; }
+  #packages .lead, #care .lead { font-size: 15.5px; }
+}
+
+.show-more {
+  display: none; width: 100%; justify-content: center; align-items: center; gap: 6px; margin-top: 12px;
+  min-height: 44px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white);
+  font-size: 14.5px; font-weight: 500; color: var(--ink);
+}
+.show-more:hover { border-color: var(--ink); }
