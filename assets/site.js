@@ -82,30 +82,36 @@
     return '<a class="nav-link' + (current === key ? " active" : "") + '" href="' + href + '">' + label + "</a>";
   }
 
-  /* Mobile menu items (same items as before; only the design changed) */
+  /* Mobile menu (same items and order as before; styled like the rest of the site) */
+  var CHEV_RIGHT = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5"/></svg>';
   function drawerItems() {
-    var i = 0;
-    function item(href, label, on, extra) {
-      return '<li style="--i:' + (i++) + '"><a class="drawer-link' + (extra || "") + (on ? " active" : "") + '" href="' + href + '" tabindex="-1"' +
-        (on ? ' aria-current="page"' : "") + ">" + label + '<span class="dot" aria-hidden="true"></span></a></li>';
+    function row(href, label, on) {
+      return '<li><a class="dr-row' + (on ? " active" : "") + '" href="' + href + '" tabindex="-1"' + (on ? ' aria-current="page"' : "") + ">" +
+        "<span>" + label + "</span>" + CHEV_RIGHT + "</a></li>";
     }
-    var svcOn = current === "services";
-    var html = item("index.html", "Home", page === "index");
-    html += '<li style="--i:' + (i++) + '"><details class="drawer-group"' + (svcOn ? " open" : "") + ">" +
-      '<summary class="drawer-link' + (svcOn ? " active" : "") + '" tabindex="-1">Services ' + I.chevron + "</summary>" +
-      '<a class="drawer-link drawer-sub' + (page === "services" ? " active" : "") + '" href="services.html" tabindex="-1">All services<span class="dot" aria-hidden="true"></span></a>' +
-      SERVICES.map(function (sv) {
-        var on = page === sv.href.replace(".html", "");
-        return '<a class="drawer-link drawer-sub' + (on ? " active" : "") + '" href="' + sv.href + '" tabindex="-1">' + sv.name.replace("&", "&amp;") + '<span class="dot" aria-hidden="true"></span></a>';
-      }).join("") + "</details></li>";
-    html += item("pricing.html", "Pricing", page === "pricing");
-    html += item("build.html", "Build your quote", page === "build");
-    html += item("portfolio.html", "Work", page === "portfolio");
-    html += item("about.html", "About", page === "about");
-    html += item("faq.html", "FAQ", page === "faq");
-    html += item("contact.html", "Contact", page === "contact");
-    html += item(CONTACT.phoneHref, "Call " + CONTACT.phone, false);
-    return html;
+    var tiles = SERVICES.map(function (sv) {
+      var on = page === sv.href.replace(".html", "");
+      return '<a class="dr-tile' + (on ? " active" : "") + '" href="' + sv.href + '" tabindex="-1"' + (on ? ' aria-current="page"' : "") + ">" +
+        '<span class="dr-tile-art"><span class="art ' + sv.art + '">' + I[sv.icon] + "</span></span>" +
+        "<strong>" + sv.name.replace("&", "&amp;") + "</strong><small>" + sv.note.split(" · ")[0].replace(" per office", "") + "</small></a>";
+    }).join("");
+    return (
+      '<ul class="dr-list" style="--i:0">' + row("index.html", "Home", page === "index") + "</ul>" +
+      '<div class="dr-sec" style="--i:1"><p class="dr-label">Services</p><div class="dr-tiles">' + tiles + "</div>" +
+      '<a class="dr-all' + (page === "services" ? " active" : "") + '" href="services.html" tabindex="-1">All services ' + CHEV_RIGHT + "</a></div>" +
+      '<div class="dr-sec" style="--i:2"><p class="dr-label">Explore</p><ul class="dr-list">' +
+      row("pricing.html", "Pricing", page === "pricing") +
+      row("build.html", "Build your quote", page === "build") +
+      row("portfolio.html", "Work", page === "portfolio") +
+      row("about.html", "About", page === "about") +
+      row("faq.html", "FAQ", page === "faq") +
+      row("contact.html", "Contact", page === "contact") +
+      "</ul></div>" +
+      '<div class="dr-actions" style="--i:3">' +
+      '<a class="btn btn-outline btn-block" href="' + CONTACT.phoneHref + '" tabindex="-1">' + I.call.replace("<svg", '<svg width="18" height="18"') + "Call " + CONTACT.phone + "</a>" +
+      '<a class="btn btn-primary btn-block" href="contact.html" tabindex="-1">Start a project</a>' +
+      '<p class="dr-meta">Mon–Fri, 8am–2pm Pacific</p></div>'
+    );
   }
 
   function headerHTML() {
@@ -132,7 +138,7 @@
       "</div>" +
       '<div class="nav-actions">' +
       '<a class="nav-phone" href="' + CONTACT.phoneHref + '">' + CONTACT.phone + "</a>" +
-      '<a class="btn btn-primary nav-quote" href="build.html">Build your quote</a>' +
+      '<a class="btn btn-primary" href="build.html">Build your quote</a>' +
       '<button class="menu-toggle" id="menuBtn" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">' +
       '<span class="mt-icon mt-menu">' + I.menu + '</span><span class="mt-icon mt-close">' + I.close + "</span></button>" +
       "</div></nav>" +
@@ -145,8 +151,7 @@
       "</div></div></header>" +
       '<div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>' +
       '<div class="drawer-wrap"><nav class="drawer" id="drawer" aria-label="Mobile menu">' +
-      '<ul class="drawer-list" id="drawerList">' + drawerItems() + "</ul>" +
-      '<a class="drawer-cta" href="contact.html" tabindex="-1">Start a project</a>' +
+      '<div class="drawer-list" id="drawerList">' + drawerItems() + "</div>" +
       "</nav></div>"
     );
   }
@@ -198,7 +203,7 @@
   var mega = document.getElementById("megaMenu");
   var closeTimer;
   function setMega(open) {
-    if (!mega) return;
+    if (!mega || open === mega.classList.contains("open")) return;
     mega.classList.toggle("open", open);
     megaBtn.setAttribute("aria-expanded", String(open));
     header.classList.toggle("menu-open", open);
