@@ -1150,3 +1150,10 @@ a.quick-card:hover { border-color: var(--ink); box-shadow: var(--shadow); transf
 @keyframes net-pulse { 0%, 100% { stroke-width: 2; } 50% { stroke-width: 5; } }
 .net-live rect { transition: stroke 0.3s, fill 0.3s; }
 .net-live rect.lit { stroke: #e8440a; fill: #241712; }
+/* Chat sample keeps a fixed size; older messages scroll up and fade out */
+.mock-chat .chat-body.chat-live { overflow: hidden; scrollbar-width: none; }
+.mock-chat .chat-body.chat-live.overflowing {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 36px);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 36px);
+}
+.mock-chat .chat-body.chat-live::-webkit-scrollbar { display: none; }

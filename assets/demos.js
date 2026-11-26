@@ -162,7 +162,14 @@
     });
     if (!script.length) return;
     var hasSlots = script.some(function (m) { return /class="slots"/.test(m.html); });
-    body.style.minHeight = body.offsetHeight + "px";
+    /* Lock the chat at its starting height so the page never moves.
+       New messages push older ones up, where they fade out. */
+    body.style.height = body.offsetHeight + "px";
+    body.classList.add("chat-live");
+    function follow() {
+      body.classList.toggle("overflowing", body.scrollHeight > body.clientHeight + 2);
+      body.scrollTo({ top: body.scrollHeight, behavior: "smooth" });
+    }
 
     whileVisible(mock, async function (s) {
       body.innerHTML = "";
@@ -175,6 +182,7 @@
           dots.className = "bubble bot typing";
           dots.innerHTML = "<i></i><i></i><i></i>";
           body.appendChild(dots);
+          follow();
           await wait(900);
           dots.remove();
         } else {
@@ -184,12 +192,13 @@
         el.className = "bubble " + (m.me ? "me" : "bot") + " pop";
         el.innerHTML = m.html;
         body.appendChild(el);
+        follow();
         await wait(m.me ? 700 : 1000);
       }
       if (!live(s)) return;
       if (hasSlots) {
         var slot = body.querySelector(".slots span");
-        if (slot) { slot.classList.add("picked"); await wait(900); }
+        if (slot) { slot.classList.add("picked"); follow(); await wait(900); }
         if (!live(s)) return;
         var done = document.createElement("div");
         done.className = "bubble bot pop";
@@ -198,13 +207,17 @@
         dots2.className = "bubble bot typing";
         dots2.innerHTML = "<i></i><i></i><i></i>";
         body.appendChild(dots2);
+        follow();
         await wait(800);
         dots2.remove();
         body.appendChild(done);
+        follow();
       }
       await wait(3200);
       body.classList.add("fade");
       await wait(400);
+      body.scrollTop = 0;
+      body.classList.remove("overflowing");
       body.classList.remove("fade");
     });
   }
